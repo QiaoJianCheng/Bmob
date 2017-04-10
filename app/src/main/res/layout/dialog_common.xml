@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+    <RelativeLayout
+        android:layout_width="@dimen/x900"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/common_dialog_title_tv"
+            style="@style/CommonDialogTitle"/>
+
+        <TextView
+            android:id="@+id/common_dialog_msg_tv"
+            style="@style/CommonDialogMsg"
+            android:layout_below="@+id/common_dialog_title_tv"/>
+
+        <LinearLayout
+            android:id="@+id/common_dialog_btns_ll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y130"
+            android:layout_below="@+id/common_dialog_msg_tv"
+            android:background="@color/colorBackground"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/common_dialog_cancel_tv"
+                style="@style/CommonDialogButton"
+                android:text="@string/common_button_cancel"/>
+
+            <View
+                android:layout_width="@dimen/x1"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/x10"
+                android:layout_marginTop="@dimen/x10"
+                android:background="@color/colorLine"/>
+
+            <TextView
+                android:id="@+id/common_dialog_confirm_tv"
+                style="@style/CommonDialogButton"
+                android:text="@string/common_button_confirm"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y150"
+        android:background="@color/colorWhite">
+
+        <TextView
+            android:id="@+id/dialog_picker_cancel_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/x50"
+            android:paddingRight="@dimen/x50"
+            android:text="@string/common_button_cancel"
+            android:textColor="@color/colorTextDark"
+            android:textSize="@dimen/x40"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="请选择日期"
+            android:textColor="@color/colorTextLight"
+            android:textSize="@dimen/x36"/>
+
+        <TextView
+            android:id="@+id/dialog_picker_confirm_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/x50"
+            android:paddingRight="@dimen/x50"
+            android:text="@string/common_button_confirm"
+            android:textColor="@color/colorTextDark"
+            android:textSize="@dimen/x40"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y500"
+        android:background="@color/colorBackground">
+
+        <DatePicker
+            android:id="@+id/dialog_picker_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner"
+            tools:targetApi="lollipop"/>
+    </RelativeLayout>
+</LinearLayout>

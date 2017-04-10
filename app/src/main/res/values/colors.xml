@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--全局颜色-->
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorTransparent">#00000000</color>
+
+    <!--主题颜色-->
+    <color name="colorTheme">#448ED2</color>
+    <color name="colorLine">#DBDBDB</color>
+    <color name="colorBackground">#F5F5F5</color>
+    <color name="colorMale">#8888ff</color>
+    <color name="colorFemale">#ff8888</color>
+
+    <!--字体颜色-->
+    <color name="colorTextDark">#323232</color>
+    <color name="colorTextLight">#929292</color>
+
+    <!-- 带透明度： 80=alpha 0.5 , 99=alpha 0.6 , 66=alpha 0.4   -->
+
+</resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y140"
+        android:background="@drawable/selector_press_effect">
+
+        <TextView
+            android:id="@+id/item_drawer_text_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x36"
+            android:textColor="@color/colorTextDark"
+            android:textSize="@dimen/textSizeNormal"
+            tools:text="选项一"/>
+
+        <ImageView
+            android:id="@+id/item_drawer_iv"
+            android:layout_width="@dimen/x64"
+            android:layout_height="@dimen/y64"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x36"
+            android:src="@drawable/ico_true"
+            android:visibility="invisible"/>
+
+        <include layout="@layout/layout_common_line_bottom_margin_left"/>
+    </RelativeLayout>
+</RelativeLayout>

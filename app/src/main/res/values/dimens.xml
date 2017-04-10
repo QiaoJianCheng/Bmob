@@ -1,0 +1,7 @@
+<resources>
+    <dimen name="textSizeLarge">@dimen/x54</dimen>
+    <dimen name="textSizeNormal">@dimen/x46</dimen>
+    <dimen name="textSizeMedium">@dimen/x44</dimen>
+    <dimen name="textSizeSmall">@dimen/x42</dimen>
+    <dimen name="textSizeTiny">@dimen/x40</dimen>
+</resources>

@@ -1,0 +1,52 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/common_failed_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/failed_iv"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_error_page"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/failed_iv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="@string/common_loading_failed"
+            android:textColor="@color/colorTextLight"
+            android:textSize="@dimen/textSizeSmall"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/common_empty_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/common_empty_data"
+        android:textColor="@color/colorTextLight"
+        android:textSize="@dimen/textSizeNormal"
+        android:visibility="gone"/>
+
+    <ProgressBar
+        android:id="@+id/common_loading_view"
+        android:layout_width="@dimen/x99"
+        android:layout_height="@dimen/x99"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="@color/colorTheme"
+        android:indeterminateTintMode="src_atop"
+        tools:targetApi="lollipop"/>
+
+</RelativeLayout>

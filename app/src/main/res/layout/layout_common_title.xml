@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/common_title_root_rl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorTheme">
+
+    <View
+        android:id="@+id/common_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y120"
+        android:layout_below="@+id/common_title_bar">
+
+        <ImageView
+            android:id="@+id/common_title_back_iv"
+            android:layout_width="@dimen/x120"
+            android:layout_height="@dimen/y120"
+            android:layout_centerVertical="true"
+            android:paddingBottom="@dimen/y32"
+            android:paddingLeft="@dimen/x36"
+            android:paddingRight="@dimen/x53"
+            android:paddingTop="@dimen/y32"
+            android:src="@drawable/btn_back"/>
+
+        <TextView
+            android:id="@+id/common_title_text_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="title"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/textSizeNormal"/>
+
+        <ImageView
+            android:id="@+id/common_title_button_iv"
+            android:layout_width="@dimen/x120"
+            android:layout_height="@dimen/y120"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingBottom="@dimen/y30"
+            android:paddingLeft="@dimen/x32"
+            android:paddingRight="@dimen/x36"
+            android:paddingTop="@dimen/y30"
+            android:src="@drawable/btn_true"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+</RelativeLayout>

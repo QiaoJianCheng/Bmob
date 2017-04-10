@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorBackground">
+
+    <RelativeLayout
+        android:id="@+id/refressh_layout_rl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/y25"
+        android:layout_marginTop="@dimen/y25"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:id="@+id/ptr_classic_header_text"
+            android:layout_width="@dimen/x200"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_toRightOf="@+id/ptr_classic_header_rotate_view_progressbar"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:text="@string/header_pull_to_refresh"
+            android:textColor="@color/colorTheme"
+            android:textSize="@dimen/textSizeTiny"/>
+
+        <ImageView
+            android:id="@+id/ptr_classic_header_rotate_view"
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/x60"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_25_scroll_down"
+            android:tint="@color/colorTheme"
+            tools:ignore="ContentDescription"/>
+
+        <ProgressBar
+            android:id="@+id/ptr_classic_header_rotate_view_progressbar"
+            style="@style/LoadingProgressBar"
+            android:visibility="invisible"/>
+
+    </RelativeLayout>
+</RelativeLayout>

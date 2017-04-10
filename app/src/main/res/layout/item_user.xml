@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_press_effect"
+    android:paddingLeft="@dimen/x30">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/item_user_avatar_sdv"
+        android:layout_width="@dimen/x130"
+        android:layout_height="@dimen/x130"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="@dimen/y30"
+        android:layout_marginTop="@dimen/y30"
+        fresco:placeholderImage="@color/colorBackground"
+        fresco:roundAsCircle="true"
+        fresco:roundingBorderColor="@color/colorLine"
+        fresco:roundingBorderWidth="@dimen/x1"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x30"
+        android:layout_toRightOf="@+id/item_user_avatar_sdv">
+
+        <TextView
+            android:id="@+id/item_user_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:textColor="@color/colorTextDark"
+            android:textSize="@dimen/textSizeNormal"
+            tools:text="乔"/>
+
+        <ImageView
+            android:id="@+id/item_user_gender_iv"
+            android:layout_width="@dimen/x46"
+            android:layout_height="@dimen/x46"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginTop="@dimen/y5"
+            android:layout_toRightOf="@+id/item_user_name_tv"
+            android:padding="@dimen/x5"
+            android:src="@drawable/icon_20_male"
+            android:tint="@color/colorMale"/>
+
+        <TextView
+            android:id="@+id/item_user_signature_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/item_user_name_tv"
+            android:layout_marginTop="@dimen/y10"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:textColor="@color/colorTextLight"
+            android:textSize="@dimen/textSizeSmall"
+            tools:text="赛扽龙单反 赛扽及"/>
+    </RelativeLayout>
+
+    <include layout="@layout/layout_common_line_bottom"/>
+</RelativeLayout>

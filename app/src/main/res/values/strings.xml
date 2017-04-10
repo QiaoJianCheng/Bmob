@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Bmob</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+
+    <string name="common_button_cancel">取消</string>
+    <string name="common_button_confirm">确定</string>
+    <string name="common_loading_failed">网络异常, 点击重试</string>
+    <string name="common_empty_data">数据是空的~</string>
+    <string name="toast_network_success">网络请求成功</string>
+    <string name="toast_network_failure">网络请求失败</string>
+    <string name="toast_network_failure_reason">网络请求失败: %s</string>
+    <string name="msg_network_error_time_out">连接超时</string>
+    <string name="msg_network_error_server">服务器异常</string>
+    <string name="msg_network_error_unknown">"未知错误: "</string>
+    <string name="header_pull_to_refresh">下拉刷新</string>
+    <string name="header_release_to_refresh">松开刷新</string>
+    <string name="header_refreshing">正在刷新...</string>
+</resources>
