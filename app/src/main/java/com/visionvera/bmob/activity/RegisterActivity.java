@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -65,7 +66,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
-    protected void initViews() {
+    protected void initViews(Bundle savedInstanceState) {
         register_avatar_sdv = (SimpleDraweeView) findViewById(R.id.register_avatar_sdv);
         register_account_ll = (TextInputLayout) findViewById(R.id.register_account_ll);
         register_account_et = (TextInputEditText) findViewById(R.id.register_account_et);

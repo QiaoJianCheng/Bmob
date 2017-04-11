@@ -30,6 +30,8 @@ public class App extends Application {
         mApp = this;
 
         LogUtil.init(BuildConfig.DEBUG);
+        LogUtil.d("App onCreate");
         Fresco.initialize(getApplicationContext());
+        CrashHandler.getInstance().init(getApplicationContext(), BuildConfig.DEBUG, getPackageName(), BuildConfig.VERSION_CODE, BuildConfig.VERSION_NAME);
     }
 }

@@ -26,7 +26,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/x20"
                 android:layout_toRightOf="@+id/footer_pb"
-                android:textColor="@color/colorTheme"
+                android:textColor="@color/colorThemeRed"
                 android:textSize="@dimen/textSizeTiny"/>
 
         </RelativeLayout>

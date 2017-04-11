@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.visionvera.bmob.R;
-import com.visionvera.bmob.activity.MainActivity;
+import com.visionvera.bmob.activity.HomeActivity;
 import com.visionvera.bmob.activity.RegisterActivity;
 
 /**
@@ -38,7 +38,7 @@ public class IntentUtil {
     }
     public static void toMainActivity(Activity activity) {
         if (activity == null) return;
-        activity.startActivity(new Intent(activity, MainActivity.class));
+        activity.startActivity(new Intent(activity, HomeActivity.class));
         enterActivityAnim(activity);
     }
 

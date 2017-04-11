@@ -57,7 +57,7 @@ public class UserAdapter extends BaseRecyclerAdapter<UserBean> {
             item_user_gender_iv.setImageResource(userBean.gender == 1 ? R.drawable.icon_20_male : R.drawable.icon_20_female);
             item_user_gender_iv.setImageTintList(ColorStateList.valueOf(ResUtil.getColor(userBean.gender == 1 ? R.color.colorMale : R.color.colorFemale)));
             int size = (int) ResUtil.getDimen(R.dimen.x130);
-            FrescoUtil.display(item_user_avatar_sdv, userBean.avatar, size, size, userBean.gender == 1 ? R.drawable.icon_80_avatar_male : R.drawable.icon_80_avatar_female);
+            FrescoUtil.display(item_user_avatar_sdv, userBean.avatar, size, size, R.drawable.sign_head);
         }
     }
 }

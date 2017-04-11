@@ -1,80 +1,108 @@
 package com.visionvera.bmob.activity;
 
-import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.text.InputType;
+import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
+import android.view.inputmethod.EditorInfo;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.visionvera.bmob.R;
 import com.visionvera.bmob.base.BaseActivity;
-import com.visionvera.bmob.event.RxEvent;
-import com.visionvera.bmob.listener.OnTextChangedListener;
+import com.visionvera.bmob.global.UserHelper;
+import com.visionvera.bmob.listener.PressEffectTouchListener;
+import com.visionvera.bmob.model.UserBean;
 import com.visionvera.bmob.net.NetworkRequest;
 import com.visionvera.bmob.net.ResponseSubscriber;
 import com.visionvera.bmob.utils.IntentUtil;
-import com.visionvera.bmob.utils.LogUtil;
+import com.visionvera.bmob.utils.ResUtil;
 import com.visionvera.bmob.utils.TextUtil;
 import com.visionvera.bmob.utils.ToastUtil;
-import com.visionvera.bmob.BuildConfig;
-import com.visionvera.bmob.global.UserHelper;
-import com.visionvera.bmob.global.CrashHandler;
-import com.visionvera.bmob.model.UserBean;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
-    private TextInputLayout login_account_ll;
-    private TextInputEditText login_account_et;
-    private TextInputLayout login_password_ll;
-    private TextInputEditText login_password_et;
-    private Button login_confirm_bt;
-    private Button login_forget_bt;
-    private Button login_register_bt;
+    private EditText login_account_et;
+    private EditText login_password_et;
+    private View login_account_clear_iv;
+    private View login_password_clear_iv;
+    private CheckBox login_show_password_cb;
+    private View login_confirm_rl;
+    private View login_progress;
+    private View login_forget_tv;
+    private View login_register_tv;
 
     @Override
     protected void setContentView() {
-        LogUtil.init(BuildConfig.DEBUG);
+        setStatusBarColor(R.color.colorWhite, true);
         setContentView(R.layout.activity_login);
     }
 
     @Override
     protected void initData() {
-        CrashHandler.getInstance().init(getApplicationContext(), BuildConfig.DEBUG, getPackageName(), BuildConfig.VERSION_CODE, BuildConfig.VERSION_NAME);
     }
 
     @Override
-    protected void initViews() {
-        login_account_ll = (TextInputLayout) findViewById(R.id.login_account_ll);
-        login_account_et = (TextInputEditText) findViewById(R.id.login_account_et);
-        login_password_ll = (TextInputLayout) findViewById(R.id.login_password_ll);
-        login_password_et = (TextInputEditText) findViewById(R.id.login_password_et);
-        login_confirm_bt = (Button) findViewById(R.id.login_confirm_bt);
-        login_forget_bt = (Button) findViewById(R.id.login_forget_bt);
-        login_register_bt = (Button) findViewById(R.id.login_register_bt);
-
-        login_account_ll.setCounterEnabled(true);
-        login_password_ll.setCounterEnabled(true);
-        login_password_ll.setPasswordVisibilityToggleEnabled(true);
-
-        login_account_et.addTextChangedListener(new OnTextChangedListener() {
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                login_account_ll.setError(null);
-            }
-        });
-
-        login_password_et.addTextChangedListener(new OnTextChangedListener() {
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                login_password_ll.setError(null);
-            }
-        });
-
-        login_confirm_bt.setOnClickListener(this);
-        login_forget_bt.setOnClickListener(this);
-        login_register_bt.setOnClickListener(this);
+    protected void initViews(Bundle savedInstanceState) {
+        login_account_et = (EditText) findViewById(R.id.login_account_et);
+        login_password_et = (EditText) findViewById(R.id.login_password_et);
+        login_account_clear_iv = findViewById(R.id.login_account_clear_iv);
+        login_password_clear_iv = findViewById(R.id.login_password_clear_iv);
+        login_show_password_cb = (CheckBox) findViewById(R.id.login_show_password_cb);
+        login_confirm_rl = findViewById(R.id.login_confirm_rl);
+        login_progress = findViewById(R.id.login_progress);
+        login_forget_tv = findViewById(R.id.login_forget_tv);
+        login_register_tv = findViewById(R.id.login_register_tv);
 
         login_account_et.setText(UserHelper.getUserName());
         login_password_et.setText(UserHelper.getPassword());
+        login_account_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                login_account_clear_iv.setVisibility(hasFocus ? View.VISIBLE : View.GONE);
+            }
+        });
+        login_password_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                login_password_clear_iv.setVisibility(hasFocus ? View.VISIBLE : View.GONE);
+            }
+        });
+        login_password_et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    onClick(login_confirm_rl);
+                }
+                return false;
+            }
+        });
+        login_account_et.setSelection(login_account_et.getText().length());
+
+        login_account_clear_iv.setOnClickListener(this);
+        login_password_clear_iv.setOnClickListener(this);
+        login_confirm_rl.setOnClickListener(this);
+        login_forget_tv.setOnClickListener(this);
+        login_register_tv.setOnClickListener(this);
+
+        login_account_clear_iv.setOnTouchListener(new PressEffectTouchListener());
+        login_password_clear_iv.setOnTouchListener(new PressEffectTouchListener());
+
+        Drawable drawable = ResUtil.getDrawable(R.drawable.selector_show_password_cb);
+        int x64 = (int) ResUtil.getDimen(R.dimen.x50);
+        int x42 = (int) ResUtil.getDimen(R.dimen.x30);
+        drawable.setBounds(0, 0, x64, x42);
+        login_show_password_cb.setCompoundDrawables(null, null, drawable, null);
+        login_show_password_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                login_password_et.setInputType(InputType.TYPE_CLASS_TEXT | (isChecked ? InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD : InputType.TYPE_TEXT_VARIATION_PASSWORD));
+                login_password_et.setSelection(login_password_et.getText().length());
+            }
+        });
     }
 
     @Override
@@ -83,28 +111,27 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     @Override
-    protected void onEventMainThread(RxEvent rxEvent) {
-
-    }
-
-    @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.login_confirm_bt:
+            case R.id.login_confirm_rl:
                 String account = login_account_et.getText().toString();
                 if (TextUtil.isEmpty(account)) {
-                    login_account_ll.setError("empty account.");
+                    ToastUtil.showToast(getString(R.string.toast_login_empty_account));
                     return;
                 }
                 final String password = login_password_et.getText().toString();
                 if (TextUtil.isEmpty(password)) {
-                    login_password_ll.setError("empty password.");
+                    ToastUtil.showToast(getString(R.string.toast_login_empty_password));
                     return;
                 }
+                login_progress.setVisibility(View.VISIBLE);
+                login_confirm_rl.setClickable(false);
                 NetworkRequest.getInstance().getLogin(LoginActivity.this, account, password, new ResponseSubscriber<UserBean>() {
                     @Override
                     public void onSuccess(UserBean userBean) {
-                        ToastUtil.showToast("login success.");
+                        login_progress.setVisibility(View.GONE);
+                        login_confirm_rl.setClickable(true);
+                        ToastUtil.showToast(getString(R.string.toast_login_success));
                         UserHelper.saveUser(userBean);
                         UserHelper.savePassword(password);
                         UserHelper.saveIsLogin(true);
@@ -114,14 +141,22 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
                     @Override
                     public void onFailure(int code, String error) {
-                        login_password_ll.setError(error);
+                        ToastUtil.networkFailure(error);
+                        login_progress.setVisibility(View.GONE);
+                        login_confirm_rl.setClickable(true);
                     }
                 });
                 break;
-            case R.id.login_forget_bt:
+            case R.id.login_forget_tv:
                 break;
-            case R.id.login_register_bt:
+            case R.id.login_register_tv:
                 IntentUtil.toRegisterActivity(LoginActivity.this);
+                break;
+            case R.id.login_account_clear_iv:
+                login_account_et.getText().clear();
+                break;
+            case R.id.login_password_clear_iv:
+                login_password_et.getText().clear();
                 break;
         }
     }

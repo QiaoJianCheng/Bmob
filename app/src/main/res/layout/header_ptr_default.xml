@@ -25,7 +25,7 @@
             android:includeFontPadding="false"
             android:maxLines="1"
             android:text="@string/header_pull_to_refresh"
-            android:textColor="@color/colorTheme"
+            android:textColor="@color/colorThemeRed"
             android:textSize="@dimen/textSizeTiny"/>
 
         <ImageView
@@ -35,7 +35,7 @@
             android:layout_centerVertical="true"
             android:scaleType="centerCrop"
             android:src="@drawable/icon_25_scroll_down"
-            android:tint="@color/colorTheme"
+            android:tint="@color/colorThemeRed"
             tools:ignore="ContentDescription"/>
 
         <ProgressBar

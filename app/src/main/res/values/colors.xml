@@ -6,7 +6,8 @@
     <color name="colorTransparent">#00000000</color>
 
     <!--主题颜色-->
-    <color name="colorTheme">#448ED2</color>
+    <color name="colorThemeRed">#d96f5d</color>
+    <color name="colorThemeGray">#969696</color>
     <color name="colorLine">#DBDBDB</color>
     <color name="colorBackground">#F5F5F5</color>
     <color name="colorMale">#8888ff</color>

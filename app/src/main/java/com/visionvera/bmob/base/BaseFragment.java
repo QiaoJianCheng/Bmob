@@ -49,7 +49,7 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflateView(inflater);
+        return inflateView(inflater, container, savedInstanceState);
     }
 
     @CallSuper
@@ -57,20 +57,35 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         lifecycleSubject.onNext(FragmentEvent.CREATE_VIEW);
         registerRxBus();
-        initCommonView(view);
+
         initData();
-        initViews(view);
+        initCommonView(view);
+        initViews(view, savedInstanceState);
         loadData(true);
     }
 
     private void initCommonView(View view) {
-        common_title_back_iv = view.findViewById(R.id.common_title_back_iv);
-        common_title_text_tv = (TextView) view.findViewById(R.id.common_title_text_tv);
-        common_title_button_iv = (ImageView) view.findViewById(R.id.common_title_button_iv);
-        common_content_view = view.findViewById(R.id.common_content_view);
-        common_failed_view = view.findViewById(R.id.common_failed_view);
-        common_loading_view = view.findViewById(R.id.common_loading_view);
-        common_empty_view = view.findViewById(R.id.common_empty_view);
+        if (common_title_back_iv == null) {
+            common_title_back_iv = view.findViewById(R.id.common_title_back_iv);
+        }
+        if (common_title_text_tv == null) {
+            common_title_text_tv = (TextView) view.findViewById(R.id.common_title_text_tv);
+        }
+        if (common_title_button_iv == null) {
+            common_title_button_iv = (ImageView) view.findViewById(R.id.common_title_button_iv);
+        }
+        if (common_content_view == null) {
+            common_content_view = view.findViewById(R.id.common_content_view);
+        }
+        if (common_failed_view == null) {
+            common_failed_view = view.findViewById(R.id.common_failed_view);
+        }
+        if (common_loading_view == null) {
+            common_loading_view = view.findViewById(R.id.common_loading_view);
+        }
+        if (common_empty_view == null) {
+            common_empty_view = view.findViewById(R.id.common_empty_view);
+        }
 
         if (common_title_back_iv != null) {
             common_title_back_iv.setVisibility(View.GONE);
@@ -107,11 +122,11 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
     }
 
     @NonNull
-    protected abstract View inflateView(LayoutInflater inflater);
+    protected abstract View inflateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 
     protected abstract void initData();
 
-    protected abstract void initViews(View view);
+    protected abstract void initViews(View view, Bundle savedInstanceState);
 
     @CallSuper
     protected void loadData(boolean showLoading) {
@@ -121,35 +136,24 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
     }
 
     public void setTitleBar(String title) {
-        if (common_title_text_tv != null) {
-            common_title_text_tv.setVisibility(View.VISIBLE);
-            common_title_text_tv.setText(title);
-        }
-        if (common_title_button_iv != null) {
-            common_title_button_iv.setVisibility(View.GONE);
-        }
+        setTitleBar(title, null);
     }
 
     public void setTitleBar(String title, View.OnClickListener onClickListener) {
-        if (common_title_text_tv != null) {
-            common_title_text_tv.setVisibility(View.VISIBLE);
-            common_title_text_tv.setText(title);
-        }
-        if (common_title_button_iv != null) {
-            common_title_button_iv.setVisibility(View.VISIBLE);
-            common_title_button_iv.setOnClickListener(onClickListener);
-        }
+        setTitleBar(title, null, false);
     }
 
-    public void setTitleBar(String title, int resId, View.OnClickListener onClickListener) {
+    public void setTitleBar(String title, View.OnClickListener onClickListener, boolean showBack) {
+        if (common_title_back_iv != null) {
+            common_title_back_iv.setVisibility(showBack ? View.VISIBLE : View.GONE);
+        }
         if (common_title_text_tv != null) {
             common_title_text_tv.setVisibility(View.VISIBLE);
             common_title_text_tv.setText(title);
         }
         if (common_title_button_iv != null) {
-            common_title_button_iv.setVisibility(View.VISIBLE);
+            common_title_button_iv.setVisibility(onClickListener == null ? View.GONE : View.VISIBLE);
             common_title_button_iv.setOnClickListener(onClickListener);
-            common_title_button_iv.setImageResource(resId);
         }
     }
 
@@ -182,6 +186,9 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
         if (common_content_view != null) {
             common_content_view.setVisibility(content);
         }
+    }
+
+    protected void onEventMainThread(RxEvent rxEvent) {
     }
 
     private void registerRxBus() {
@@ -287,6 +294,4 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
         lifecycleSubject.onNext(FragmentEvent.DETACH);
         super.onDetach();
     }
-
-    protected abstract void onEventMainThread(RxEvent rxEvent);
 }

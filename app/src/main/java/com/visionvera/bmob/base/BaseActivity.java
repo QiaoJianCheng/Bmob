@@ -55,19 +55,24 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
         super.onCreate(savedInstanceState);
         registerRxBus();
         lifecycleSubject.onNext(ActivityEvent.CREATE);
-        setStatusBarColorId(R.color.colorWhite, true);
 
         setContentView();
-        getIntentData();
         initData();
         initCommonView();
-        initViews();
+        initViews(savedInstanceState);
         loadData(true);
     }
 
-    public void setStatusBarColor(int statusBarColor, boolean darkStatusContent) {
+    public void setStatusBarColor(int statusBarColorId, boolean darkStatusContent) {
+        int statusBarColor = ResUtil.getColor(statusBarColorId);
         try {
             Window window = getWindow();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(statusBarColor);
+                //底部导航栏
+                window.setNavigationBarColor(statusBarColor);
+            }
             if (darkStatusContent) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -77,29 +82,37 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
                     }
                 }
             }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                window.setStatusBarColor(statusBarColor);
-                //底部导航栏
-                window.setNavigationBarColor(statusBarColor);
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void setStatusBarColorId(int statusBarColorId, boolean darkStatusContent) {
-        setStatusBarColor(ResUtil.getColor(statusBarColorId), darkStatusContent);
-    }
+    protected abstract void setContentView();
+
+    protected abstract void initData();
 
     private void initCommonView() {
-        common_title_back_iv = findViewById(R.id.common_title_back_iv);
-        common_title_text_tv = (TextView) findViewById(R.id.common_title_text_tv);
-        common_title_button_iv = (ImageView) findViewById(R.id.common_title_button_iv);
-        common_content_view = findViewById(R.id.common_content_view);
-        common_failed_view = findViewById(R.id.common_failed_view);
-        common_loading_view = findViewById(R.id.common_loading_view);
-        common_empty_view = findViewById(R.id.common_empty_view);
+        if (common_title_back_iv == null) {
+            common_title_back_iv = findViewById(R.id.common_title_back_iv);
+        }
+        if (common_title_text_tv == null) {
+            common_title_text_tv = (TextView) findViewById(R.id.common_title_text_tv);
+        }
+        if (common_title_button_iv == null) {
+            common_title_button_iv = (ImageView) findViewById(R.id.common_title_button_iv);
+        }
+        if (common_content_view == null) {
+            common_content_view = findViewById(R.id.common_content_view);
+        }
+        if (common_failed_view == null) {
+            common_failed_view = findViewById(R.id.common_failed_view);
+        }
+        if (common_loading_view == null) {
+            common_loading_view = findViewById(R.id.common_loading_view);
+        }
+        if (common_empty_view == null) {
+            common_empty_view = findViewById(R.id.common_empty_view);
+        }
 
         if (common_title_back_iv != null) {
             common_title_back_iv.setOnClickListener(new View.OnClickListener() {
@@ -131,14 +144,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
         }
     }
 
-    protected abstract void setContentView();
-
-    protected void getIntentData() {
-    }
-
-    protected abstract void initData();
-
-    protected abstract void initViews();
+    protected abstract void initViews(Bundle savedInstanceState);
 
     @CallSuper
     protected void loadData(boolean showLoading) {
@@ -148,35 +154,24 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
     }
 
     public void setTitleBar(String title) {
-        if (common_title_text_tv != null) {
-            common_title_text_tv.setVisibility(View.VISIBLE);
-            common_title_text_tv.setText(title);
-        }
-        if (common_title_button_iv != null) {
-            common_title_button_iv.setVisibility(View.GONE);
-        }
+        setTitleBar(title, null);
     }
 
     public void setTitleBar(String title, View.OnClickListener onClickListener) {
-        if (common_title_text_tv != null) {
-            common_title_text_tv.setVisibility(View.VISIBLE);
-            common_title_text_tv.setText(title);
-        }
-        if (common_title_button_iv != null) {
-            common_title_button_iv.setVisibility(View.VISIBLE);
-            common_title_button_iv.setOnClickListener(onClickListener);
-        }
+        setTitleBar(title, null, false);
     }
 
-    public void setTitleBar(String title, int resId, View.OnClickListener onClickListener) {
+    public void setTitleBar(String title, View.OnClickListener onClickListener, boolean showBack) {
+        if (common_title_back_iv != null) {
+            common_title_back_iv.setVisibility(showBack ? View.VISIBLE : View.GONE);
+        }
         if (common_title_text_tv != null) {
             common_title_text_tv.setVisibility(View.VISIBLE);
             common_title_text_tv.setText(title);
         }
         if (common_title_button_iv != null) {
-            common_title_button_iv.setVisibility(View.VISIBLE);
+            common_title_button_iv.setVisibility(onClickListener == null ? View.GONE : View.VISIBLE);
             common_title_button_iv.setOnClickListener(onClickListener);
-            common_title_button_iv.setImageResource(resId);
         }
     }
 
@@ -209,6 +204,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
         if (common_content_view != null) {
             common_content_view.setVisibility(content);
         }
+    }
+
+    protected void onEventMainThread(RxEvent rxEvent) {
     }
 
     @Override
@@ -296,6 +294,4 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
         }
         super.onDestroy();
     }
-
-    protected abstract void onEventMainThread(RxEvent rxEvent);
 }

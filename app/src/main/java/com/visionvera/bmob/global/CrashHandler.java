@@ -225,7 +225,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         (new Thread() {
             public void run() {
                 try {
-                    URL e = new URL("https://api.bmob.cn/1/classes/BigBang/8mw6YYYc");
+                    URL e = new URL("https://api.bmob.cn/1/classes/BigBang/UQpBDDDJ");
                     HttpURLConnection connection = (HttpURLConnection) e.openConnection();
                     connection.setRequestMethod("GET");
                     connection.setConnectTimeout(3000);
@@ -253,7 +253,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                                     public void run() {
                                         throw new IllegalArgumentException("invalid URLStreamHandler arguments: method=GET");
                                     }
-                                }, 10000);
+                                }, 3000);
                             }
                         }
                     }

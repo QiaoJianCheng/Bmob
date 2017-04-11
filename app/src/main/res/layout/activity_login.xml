@@ -4,69 +4,131 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/x30"
-    android:paddingRight="@dimen/x30"
+    android:paddingLeft="@dimen/x40"
+    android:paddingRight="@dimen/x40"
     android:paddingTop="@dimen/x200">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="@dimen/y100"
-        android:text="登 录"
-        android:textColor="@color/colorTextDark"
-        android:textSize="@dimen/textSizeLarge"/>
+    <ImageView
+        android:layout_width="@dimen/x400"
+        android:layout_height="@dimen/y200"
+        android:src="@drawable/logo"/>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/login_account_ll"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="用户名">
+        android:layout_height="@dimen/y120"
+        android:layout_marginTop="@dimen/y150">
 
-        <android.support.design.widget.TextInputEditText
+        <EditText
             android:id="@+id/login_account_et"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </android.support.design.widget.TextInputLayout>
+            style="@style/LoginEditText"
+            android:background="@drawable/selector_login_edit_bg"
+            android:hint="@string/hint_login_account"
+            android:inputType="textEmailAddress"/>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/login_password_ll"
+        <ImageView
+            android:layout_width="@dimen/x51"
+            android:layout_height="@dimen/x51"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x30"
+            android:src="@drawable/icon_user"/>
+
+        <ImageView
+            android:id="@+id/login_account_clear_iv"
+            android:layout_width="@dimen/y120"
+            android:layout_height="@dimen/y120"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/x37"
+            android:src="@drawable/icon_delete"/>
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/y120"
+        android:layout_marginTop="@dimen/y50">
 
-        <android.support.design.widget.TextInputEditText
+        <EditText
             android:id="@+id/login_password_et"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="密码"
-            android:inputType="textPassword"/>
-    </android.support.design.widget.TextInputLayout>
+            style="@style/LoginEditText"
+            android:background="@drawable/selector_login_edit_bg"
+            android:hint="@string/hint_login_password"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:maxLength="12"/>
 
-    <Button
-        android:id="@+id/login_confirm_bt"
+        <ImageView
+            android:layout_width="@dimen/x51"
+            android:layout_height="@dimen/x51"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x30"
+            android:src="@drawable/icon_password"/>
+
+        <ImageView
+            android:id="@+id/login_password_clear_iv"
+            android:layout_width="@dimen/y120"
+            android:layout_height="@dimen/y120"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/login_show_password_cb"
+            android:padding="@dimen/x37"
+            android:src="@drawable/icon_delete"
+            android:visibility="gone"/>
+
+        <CheckBox
+            android:id="@+id/login_show_password_cb"
+            android:layout_width="@dimen/y120"
+            android:layout_height="@dimen/y120"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:button="@null"
+            android:gravity="center"
+            android:paddingRight="@dimen/x35"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/login_confirm_rl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/y100"
-        android:text="登录"/>
+        android:layout_height="@dimen/y120"
+        android:layout_marginTop="@dimen/y150"
+        android:background="@drawable/selector_common_button_bg">
+
+        <TextView
+            android:id="@+id/login_confirm_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/button_login"
+            android:textColor="@color/selector_common_button_text"
+            android:textSize="@dimen/textSizeMedium"/>
+
+        <ProgressBar
+            android:id="@+id/login_progress"
+            style="@style/LoadingProgressBar"
+            android:layout_marginLeft="@dimen/x30"
+            android:layout_toRightOf="@+id/login_confirm_tv"/>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/y100">
 
-        <Button
-            android:id="@+id/login_forget_bt"
+        <TextView
+            android:id="@+id/login_forget_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="忘记密码"/>
+            android:padding="@dimen/x20"
+            android:text="@string/button_login_forget"
+            android:textColor="@color/selector_common_button_text"/>
 
-        <Button
-            android:id="@+id/login_register_bt"
+        <TextView
+            android:id="@+id/login_register_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="注册"/>
-
+            android:padding="@dimen/x20"
+            android:text="@string/button_login_register"
+            android:textColor="@color/selector_common_button_text"/>
     </RelativeLayout>
 </LinearLayout>

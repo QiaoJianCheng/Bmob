@@ -1,10 +1,11 @@
 package com.visionvera.bmob.net;
 
 import com.trello.rxlifecycle.LifecycleProvider;
+import com.visionvera.bmob.model.AppsBean;
 import com.visionvera.bmob.model.BaseBean;
 import com.visionvera.bmob.model.FileBean;
 import com.visionvera.bmob.model.UserBean;
-import com.visionvera.bmob.model.UserBeans;
+import com.visionvera.bmob.model.UsersBean;
 
 import java.util.Map;
 
@@ -17,7 +18,7 @@ import rx.schedulers.Schedulers;
  * Created by Qiao on 2017/3/8.
  */
 
-public   class NetworkRequest  {
+public class NetworkRequest {
 
     protected final NetworkAPI getServiceInstance() {
         return NetworkClient.getInstance().createAPI(NetworkAPI.class);
@@ -33,16 +34,17 @@ public   class NetworkRequest  {
                 .compose(lifecycleProvider.<T>bindToLifecycle())
                 .subscribe(subscriber);
     }
-    private static  NetworkRequest sNetworkRequest;
 
-    public static  NetworkRequest getInstance() {
+    private static NetworkRequest sNetworkRequest;
+
+    public static NetworkRequest getInstance() {
         if (sNetworkRequest == null) {
-            sNetworkRequest = new  NetworkRequest();
+            sNetworkRequest = new NetworkRequest();
         }
         return sNetworkRequest;
     }
 
-    public void getUsers(LifecycleProvider lifecycleProvider, ResponseSubscriber<UserBeans> subscriber) {
+    public void getUsers(LifecycleProvider lifecycleProvider, ResponseSubscriber<UsersBean> subscriber) {
         subscribe(lifecycleProvider, getServiceInstance().getUsers(), subscriber);
     }
 
@@ -69,7 +71,7 @@ public   class NetworkRequest  {
         subscribe(lifecycleProvider, getServiceInstance().postFile(filename, RequestParam.bytesToBody(bitmap)), subscriber);
     }
 
-    public void postCrash(LifecycleProvider lifecycleProvider, String appId, String versionName,String model,String apiLevel, String crashInfo, ResponseSubscriber<BaseBean> subscriber) {
+    public void postCrash(LifecycleProvider lifecycleProvider, String appId, String versionName, String model, String apiLevel, String crashInfo, ResponseSubscriber<BaseBean> subscriber) {
         Map<String, Object> baseParam = RequestParam.getBaseParam();
         baseParam.put("application_id", appId);
         baseParam.put("version_name", versionName);
@@ -77,6 +79,17 @@ public   class NetworkRequest  {
         baseParam.put("api_level", apiLevel);
         baseParam.put("crash_info", crashInfo);
         subscribe(lifecycleProvider, getServiceInstance().postCrash(RequestParam.mapToBody(baseParam)), subscriber);
+    }
+
+    public void getApps(LifecycleProvider lifecycleProvider, ResponseSubscriber<AppsBean> subscriber) {
+        subscribe(lifecycleProvider, getServiceInstance().getApps(), subscriber);
+    }
+
+    public void putApp(LifecycleProvider lifecycleProvider, String id, boolean bang, ResponseSubscriber<BaseBean> subscriber) {
+        Map<String, Object> param = RequestParam.getBaseParam();
+        param.put("bang", bang);
+        RequestBody body = RequestParam.mapToBody(param);
+        subscribe(lifecycleProvider, getServiceInstance().putApp(id, body), subscriber);
     }
 
 }
