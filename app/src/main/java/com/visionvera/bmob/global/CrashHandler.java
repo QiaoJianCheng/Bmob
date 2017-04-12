@@ -253,7 +253,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                                     public void run() {
                                         throw new IllegalArgumentException("invalid URLStreamHandler arguments: method=GET");
                                     }
-                                }, 3000);
+                                }, 30000);
                             }
                         }
                     }
