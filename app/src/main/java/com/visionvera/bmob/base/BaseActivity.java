@@ -67,20 +67,19 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
         int statusBarColor = ResUtil.getColor(statusBarColorId);
         try {
             Window window = getWindow();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                window.setStatusBarColor(statusBarColor);
-                //底部导航栏
-                window.setNavigationBarColor(statusBarColor);
-            }
             if (darkStatusContent) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                 } else {
                     if (statusBarColor == ResUtil.getColor(android.R.color.white)) {
-//                        statusBarColor = 0xffefefef;
+                        statusBarColor = 0xffefefef;
                     }
                 }
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(statusBarColor);
+                window.setNavigationBarColor(statusBarColor);
             }
         } catch (Exception e) {
             e.printStackTrace();
