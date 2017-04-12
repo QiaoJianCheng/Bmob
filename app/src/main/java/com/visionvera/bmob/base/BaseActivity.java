@@ -71,7 +71,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                 } else {
-                    if (statusBarColor == ResUtil.getColor(android.R.color.white)) {
+                    if (statusBarColor == 0xffffffff) {
                         statusBarColor = 0xffefefef;
                     }
                 }
