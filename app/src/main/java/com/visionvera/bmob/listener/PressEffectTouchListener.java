@@ -17,7 +17,7 @@ public class PressEffectTouchListener implements View.OnTouchListener {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                v.setAlpha(0.3f);
+                v.setAlpha(0.5f);
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:

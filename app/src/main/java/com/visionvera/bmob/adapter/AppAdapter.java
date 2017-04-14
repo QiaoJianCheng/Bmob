@@ -46,7 +46,7 @@ public class AppAdapter extends BaseRecyclerAdapter<AppBean> {
         @Override
         public void onBindViewHolder(final int position) {
             AppBean bean = mList.get(position);
-            item_app_name_tv.setText(bean.app);
+            item_app_name_tv.setText(bean.app_name);
             item_app_switch.setChecked(bean.bang);
             item_app_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override

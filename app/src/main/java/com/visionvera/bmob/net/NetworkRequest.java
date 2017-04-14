@@ -1,11 +1,15 @@
 package com.visionvera.bmob.net;
 
+import com.google.gson.JsonObject;
 import com.trello.rxlifecycle.LifecycleProvider;
+import com.visionvera.bmob.global.UserHelper;
 import com.visionvera.bmob.model.AppsBean;
 import com.visionvera.bmob.model.BaseBean;
+import com.visionvera.bmob.model.CrashesBean;
 import com.visionvera.bmob.model.FileBean;
 import com.visionvera.bmob.model.UserBean;
 import com.visionvera.bmob.model.UsersBean;
+import com.visionvera.bmob.utils.TextUtil;
 
 import java.util.Map;
 
@@ -71,16 +75,6 @@ public class NetworkRequest {
         subscribe(lifecycleProvider, getServiceInstance().postFile(filename, RequestParam.bytesToBody(bitmap)), subscriber);
     }
 
-    public void postCrash(LifecycleProvider lifecycleProvider, String appId, String versionName, String model, String apiLevel, String crashInfo, ResponseSubscriber<BaseBean> subscriber) {
-        Map<String, Object> baseParam = RequestParam.getBaseParam();
-        baseParam.put("application_id", appId);
-        baseParam.put("version_name", versionName);
-        baseParam.put("model", model);
-        baseParam.put("api_level", apiLevel);
-        baseParam.put("crash_info", crashInfo);
-        subscribe(lifecycleProvider, getServiceInstance().postCrash(RequestParam.mapToBody(baseParam)), subscriber);
-    }
-
     public void getApps(LifecycleProvider lifecycleProvider, ResponseSubscriber<AppsBean> subscriber) {
         subscribe(lifecycleProvider, getServiceInstance().getApps(), subscriber);
     }
@@ -89,7 +83,17 @@ public class NetworkRequest {
         Map<String, Object> param = RequestParam.getBaseParam();
         param.put("bang", bang);
         RequestBody body = RequestParam.mapToBody(param);
-        subscribe(lifecycleProvider, getServiceInstance().putApp(id, body), subscriber);
+        subscribe(lifecycleProvider, getServiceInstance().putApp(id, body, UserHelper.getUserToken()), subscriber);
+    }
+
+    public void getCrashes(LifecycleProvider lifecycleProvider, String appId, ResponseSubscriber<CrashesBean> subscriber) {
+        String where = "";
+        if (!TextUtil.isEmpty(appId)) {
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("application_id", appId);
+            where = jsonObject.toString();
+        }
+        subscribe(lifecycleProvider, getServiceInstance().getCrashes(where), subscriber);
     }
 
 }

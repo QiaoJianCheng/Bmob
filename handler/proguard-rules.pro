@@ -15,3 +15,8 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+# Keep - Library. Keep all public and protected classes, fields, and methods.
+-keep public class * {
+    public protected <fields>;
+    public protected <methods>;
+}

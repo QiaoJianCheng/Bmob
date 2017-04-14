@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.visionvera.bmob.base.BaseFragment;
 import com.visionvera.bmob.fragment.AppsTabFragment;
+import com.visionvera.bmob.fragment.PlanTabFragment;
 import com.visionvera.bmob.fragment.UsersTabFragment;
 
 import java.util.ArrayList;
@@ -15,17 +16,14 @@ import java.util.ArrayList;
  */
 
 public class HomePagerAdapter extends FragmentPagerAdapter {
-    private AppsTabFragment mAppsTabFragment;
-    private UsersTabFragment mUsersTabFragment;
     private ArrayList<BaseFragment> mTabFragments;
 
     public HomePagerAdapter(FragmentManager fm) {
         super(fm);
         mTabFragments = new ArrayList<>();
-        mAppsTabFragment = new AppsTabFragment();
-        mUsersTabFragment = new UsersTabFragment();
-        mTabFragments.add(mAppsTabFragment);
-        mTabFragments.add(mUsersTabFragment);
+        mTabFragments.add(new AppsTabFragment());
+        mTabFragments.add(new UsersTabFragment());
+        mTabFragments.add(new PlanTabFragment());
     }
 
     @Override

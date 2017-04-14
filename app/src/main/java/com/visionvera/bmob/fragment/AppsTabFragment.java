@@ -20,6 +20,7 @@ import com.visionvera.bmob.model.AppsBean;
 import com.visionvera.bmob.model.BaseBean;
 import com.visionvera.bmob.net.NetworkRequest;
 import com.visionvera.bmob.net.ResponseSubscriber;
+import com.visionvera.bmob.utils.IntentUtil;
 import com.visionvera.bmob.utils.ToastUtil;
 import com.visionvera.bmob.view.PtrRefreshLayout;
 
@@ -33,7 +34,7 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
  */
 
 public class AppsTabFragment extends BaseFragment {
-    private PtrRefreshLayout users_ptr;
+    private PtrRefreshLayout apps_ptr;
     private RecyclerView apps_rv;
     private ArrayList<AppBean> mApps;
     private AppAdapter mAppAdapter;
@@ -51,7 +52,8 @@ public class AppsTabFragment extends BaseFragment {
         mAppAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-//                IntentUtil.toRegisterActivity(getActivity());
+                AppBean appBean = mApps.get(position);
+                IntentUtil.toAppDetailActivity(getActivity(), appBean.application_id, appBean.app_name);
             }
         });
         mAppAdapter.setOnCheckChangedListener(mOnCheckChangedListener);
@@ -59,11 +61,11 @@ public class AppsTabFragment extends BaseFragment {
 
     @Override
     protected void initViews(View view, Bundle savedInstanceState) {
-        users_ptr = (PtrRefreshLayout) view.findViewById(R.id.common_content_view);
+        apps_ptr = (PtrRefreshLayout) view.findViewById(R.id.common_content_view);
         apps_rv = (RecyclerView) view.findViewById(R.id.apps_rv);
 
-        users_ptr.disableWhenHorizontalMove(true);
-        users_ptr.setPtrHandler(new PtrDefaultHandler() {
+        apps_ptr.disableWhenHorizontalMove(true);
+        apps_ptr.setPtrHandler(new PtrDefaultHandler() {
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
                 loadData(false);
@@ -96,20 +98,18 @@ public class AppsTabFragment extends BaseFragment {
     }
 
     private void networkFailure(String error) {
-        users_ptr.refreshComplete();
+        apps_ptr.refreshComplete();
         ToastUtil.networkFailure(error);
         if (mApps.size() == 0) {
             showFailedView();
-            mAppAdapter.footerLoadCompleted();
         } else {
             showContentView();
-            mAppAdapter.footerFailed();
         }
     }
 
     private void networkSuccess() {
         mAppAdapter.footerLoadCompleted();
-        users_ptr.refreshComplete();
+        apps_ptr.refreshComplete();
         if (mApps.size() == 0) {
             showEmptyView();
         } else {

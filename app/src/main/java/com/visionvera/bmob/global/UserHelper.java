@@ -1,8 +1,7 @@
 package com.visionvera.bmob.global;
 
-import com.visionvera.bmob.utils.SharedPrefUtil;
-import com.visionvera.bmob.global.Constants;
 import com.visionvera.bmob.model.UserBean;
+import com.visionvera.bmob.utils.SharedPrefUtil;
 
 /**
  * Created by Qiao on 2017/3/17.
@@ -90,6 +89,7 @@ public class UserHelper {
         saveGender(userBean.gender);
         savePhone(userBean.mobilePhoneNumber);
         saveSignature(userBean.signature);
+        saveUserToken(userBean.sessionToken);
     }
 
 }

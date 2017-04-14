@@ -5,7 +5,8 @@ package com.visionvera.bmob.model;
  */
 
 public class AppBean extends BaseBean {
-    public String app;
+    public String application_id;
+    public String app_name;
     public boolean bang;
     public String createdAt;
     public String objectId;

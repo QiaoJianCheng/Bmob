@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.visionvera.bmob.R;
 import com.visionvera.bmob.adapter.HomePagerAdapter;
 import com.visionvera.bmob.base.BaseActivity;
+import com.visionvera.bmob.global.App;
 import com.visionvera.bmob.utils.ResUtil;
 
 public class HomeActivity extends BaseActivity {
@@ -17,6 +18,7 @@ public class HomeActivity extends BaseActivity {
     private RadioGroup home_tab_rg;
     private RadioButton home_tab_apps_rb;
     private RadioButton home_tab_users_rb;
+    private RadioButton home_tab_plan_rb;
     private ViewPager home_view_pager;
     private HomePagerAdapter mHomePagerAdapter;
 
@@ -29,6 +31,7 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void initData() {
         mHomePagerAdapter = new HomePagerAdapter(getSupportFragmentManager());
+        App.getInstance().isAppOnForeground();
     }
 
     @Override
@@ -37,6 +40,7 @@ public class HomeActivity extends BaseActivity {
         home_tab_rg = (RadioGroup) findViewById(R.id.home_tab_rg);
         home_tab_apps_rb = (RadioButton) findViewById(R.id.home_tab_apps_rb);
         home_tab_users_rb = (RadioButton) findViewById(R.id.home_tab_users_rb);
+        home_tab_plan_rb = (RadioButton) findViewById(R.id.home_tab_plan_rb);
         home_view_pager = (ViewPager) findViewById(R.id.home_view_pager);
 
         int paddingTop = (int) ResUtil.getDimen(R.dimen.x20);
@@ -48,11 +52,20 @@ public class HomeActivity extends BaseActivity {
         Drawable userDrawable = ResUtil.getDrawable(R.drawable.selector_home_tab_users);
         userDrawable.setBounds(0, paddingTop, x71, x60 + paddingTop);
         home_tab_users_rb.setCompoundDrawables(null, userDrawable, null, null);
+        Drawable planDrawable = ResUtil.getDrawable(R.drawable.selector_home_tab_plan);
+        planDrawable.setBounds(0, paddingTop, x71, x60 + paddingTop);
+        home_tab_plan_rb.setCompoundDrawables(null, planDrawable, null, null);
 
         home_tab_rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                home_view_pager.setCurrentItem(checkedId == R.id.home_tab_apps_rb ? 0 : 1);
+                if (checkedId == R.id.home_tab_apps_rb) {
+                    home_view_pager.setCurrentItem(0);
+                } else if (checkedId == R.id.home_tab_users_rb) {
+                    home_view_pager.setCurrentItem(1);
+                } else if (checkedId == R.id.home_tab_plan_rb) {
+                    home_view_pager.setCurrentItem(2);
+                }
             }
         });
 
@@ -61,8 +74,16 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                home_tab_rg.check(position == 0 ? R.id.home_tab_apps_rb : R.id.home_tab_users_rb);
-                home_title_tv.setText(position == 0 ? R.string.tab_home_apps : R.string.tab_home_users);
+                if (position == 0) {
+                    home_tab_rg.check(R.id.home_tab_apps_rb);
+                    home_title_tv.setText(R.string.tab_home_apps);
+                } else if (position == 1) {
+                    home_tab_rg.check(R.id.home_tab_users_rb);
+                    home_title_tv.setText(R.string.tab_home_users);
+                } else if (position == 2) {
+                    home_tab_rg.check(R.id.home_tab_plan_rb);
+                    home_title_tv.setText(R.string.tab_home_plan);
+                }
             }
         });
     }

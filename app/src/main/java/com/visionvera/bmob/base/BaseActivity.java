@@ -51,7 +51,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
 
     @Override
     @CallSuper
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected final void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         registerRxBus();
         lifecycleSubject.onNext(ActivityEvent.CREATE);
@@ -157,7 +157,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
     }
 
     public void setTitleBar(String title, View.OnClickListener onClickListener) {
-        setTitleBar(title, null, false);
+        setTitleBar(title, null, true);
     }
 
     public void setTitleBar(String title, View.OnClickListener onClickListener, boolean showBack) {

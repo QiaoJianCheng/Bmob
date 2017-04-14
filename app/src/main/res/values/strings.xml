@@ -26,4 +26,11 @@
     <string name="toast_login_success">登录成功</string>
     <string name="tab_home_apps">应用</string>
     <string name="tab_home_users">用户</string>
+    <string name="tab_home_plan">计划</string>
+    <string name="button_plan_sensor">距离传感器</string>
+    <string name="text_time">时间</string>
+    <string name="text_count">计数</string>
+    <string name="text_start_time">00:00:00.00</string>
+    <string name="text_start_count">0</string>
+    <string name="title_sensor">传感器</string>
 </resources>

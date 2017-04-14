@@ -23,6 +23,11 @@
             android:id="@+id/home_tab_users_rb"
             style="@style/HomeTabRb"
             android:text="@string/tab_home_users"/>
+
+        <RadioButton
+            android:id="@+id/home_tab_plan_rb"
+            style="@style/HomeTabRb"
+            android:text="@string/tab_home_plan"/>
     </RadioGroup>
 
     <TextView

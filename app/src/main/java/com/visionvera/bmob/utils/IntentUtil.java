@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.visionvera.bmob.R;
+import com.visionvera.bmob.activity.AppDetailActivity;
 import com.visionvera.bmob.activity.HomeActivity;
 import com.visionvera.bmob.activity.RegisterActivity;
+import com.visionvera.bmob.activity.SensorActivity;
 
 /**
  * Created by Qiao on 2016/12/16.
@@ -36,9 +38,11 @@ public class IntentUtil {
         }
         activity.overridePendingTransition(R.anim.previus_left_in, R.anim.current_right_out);
     }
+
     public static void toMainActivity(Activity activity) {
         if (activity == null) return;
-        activity.startActivity(new Intent(activity, HomeActivity.class));
+        Intent intent = new Intent(activity, HomeActivity.class);
+        activity.startActivity(intent);
         enterActivityAnim(activity);
     }
 
@@ -47,4 +51,20 @@ public class IntentUtil {
         activity.startActivity(new Intent(activity, RegisterActivity.class));
         enterActivityAnim(activity);
     }
+
+    public static void toAppDetailActivity(Activity activity, String appId, String appName) {
+        if (activity == null) return;
+        Intent intent = new Intent(activity, AppDetailActivity.class);
+        intent.putExtra(AppDetailActivity.INTENT_APP_ID, appId);
+        intent.putExtra(AppDetailActivity.INTENT_APP_NAME, appName);
+        activity.startActivity(intent);
+        enterActivityAnim(activity);
+    }
+
+    public static void toSensorActivity(Activity activity) {
+        if (activity == null) return;
+        activity.startActivity(new Intent(activity, SensorActivity.class));
+        enterActivityAnim(activity);
+    }
+
 }

@@ -1,6 +1,10 @@
 package com.visionvera.bmob.activity;
 
+import android.app.ActivityManager;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.KeyEvent;
@@ -13,15 +17,19 @@ import android.widget.TextView;
 
 import com.visionvera.bmob.R;
 import com.visionvera.bmob.base.BaseActivity;
+import com.visionvera.bmob.global.App;
 import com.visionvera.bmob.global.UserHelper;
 import com.visionvera.bmob.listener.PressEffectTouchListener;
 import com.visionvera.bmob.model.UserBean;
 import com.visionvera.bmob.net.NetworkRequest;
 import com.visionvera.bmob.net.ResponseSubscriber;
 import com.visionvera.bmob.utils.IntentUtil;
+import com.visionvera.bmob.utils.LogUtil;
 import com.visionvera.bmob.utils.ResUtil;
 import com.visionvera.bmob.utils.TextUtil;
 import com.visionvera.bmob.utils.ToastUtil;
+
+import java.util.List;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
@@ -43,6 +51,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     protected void initData() {
+        App.getInstance().isAppOnForeground();
     }
 
     @Override
@@ -160,4 +169,5 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 break;
         }
     }
+
 }
