@@ -34,11 +34,6 @@
             android:name=".activity.LoginActivity"
             android:configChanges="orientation|keyboardHidden"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
             android:name=".activity.RegisterActivity"
@@ -50,7 +45,23 @@
             android:configChanges="orientation|keyboardHidden"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
         </activity>
-        <activity android:name=".activity.SensorActivity">
+        <activity
+            android:name=".activity.SensorActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
+        </activity>
+        <activity
+            android:name=".activity.SplashActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@style/AppFullScreenTheme"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.SdcardActivity">
         </activity>
     </application>
 

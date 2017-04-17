@@ -17,6 +17,7 @@ import com.visionvera.bmob.utils.IntentUtil;
 
 public class PlanTabFragment extends BaseFragment {
     private TextView plan_sensor_tv;
+    private TextView plan_sdcard_tv;
 
     @NonNull
     @Override
@@ -32,10 +33,17 @@ public class PlanTabFragment extends BaseFragment {
     @Override
     protected void initViews(View view, Bundle savedInstanceState) {
         plan_sensor_tv = (TextView) view.findViewById(R.id.plan_sensor_tv);
+        plan_sdcard_tv = (TextView) view.findViewById(R.id.plan_sdcard_tv);
         plan_sensor_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 IntentUtil.toSensorActivity(getActivity());
+            }
+        });
+        plan_sdcard_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentUtil.toSdcardActivity(getActivity());
             }
         });
     }

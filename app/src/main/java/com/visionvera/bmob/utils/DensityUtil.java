@@ -28,10 +28,17 @@ public class DensityUtil {
         return (int) ((spValue - 0.5f) * fontScale);
     }
 
-    /* 获取手机的通知栏的高度 */
+    /* 获取手机的状态栏的高度 */
     public static int getStatusBarHeight() {
         return Resources.getSystem().getDimensionPixelSize(
                 Resources.getSystem().getIdentifier("status_bar_height",
+                        "dimen", "android"));
+    }
+
+    /* 获取手机的导航栏的高度 */
+    public static int getNavigationBarHeight() {
+        return Resources.getSystem().getDimensionPixelSize(
+                Resources.getSystem().getIdentifier("navigation_bar_height",
                         "dimen", "android"));
     }
 

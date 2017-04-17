@@ -135,7 +135,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 }
                 login_progress.setVisibility(View.VISIBLE);
                 login_confirm_rl.setClickable(false);
-                NetworkRequest.getInstance().getLogin(LoginActivity.this, account, password, new ResponseSubscriber<UserBean>() {
+                NetworkRequest.getLogin(LoginActivity.this, account, password, new ResponseSubscriber<UserBean>() {
                     @Override
                     public void onSuccess(UserBean userBean) {
                         login_progress.setVisibility(View.GONE);

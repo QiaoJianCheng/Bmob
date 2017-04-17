@@ -47,6 +47,14 @@ public class SharedPrefUtil {
         return getSharedPreferences().getInt(key, defValue);
     }
 
+    public static void putLong(String key, long value) {
+        getSharedPreferences().edit().putLong(key, value).apply();
+    }
+
+    public static long getLong(String key, long defValue) {
+        return getSharedPreferences().getLong(key, defValue);
+    }
+
     public static void remove(String key) {
         getSharedPreferences().edit().remove(key).apply();
     }

@@ -1,7 +1,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_below="@+id/common_title_root_rl">
 
     <RelativeLayout
         android:id="@+id/common_failed_view"

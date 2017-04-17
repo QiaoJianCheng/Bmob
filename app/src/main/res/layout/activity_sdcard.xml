@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_common_title"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y150"
+        android:text="@string/text_screen"
+        android:textColor="@color/colorTextLight"
+        android:textSize="@dimen/textSizeSmall"/>
+
+    <TextView
+        android:id="@+id/sdcard_screen_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y20"
+        android:textColor="@color/colorTextDark"
+        android:textSize="@dimen/textSizeNormal"
+        tools:text="1080×1920"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y150"
+        android:text="@string/text_storage"
+        android:textColor="@color/colorTextLight"
+        android:textSize="@dimen/textSizeSmall"/>
+
+    <TextView
+        android:id="@+id/sdcard_storage_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y20"
+        android:textColor="@color/colorTextDark"
+        android:textSize="@dimen/textSizeNormal"/>
+
+</LinearLayout>

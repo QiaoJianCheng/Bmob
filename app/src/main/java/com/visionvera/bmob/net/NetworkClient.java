@@ -29,9 +29,8 @@ public class NetworkClient {
     private static final int HTTP_READ_TIMEOUT = 10;
     private static final int HTTP_CACHE_SIZE = 5242880; //5 * 1024 * 1024
     private static final String HTTP_CACHE_DIR = "HttpCache";
+    private static NetworkAPI mServerAPI;
     private Retrofit mRetrofit;
-    private static NetworkClient mNetworkClient;
-    private Object mServerAPI;
 
     private NetworkClient() {
         File cacheFile = new File(App.getContext().getCacheDir().getAbsolutePath(), HTTP_CACHE_DIR);
@@ -52,22 +51,15 @@ public class NetworkClient {
                 .build();
     }
 
-    public static NetworkClient getInstance() {
-        if (mNetworkClient == null) {
-            mNetworkClient = new NetworkClient();
-        }
-        return mNetworkClient;
-    }
-
-    public <T> T createAPI(Class<T> clazz) {
+    static NetworkAPI createAPI(Class<NetworkAPI> clazz) {
         if (mServerAPI == null) {
-            mServerAPI = getInstance().mRetrofit.create(clazz);
+            mServerAPI = new NetworkClient().mRetrofit.create(clazz);
         }
-        return (T) mServerAPI;
+        return mServerAPI;
     }
 
     static void reset() {
-        mNetworkClient = null;
+        mServerAPI = null;
     }
 
     private HttpLoggingInterceptor getBodyInterceptor() {

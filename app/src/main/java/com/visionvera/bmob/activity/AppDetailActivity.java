@@ -74,14 +74,14 @@ public class AppDetailActivity extends BaseActivity {
     @Override
     protected void loadData(boolean showLoading) {
         super.loadData(showLoading);
-        NetworkRequest.getInstance().getCrashes(this, mAppId, new ResponseSubscriber<CrashesBean>() {
+        NetworkRequest.getCrashes(this, mAppId, new ResponseSubscriber<CrashesBean>() {
             @Override
             public void onSuccess(CrashesBean crashesBean) {
+                mAppDetails.clear();
                 if (crashesBean != null && crashesBean.results != null) {
-                    mAppDetails.clear();
                     mAppDetails.addAll(crashesBean.results);
-                    mAppDetailAdapter.notifyDataSetChanged();
                 }
+                mAppDetailAdapter.notifyDataSetChanged();
                 networkSuccess();
             }
 

@@ -24,11 +24,11 @@ import rx.schedulers.Schedulers;
 
 public class NetworkRequest {
 
-    protected final NetworkAPI getServiceInstance() {
-        return NetworkClient.getInstance().createAPI(NetworkAPI.class);
+    private static NetworkAPI getServiceInstance() {
+        return NetworkClient.createAPI(NetworkAPI.class);
     }
 
-    protected final <T extends BaseBean, E> void subscribe(LifecycleProvider<E> lifecycleProvider, Observable<T> observable, ResponseSubscriber<T> subscriber) {
+    private static <T extends BaseBean, E> void subscribe(LifecycleProvider<E> lifecycleProvider, Observable<T> observable, ResponseSubscriber<T> subscriber) {
         if (observable == null || subscriber == null) return;
         observable
                 .map(new ResponseFunc<T>())
@@ -39,27 +39,18 @@ public class NetworkRequest {
                 .subscribe(subscriber);
     }
 
-    private static NetworkRequest sNetworkRequest;
-
-    public static NetworkRequest getInstance() {
-        if (sNetworkRequest == null) {
-            sNetworkRequest = new NetworkRequest();
-        }
-        return sNetworkRequest;
-    }
-
-    public void getUsers(LifecycleProvider lifecycleProvider, ResponseSubscriber<UsersBean> subscriber) {
+    public static void getUsers(LifecycleProvider lifecycleProvider, ResponseSubscriber<UsersBean> subscriber) {
         subscribe(lifecycleProvider, getServiceInstance().getUsers(), subscriber);
     }
 
-    public void getLogin(LifecycleProvider lifecycleProvider, String username, String password, ResponseSubscriber<UserBean> subscriber) {
+    public static void getLogin(LifecycleProvider lifecycleProvider, String username, String password, ResponseSubscriber<UserBean> subscriber) {
         Map<String, Object> param = RequestParam.getBaseParam();
         param.put("username", username);
         param.put("password", password);
         subscribe(lifecycleProvider, getServiceInstance().getLogin(param), subscriber);
     }
 
-    public void postRegister(LifecycleProvider lifecycleProvider, String username, String password, String phone, String signature, int gender, String avatar, ResponseSubscriber<UserBean> subscriber) {
+    public static void postRegister(LifecycleProvider lifecycleProvider, String username, String password, String phone, String signature, int gender, String avatar, ResponseSubscriber<UserBean> subscriber) {
         Map<String, Object> param = RequestParam.getBaseParam();
         param.put("username", username);
         param.put("password", password);
@@ -71,22 +62,22 @@ public class NetworkRequest {
         subscribe(lifecycleProvider, getServiceInstance().postRegister(body), subscriber);
     }
 
-    public void postFile(LifecycleProvider lifecycleProvider, String filename, byte[] bitmap, ResponseSubscriber<FileBean> subscriber) {
+    public static void postFile(LifecycleProvider lifecycleProvider, String filename, byte[] bitmap, ResponseSubscriber<FileBean> subscriber) {
         subscribe(lifecycleProvider, getServiceInstance().postFile(filename, RequestParam.bytesToBody(bitmap)), subscriber);
     }
 
-    public void getApps(LifecycleProvider lifecycleProvider, ResponseSubscriber<AppsBean> subscriber) {
+    public static void getApps(LifecycleProvider lifecycleProvider, ResponseSubscriber<AppsBean> subscriber) {
         subscribe(lifecycleProvider, getServiceInstance().getApps(), subscriber);
     }
 
-    public void putApp(LifecycleProvider lifecycleProvider, String id, boolean bang, ResponseSubscriber<BaseBean> subscriber) {
+    public static void putApp(LifecycleProvider lifecycleProvider, String id, boolean bang, ResponseSubscriber<BaseBean> subscriber) {
         Map<String, Object> param = RequestParam.getBaseParam();
         param.put("bang", bang);
         RequestBody body = RequestParam.mapToBody(param);
         subscribe(lifecycleProvider, getServiceInstance().putApp(id, body, UserHelper.getUserToken()), subscriber);
     }
 
-    public void getCrashes(LifecycleProvider lifecycleProvider, String appId, ResponseSubscriber<CrashesBean> subscriber) {
+    public static void getCrashes(LifecycleProvider lifecycleProvider, String appId, ResponseSubscriber<CrashesBean> subscriber) {
         String where = "";
         if (!TextUtil.isEmpty(appId)) {
             JsonObject jsonObject = new JsonObject();

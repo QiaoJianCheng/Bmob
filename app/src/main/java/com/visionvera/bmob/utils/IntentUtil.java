@@ -1,12 +1,16 @@
 package com.visionvera.bmob.utils;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.view.View;
 
 import com.visionvera.bmob.R;
 import com.visionvera.bmob.activity.AppDetailActivity;
 import com.visionvera.bmob.activity.HomeActivity;
+import com.visionvera.bmob.activity.LoginActivity;
 import com.visionvera.bmob.activity.RegisterActivity;
+import com.visionvera.bmob.activity.SdcardActivity;
 import com.visionvera.bmob.activity.SensorActivity;
 
 /**
@@ -46,6 +50,12 @@ public class IntentUtil {
         enterActivityAnim(activity);
     }
 
+    public static void toLoginActivity(Activity activity, View view) {
+        if (activity == null) return;
+        activity.startActivity(new Intent(activity, LoginActivity.class), ActivityOptions.makeSceneTransitionAnimation(activity, view, "image").toBundle());
+        activity.overridePendingTransition(R.anim.next_alpha_in, R.anim.current_alpha_out);
+    }
+
     public static void toRegisterActivity(Activity activity) {
         if (activity == null) return;
         activity.startActivity(new Intent(activity, RegisterActivity.class));
@@ -64,6 +74,12 @@ public class IntentUtil {
     public static void toSensorActivity(Activity activity) {
         if (activity == null) return;
         activity.startActivity(new Intent(activity, SensorActivity.class));
+        enterActivityAnim(activity);
+    }
+
+    public static void toSdcardActivity(Activity activity) {
+        if (activity == null) return;
+        activity.startActivity(new Intent(activity, SdcardActivity.class));
         enterActivityAnim(activity);
     }
 

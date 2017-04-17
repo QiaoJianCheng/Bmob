@@ -22,11 +22,15 @@ import java.util.List;
 
 public class App extends Application {
     public static final String TAG = "APP";
-    public static Handler mHandler = new Handler();
     private static App mApp;
+    public Handler mHandler = new Handler();
 
-    public static void runOnUiThread(Runnable r) {
+    public void post(Runnable r) {
         mHandler.post(r);
+    }
+
+    public void postDelay(Runnable r, long delay) {
+        mHandler.postDelayed(r, delay);
     }
 
     public static Context getContext() {

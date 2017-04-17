@@ -1,12 +1,14 @@
 <resources
-    xmlns:tools="http://schemas.android.com/tools">
+    >
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowContentTransitions">true</item>
         <item name="android:windowBackground">@color/colorBackground</item>
     </style>
 
     <style name="AppFullScreenTheme" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
@@ -78,8 +80,8 @@
         <item name="android:layout_width">@dimen/x60</item>
         <item name="android:layout_height">@dimen/x60</item>
         <item name="android:layout_centerVertical">true</item>
-        <item name="android:indeterminateTint" tools:ignore="NewApi">@color/colorThemeRed</item>
-        <item name="android:indeterminateTintMode" tools:ignore="NewApi">src_atop</item>
+        <item name="android:indeterminateDuration">1000</item>
+        <item name="android:indeterminateDrawable">@drawable/rotate_progress_bar</item>
         <item name="android:visibility">gone</item>
     </style>
 

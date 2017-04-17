@@ -128,7 +128,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 return;
             }
 
-            NetworkRequest.getInstance().postRegister(this, account, password, phone, signature,
+            NetworkRequest.postRegister(this, account, password, phone, signature,
                     register_gender_rg.getCheckedRadioButtonId() == R.id.register_gender_female_rb ? Constants.GENDER_FEMALE : Constants.GENDER_MALE,
                     mAvatar, new ResponseSubscriber<UserBean>() {
                         @Override
@@ -218,7 +218,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 final Bitmap bitmap = data.getParcelableExtra("data");
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 90, stream);
-                NetworkRequest.getInstance().postFile(this, System.currentTimeMillis() + ".jpg", stream.toByteArray(), new ResponseSubscriber<FileBean>() {
+                NetworkRequest.postFile(this, System.currentTimeMillis() + ".jpg", stream.toByteArray(), new ResponseSubscriber<FileBean>() {
                     @Override
                     public void onSuccess(FileBean fileBean) {
                         if (fileBean != null) {

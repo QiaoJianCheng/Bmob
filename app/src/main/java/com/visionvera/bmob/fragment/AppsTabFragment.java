@@ -79,14 +79,14 @@ public class AppsTabFragment extends BaseFragment {
     @Override
     protected void loadData(boolean showLoading) {
         super.loadData(showLoading);
-        NetworkRequest.getInstance().getApps(this, new ResponseSubscriber<AppsBean>() {
+        NetworkRequest.getApps(this, new ResponseSubscriber<AppsBean>() {
             @Override
             public void onSuccess(AppsBean appsBean) {
+                mApps.clear();
                 if (appsBean != null && appsBean.results != null) {
-                    mApps.clear();
                     mApps.addAll(appsBean.results);
-                    mAppAdapter.notifyDataSetChanged();
                 }
+                mAppAdapter.notifyDataSetChanged();
                 networkSuccess();
             }
 
@@ -124,7 +124,7 @@ public class AppsTabFragment extends BaseFragment {
             buttonView.setClickable(false);
             RxBus.getDefault().post(new ProgressEvent(position, true));
             final AppBean bean = mApps.get(position);
-            NetworkRequest.getInstance().putApp(AppsTabFragment.this, bean.objectId, isChecked, new ResponseSubscriber<BaseBean>() {
+            NetworkRequest.putApp(AppsTabFragment.this, bean.objectId, isChecked, new ResponseSubscriber<BaseBean>() {
                 @Override
                 public void onSuccess(BaseBean baseBean) {
                     buttonView.setClickable(true);

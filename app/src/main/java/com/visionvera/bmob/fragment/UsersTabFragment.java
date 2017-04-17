@@ -16,7 +16,6 @@ import com.visionvera.bmob.model.UserBean;
 import com.visionvera.bmob.model.UsersBean;
 import com.visionvera.bmob.net.NetworkRequest;
 import com.visionvera.bmob.net.ResponseSubscriber;
-import com.visionvera.bmob.utils.IntentUtil;
 import com.visionvera.bmob.utils.ToastUtil;
 import com.visionvera.bmob.view.PtrRefreshLayout;
 
@@ -73,14 +72,14 @@ public class UsersTabFragment extends BaseFragment {
     @Override
     protected void loadData(boolean showLoading) {
         super.loadData(showLoading);
-        NetworkRequest.getInstance().getUsers(this, new ResponseSubscriber<UsersBean>() {
+        NetworkRequest.getUsers(this, new ResponseSubscriber<UsersBean>() {
             @Override
             public void onSuccess(UsersBean userBean) {
+                mUsers.clear();
                 if (userBean != null && userBean.results != null) {
-                    mUsers.clear();
                     mUsers.addAll(userBean.results);
-                    mUserAdapter.notifyDataSetChanged();
                 }
+                mUserAdapter.notifyDataSetChanged();
                 networkSuccess();
             }
 

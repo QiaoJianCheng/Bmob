@@ -13,6 +13,7 @@
     <ImageView
         android:layout_width="@dimen/x400"
         android:layout_height="@dimen/y200"
+        android:transitionName="image"
         android:src="@drawable/logo"/>
 
     <RelativeLayout
