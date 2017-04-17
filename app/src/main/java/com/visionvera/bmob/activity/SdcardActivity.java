@@ -66,7 +66,8 @@ public class SdcardActivity extends BaseActivity {
                 text += storage + ": " + getStorageState(storage) + "\n\t\t";
             }
         }
-        text += "\nEnvironment:\n\t\t" + Environment.getExternalStorageDirectory().getAbsolutePath() + ": " + Environment.getExternalStorageState();
+        text += "\nEnvironment:\n\t\t" + Environment.getExternalStorageDirectory().getAbsolutePath() + ": " + Environment.getExternalStorageState() + "\n\t\t";
+        text += Environment.getRootDirectory().getAbsolutePath() + ": " + Environment.getExternalStorageState(Environment.getRootDirectory());
         sdcard_storage_tv.setText(text);
     }
 
