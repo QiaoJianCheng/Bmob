@@ -13,8 +13,8 @@
     <ImageView
         android:layout_width="@dimen/x400"
         android:layout_height="@dimen/y200"
-        android:transitionName="image"
-        android:src="@drawable/logo"/>
+        android:src="@drawable/logo"
+        android:transitionName="image"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -107,7 +107,8 @@
             android:id="@+id/login_progress"
             style="@style/LoadingProgressBar"
             android:layout_marginLeft="@dimen/x30"
-            android:layout_toRightOf="@+id/login_confirm_tv"/>
+            android:layout_toRightOf="@+id/login_confirm_tv"
+            android:visibility="gone"/>
     </RelativeLayout>
 
     <RelativeLayout

@@ -40,4 +40,6 @@
     <string name="title_sdcard">屏幕和储存</string>
     <string name="text_screen">屏幕</string>
     <string name="text_storage">储存</string>
+    <string name="button_color_filter">ColorFilter</string>
+    <string name="title_color_filter">ColorFilter</string>
 </resources>

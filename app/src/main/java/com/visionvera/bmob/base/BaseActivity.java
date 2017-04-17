@@ -88,7 +88,8 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
 
     protected abstract void setContentView();
 
-    protected abstract void initData();
+    protected void initData() {
+    }
 
     private void initCommonView() {
         if (common_title_back_iv == null) {

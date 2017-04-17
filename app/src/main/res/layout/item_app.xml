@@ -24,13 +24,15 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/x40" />
+            android:layout_marginRight="@dimen/x40"/>
+
         <ProgressBar
             android:id="@+id/item_app_progress"
             style="@style/LoadingProgressBar"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/x20"
-            android:layout_toLeftOf="@+id/item_app_switch"/>
+            android:layout_toLeftOf="@+id/item_app_switch"
+            android:visibility="gone"/>
 
         <include layout="@layout/layout_common_line_bottom"/>
     </RelativeLayout>

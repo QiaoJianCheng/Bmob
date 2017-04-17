@@ -82,7 +82,6 @@
         <item name="android:layout_centerVertical">true</item>
         <item name="android:indeterminateDuration">1000</item>
         <item name="android:indeterminateDrawable">@drawable/rotate_progress_bar</item>
-        <item name="android:visibility">gone</item>
     </style>
 
     <style name="LoginEditText">

@@ -1,29 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/plan_sensor_tv"
+    <LinearLayout
+        android:id="@+id/common_content_view"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y240"
-        android:background="@drawable/selector_press_effect"
-        android:gravity="center"
-        android:text="@string/button_plan_sensor"
-        android:textColor="@color/colorTextDark"
-        android:textSize="@dimen/textSizeLarge"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
 
-    <include layout="@layout/layout_common_line"/>
+        <TextView
+            android:id="@+id/plan_sensor_tv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y240"
+            android:background="@drawable/selector_press_effect"
+            android:gravity="center"
+            android:text="@string/button_plan_sensor"
+            android:textColor="@color/colorTextDark"
+            android:textSize="@dimen/textSizeLarge"/>
 
-    <TextView
-        android:id="@+id/plan_sdcard_tv"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y240"
-        android:background="@drawable/selector_press_effect"
-        android:gravity="center"
-        android:text="@string/button_plan_sdcard"
-        android:textColor="@color/colorTextDark"
-        android:textSize="@dimen/textSizeLarge"/>
-</LinearLayout>
+        <include layout="@layout/layout_common_line"/>
+
+        <TextView
+            android:id="@+id/plan_sdcard_tv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y240"
+            android:background="@drawable/selector_press_effect"
+            android:gravity="center"
+            android:text="@string/button_plan_sdcard"
+            android:textColor="@color/colorTextDark"
+            android:textSize="@dimen/textSizeLarge"/>
+
+        <include layout="@layout/layout_common_line"/>
+
+        <TextView
+            android:id="@+id/plan_color_filter_tv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y240"
+            android:background="@drawable/selector_press_effect"
+            android:gravity="center"
+            android:text="@string/button_color_filter"
+            android:textColor="@color/colorTextDark"
+            android:textSize="@dimen/textSizeLarge"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/layout_common_loading_view"/>
+</RelativeLayout>

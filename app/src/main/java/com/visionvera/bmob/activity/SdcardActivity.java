@@ -26,11 +26,6 @@ public class SdcardActivity extends BaseActivity {
     }
 
     @Override
-    protected void initData() {
-
-    }
-
-    @Override
     protected void initViews(Bundle savedInstanceState) {
         setTitleBar(ResUtil.getString(R.string.title_sdcard));
 
@@ -72,7 +67,10 @@ public class SdcardActivity extends BaseActivity {
     }
 
     private void setScreen() {
-        sdcard_screen_tv.setText("screen size: " + DensityUtil.getScreenWidth() + "×" + DensityUtil.getScreenHeight() +
+        int width = getWindowManager().getDefaultDisplay().getWidth();
+        int height = getWindowManager().getDefaultDisplay().getHeight();
+        sdcard_screen_tv.setText("window size: " + width + "×" + height +
+                "\ndisplay metric: " + DensityUtil.getScreenWidth() + "×" + DensityUtil.getScreenHeight() +
                 "\nstatus bar: " + DensityUtil.getStatusBarHeight() +
                 "\nnavigation bar: " + DensityUtil.getNavigationBarHeight());
     }

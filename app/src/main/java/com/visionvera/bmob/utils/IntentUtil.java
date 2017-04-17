@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.visionvera.bmob.R;
 import com.visionvera.bmob.activity.AppDetailActivity;
+import com.visionvera.bmob.activity.ColorFilterActivity;
 import com.visionvera.bmob.activity.HomeActivity;
 import com.visionvera.bmob.activity.LoginActivity;
 import com.visionvera.bmob.activity.RegisterActivity;
@@ -80,6 +81,12 @@ public class IntentUtil {
     public static void toSdcardActivity(Activity activity) {
         if (activity == null) return;
         activity.startActivity(new Intent(activity, SdcardActivity.class));
+        enterActivityAnim(activity);
+    }
+
+    public static void toColorFilterActivity(Activity activity) {
+        if (activity == null) return;
+        activity.startActivity(new Intent(activity, ColorFilterActivity.class));
         enterActivityAnim(activity);
     }
 

@@ -19,7 +19,6 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.visionvera.bmob.R;
 import com.visionvera.bmob.base.BaseActivity;
 import com.visionvera.bmob.dialog.DrawerDialog;
-import com.visionvera.bmob.event.RxEvent;
 import com.visionvera.bmob.global.Constants;
 import com.visionvera.bmob.global.UserHelper;
 import com.visionvera.bmob.model.FileBean;
@@ -61,11 +60,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
-    protected void initData() {
-
-    }
-
-    @Override
     protected void initViews(Bundle savedInstanceState) {
         register_avatar_sdv = (SimpleDraweeView) findViewById(R.id.register_avatar_sdv);
         register_account_ll = (TextInputLayout) findViewById(R.id.register_account_ll);
@@ -88,11 +82,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
         register_confirm_bt.setOnClickListener(this);
         register_avatar_sdv.setOnClickListener(this);
-    }
-
-    @Override
-    protected void onEventMainThread(RxEvent rxEvent) {
-
     }
 
     @Override

@@ -46,6 +46,7 @@
         style="@style/LoadingProgressBar"
         android:layout_width="@dimen/x99"
         android:layout_height="@dimen/x99"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        android:visibility="visible"/>
 
 </RelativeLayout>

@@ -22,6 +22,7 @@ import com.visionvera.bmob.R;
 import com.visionvera.bmob.event.RxBus;
 import com.visionvera.bmob.event.RxEvent;
 import com.visionvera.bmob.listener.PressEffectTouchListener;
+import com.visionvera.bmob.utils.ToastUtil;
 
 import rx.Observable;
 import rx.Subscription;
@@ -45,6 +46,7 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
     private View common_loading_view;
     private View common_empty_view;
     private Subscription mRxBusSubscription;
+    private boolean mIsFirst = true, mIsVisible = false, mIsCreated = false;
 
     @Nullable
     @Override
@@ -61,7 +63,8 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
         initData();
         initCommonView(view);
         initViews(view, savedInstanceState);
-        loadData(true);
+        mIsCreated = true;
+        toLoad();
     }
 
     private void initCommonView(View view) {
@@ -188,6 +191,20 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
         }
     }
 
+    private void toLoad() {
+        if (mIsFirst && mIsVisible && mIsCreated) {
+            mIsFirst = false;
+            loadData(true);
+        }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        mIsVisible = isVisibleToUser;
+        toLoad();
+    }
+
     protected void onEventMainThread(RxEvent rxEvent) {
     }
 
@@ -282,7 +299,7 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
     @CallSuper
     public void onDestroy() {
         lifecycleSubject.onNext(FragmentEvent.DESTROY);
-        if (!mRxBusSubscription.isUnsubscribed()) {
+        if (mRxBusSubscription != null && !mRxBusSubscription.isUnsubscribed()) {
             mRxBusSubscription.unsubscribe();
         }
         super.onDestroy();

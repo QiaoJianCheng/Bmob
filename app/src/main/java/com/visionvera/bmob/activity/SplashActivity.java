@@ -17,10 +17,6 @@ public class SplashActivity extends BaseActivity {
     }
 
     @Override
-    protected void initData() {
-    }
-
-    @Override
     protected void initViews(Bundle savedInstanceState) {
         splash_image = (ImageView) findViewById(R.id.splash_image);
 

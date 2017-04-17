@@ -21,6 +21,7 @@ public class HomeActivity extends BaseActivity {
     private RadioButton home_tab_plan_rb;
     private ViewPager home_view_pager;
     private HomePagerAdapter mHomePagerAdapter;
+    private boolean mIsScrolling;
 
     @Override
     protected void setContentView() {
@@ -60,17 +61,24 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.home_tab_apps_rb) {
-                    home_view_pager.setCurrentItem(0);
+                    home_view_pager.setCurrentItem(0, mIsScrolling);
                 } else if (checkedId == R.id.home_tab_users_rb) {
-                    home_view_pager.setCurrentItem(1);
+                    home_view_pager.setCurrentItem(1, mIsScrolling);
                 } else if (checkedId == R.id.home_tab_plan_rb) {
-                    home_view_pager.setCurrentItem(2);
+                    home_view_pager.setCurrentItem(2, mIsScrolling);
                 }
             }
         });
 
+        home_view_pager.setOffscreenPageLimit(5);
         home_view_pager.setAdapter(mHomePagerAdapter);
         home_view_pager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                super.onPageScrollStateChanged(state);
+                mIsScrolling = !(state == ViewPager.SCROLL_STATE_IDLE);
+            }
+
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
