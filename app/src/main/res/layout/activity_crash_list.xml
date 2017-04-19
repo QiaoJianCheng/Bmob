@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/common_root_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/layout_common_title"/>
+
+    <LinearLayout
+        android:id="@+id/common_content_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/common_title_root_rl"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y80"
+            android:background="@color/colorWhite">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y120"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="@dimen/x380"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x40"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="机型"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="@dimen/textSizeSmall"/>
+
+
+                <TextView
+                    android:layout_width="@dimen/x90"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x40"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="API"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="@dimen/textSizeSmall"/>
+
+                <TextView
+                    android:layout_width="@dimen/x130"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x40"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="版本"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="@dimen/textSizeSmall"/>
+
+                <TextView
+                    android:layout_width="@dimen/x300"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x40"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="时间"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="@dimen/textSizeSmall"/>
+
+            </LinearLayout>
+
+            <include layout="@layout/layout_common_line_bottom"/>
+        </RelativeLayout>
+
+        <com.visionvera.bmob.view.PtrRefreshLayout
+            android:id="@+id/crash_list_ptr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="UnknownIdInLayout">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/crash_list_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.visionvera.bmob.view.PtrRefreshLayout>
+    </LinearLayout>
+
+    <include layout="@layout/layout_common_loading_view"/>
+</RelativeLayout>

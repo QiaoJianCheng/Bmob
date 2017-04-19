@@ -4,13 +4,14 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowContentTransitions">true</item>
-        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/colorTransparent</item>
     </style>
 
     <style name="AppFullScreenTheme" parent="AppTheme">
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowBackground">@color/colorTransparent</item>
     </style>
 
     <style name="CommonDialogStyle" parent="@android:style/Theme.Dialog">

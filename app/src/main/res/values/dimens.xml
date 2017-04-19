@@ -1,9 +1,9 @@
 <resources>
     <dimen name="textSizeLarge">@dimen/x52</dimen>
     <dimen name="textSizeMedium">@dimen/x46</dimen>
-    <dimen name="textSizeNormal">@dimen/x44</dimen>
-    <dimen name="textSizeSmall">@dimen/x40</dimen>
-    <dimen name="textSizeTiny">@dimen/x30</dimen>
+    <dimen name="textSizeNormal">@dimen/x40</dimen>
+    <dimen name="textSizeSmall">@dimen/x35</dimen>
+    <dimen name="textSizeTiny">@dimen/x28</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>

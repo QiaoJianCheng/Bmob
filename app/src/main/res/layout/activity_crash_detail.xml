@@ -2,23 +2,25 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/common_root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <include layout="@layout/layout_common_title"/>
 
-    <com.visionvera.bmob.view.PtrRefreshLayout
-        android:id="@+id/common_content_view"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/common_title_root_rl"
+        android:background="@color/colorWhite"
         tools:ignore="UnknownIdInLayout">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/app_detail_rv"
+        <TextView
+            android:id="@+id/crash_detail_tv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </com.visionvera.bmob.view.PtrRefreshLayout>
-
-    <include layout="@layout/layout_common_loading_view"/>
+            android:layout_height="wrap_content"
+            android:padding="@dimen/x40"
+            android:textColor="@color/colorTextDark"
+            android:textSize="@dimen/textSizeSmall"/>
+    </ScrollView>
 </RelativeLayout>

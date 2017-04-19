@@ -41,7 +41,7 @@
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
         </activity>
         <activity
-            android:name=".activity.AppDetailActivity"
+            android:name=".activity.CrashListlActivity"
             android:configChanges="orientation|keyboardHidden"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
         </activity>
@@ -70,6 +70,8 @@
             android:name=".activity.ColorFilterActivity"
             android:configChanges="orientation|keyboardHidden"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
+        </activity>
+        <activity android:name=".activity.CrashDetailActivity">
         </activity>
     </application>
 

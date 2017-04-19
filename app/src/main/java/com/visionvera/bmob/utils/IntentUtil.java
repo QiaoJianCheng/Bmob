@@ -1,13 +1,13 @@
 package com.visionvera.bmob.utils;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.view.View;
 
 import com.visionvera.bmob.R;
-import com.visionvera.bmob.activity.AppDetailActivity;
 import com.visionvera.bmob.activity.ColorFilterActivity;
+import com.visionvera.bmob.activity.CrashDetailActivity;
+import com.visionvera.bmob.activity.CrashListlActivity;
 import com.visionvera.bmob.activity.HomeActivity;
 import com.visionvera.bmob.activity.LoginActivity;
 import com.visionvera.bmob.activity.RegisterActivity;
@@ -53,8 +53,9 @@ public class IntentUtil {
 
     public static void toLoginActivity(Activity activity, View view) {
         if (activity == null) return;
-        activity.startActivity(new Intent(activity, LoginActivity.class), ActivityOptions.makeSceneTransitionAnimation(activity, view, "image").toBundle());
-        activity.overridePendingTransition(R.anim.next_alpha_in, R.anim.current_alpha_out);
+//        activity.startActivity(new Intent(activity, LoginActivity.class), ActivityOptions.makeSceneTransitionAnimation(activity, view, "image").toBundle());
+        activity.startActivity(new Intent(activity, LoginActivity.class));
+        enterActivityAnim(activity);
     }
 
     public static void toRegisterActivity(Activity activity) {
@@ -65,9 +66,9 @@ public class IntentUtil {
 
     public static void toAppDetailActivity(Activity activity, String appId, String appName) {
         if (activity == null) return;
-        Intent intent = new Intent(activity, AppDetailActivity.class);
-        intent.putExtra(AppDetailActivity.INTENT_APP_ID, appId);
-        intent.putExtra(AppDetailActivity.INTENT_APP_NAME, appName);
+        Intent intent = new Intent(activity, CrashListlActivity.class);
+        intent.putExtra(CrashListlActivity.INTENT_APP_ID, appId);
+        intent.putExtra(CrashListlActivity.INTENT_APP_NAME, appName);
         activity.startActivity(intent);
         enterActivityAnim(activity);
     }
@@ -90,4 +91,12 @@ public class IntentUtil {
         enterActivityAnim(activity);
     }
 
+    public static void toCrashDetailActivity(Activity activity, String title, String detail) {
+        if (activity == null) return;
+        Intent intent = new Intent(activity, CrashDetailActivity.class);
+        intent.putExtra(CrashDetailActivity.INTENT_TITLE, title);
+        intent.putExtra(CrashDetailActivity.INTENT_DETAIL, detail);
+        activity.startActivity(intent);
+        enterActivityAnim(activity);
+    }
 }

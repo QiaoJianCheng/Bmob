@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ import com.trello.rxlifecycle.RxLifecycle;
 import com.trello.rxlifecycle.android.ActivityEvent;
 import com.trello.rxlifecycle.android.RxLifecycleAndroid;
 import com.visionvera.bmob.R;
+import com.visionvera.bmob.activity.DragParentLayout;
 import com.visionvera.bmob.event.FinishEvent;
 import com.visionvera.bmob.event.RxBus;
 import com.visionvera.bmob.event.RxEvent;
@@ -47,7 +49,10 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
     private View common_failed_view;
     private View common_loading_view;
     private View common_empty_view;
+    private View common_root_view;
     private Subscription mRxBusSubscription;
+
+    private DragParentLayout mDragParentLayout;
 
     @Override
     @CallSuper
@@ -72,7 +77,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
                     window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                 } else {
                     if (statusBarColor == 0xffffffff) {
-                        statusBarColor = 0xffefefef;
+                        statusBarColor = 0xffafafaf;
                     }
                 }
             }
@@ -139,6 +144,26 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
                 @Override
                 public void onClick(View v) {
                     loadData(true);
+                }
+            });
+        }
+        if (common_root_view == null) {
+            common_root_view = findViewById(R.id.common_root_view);
+        }
+        if (common_root_view != null) {
+            common_root_view.setBackgroundResource(R.color.colorBackground);
+            ViewGroup contentView = (ViewGroup) findViewById(Window.ID_ANDROID_CONTENT);
+            View childView = contentView.getChildAt(0);
+            mDragParentLayout = new DragParentLayout(getApplicationContext());
+            contentView.removeViewAt(0);
+            mDragParentLayout.addView(childView);
+            contentView.addView(mDragParentLayout, 0);
+
+            mDragParentLayout.setDragView(common_root_view);
+            mDragParentLayout.setOnActivityListener(new DragParentLayout.OnActivityListener() {
+                @Override
+                public void onActivityFinish() {
+                    finish();
                 }
             });
         }
