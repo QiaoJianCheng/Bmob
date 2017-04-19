@@ -31,7 +31,6 @@ public class DragParentLayout extends FrameLayout {
     private int mLeft;
     private int mScreenWidth;
     private boolean mIsFromEdge;
-    private View mView;
 
 
     public DragParentLayout(Context context) {
@@ -60,6 +59,7 @@ public class DragParentLayout extends FrameLayout {
     public void addView(View child, int index) {
         super.addView(child, index);
         child.setElevation(100);
+        mDragView = child;
     }
 
     @Override
@@ -101,6 +101,7 @@ public class DragParentLayout extends FrameLayout {
         public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
             super.onViewPositionChanged(changedView, left, top, dx, dy);
             mLeft = left;
+            mDragView.setElevation((mScreenWidth - mLeft) / 10);
             if (mLeft == mScreenWidth) {
                 if (mOnActivityListener != null) {
                     mOnActivityListener.onActivityFinish();
@@ -140,10 +141,6 @@ public class DragParentLayout extends FrameLayout {
         if (mDragHelper.smoothSlideViewTo(releasedChild, 0, 0)) {
             ViewCompat.postInvalidateOnAnimation(this);
         }
-    }
-
-    public void setDragView(View dragView) {
-        mDragView = dragView;
     }
 
     public interface OnActivityListener {

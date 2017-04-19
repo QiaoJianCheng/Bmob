@@ -156,10 +156,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
             View childView = contentView.getChildAt(0);
             mDragParentLayout = new DragParentLayout(getApplicationContext());
             contentView.removeViewAt(0);
-            mDragParentLayout.addView(childView);
+            mDragParentLayout.addView(childView, 0);
             contentView.addView(mDragParentLayout, 0);
 
-            mDragParentLayout.setDragView(common_root_view);
             mDragParentLayout.setOnActivityListener(new DragParentLayout.OnActivityListener() {
                 @Override
                 public void onActivityFinish() {
