@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+    <LinearLayout
+        android:id="@+id/home_tab_ll"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y140"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorWhite"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/home_tab_apps_rl"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/home_tab_apps_0_iv"
+                style="@style/HomeTabImage"
+                android:src="@drawable/cb_icon_discover_normal"/>
+
+            <ImageView
+                android:id="@+id/home_tab_apps_1_iv"
+                style="@style/HomeTabImage"
+                android:alpha="1"
+                android:src="@drawable/cb_icon_discover_selected"/>
+
+            <TextView
+                android:id="@+id/home_tab_apps_tv"
+                style="@style/HomeTabText"
+                android:text="@string/tab_home_apps"
+                android:textColor="@color/colorThemeRed"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/home_tab_users_rl"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/home_tab_users_0_iv"
+                style="@style/HomeTabImage"
+                android:src="@drawable/cb_icon_more_normal"/>
+
+            <ImageView
+                android:id="@+id/home_tab_users_1_iv"
+                style="@style/HomeTabImage"
+                android:alpha="0"
+                android:src="@drawable/cb_icon_more_selected"/>
+
+            <TextView
+                android:id="@+id/home_tab_users_tv"
+                style="@style/HomeTabText"
+                android:text="@string/tab_home_users"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/home_tab_plan_rl"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/home_tab_plan_0_iv"
+                style="@style/HomeTabImage"
+                android:src="@drawable/cb_icon_tixing_normal"/>
+
+            <ImageView
+                android:id="@+id/home_tab_plan_1_iv"
+                style="@style/HomeTabImage"
+                android:alpha="0"
+                android:src="@drawable/cb_icon_tixing_selected"/>
+
+            <TextView
+                android:id="@+id/home_tab_plan_tv"
+                style="@style/HomeTabText"
+                android:text="@string/tab_home_plan"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/home_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y120"
+        android:background="@color/colorThemeRed"
+        android:gravity="center"
+        android:text="@string/tab_home_apps"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/textSizeLarge"/>
+
+    <include layout="@layout/layout_common_line_bottom"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/home_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/home_tab_ll"
+        android:layout_below="@+id/home_title_tv"/>
+
+</RelativeLayout>

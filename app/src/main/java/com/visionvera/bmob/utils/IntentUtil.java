@@ -9,6 +9,7 @@ import com.visionvera.bmob.activity.ColorFilterActivity;
 import com.visionvera.bmob.activity.CrashDetailActivity;
 import com.visionvera.bmob.activity.CrashListlActivity;
 import com.visionvera.bmob.activity.HomeActivity;
+import com.visionvera.bmob.activity.HomeActivity2;
 import com.visionvera.bmob.activity.LoginActivity;
 import com.visionvera.bmob.activity.RegisterActivity;
 import com.visionvera.bmob.activity.SdcardActivity;
@@ -47,6 +48,13 @@ public class IntentUtil {
     public static void toMainActivity(Activity activity) {
         if (activity == null) return;
         Intent intent = new Intent(activity, HomeActivity.class);
+        activity.startActivity(intent);
+        enterActivityAnim(activity);
+    }
+
+    public static void toMainActivity2(Activity activity) {
+        if (activity == null) return;
+        Intent intent = new Intent(activity, HomeActivity2.class);
         activity.startActivity(intent);
         enterActivityAnim(activity);
     }

@@ -52,7 +52,6 @@ public class CrashListlActivity extends BaseActivity {
                 IntentUtil.toCrashDetailActivity(CrashListlActivity.this, mAppName, bean.crash_info);
             }
         });
-        App.getInstance().isAppOnForeground();
     }
 
     @Override

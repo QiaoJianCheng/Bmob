@@ -45,7 +45,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     protected void initData() {
-        App.getInstance().isAppOnForeground();
     }
 
     @Override
@@ -112,12 +111,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     protected void loadData(boolean showLoading) {
         super.loadData(showLoading);
         if (UserHelper.isLogin()) {
-//            App.getInstance().postDelay(new Runnable() {
-//                @Override
-//                public void run() {
-//                    onClick(login_confirm_rl);
-//                }
-//            }, 1000);
+            App.getInstance().postDelay(new Runnable() {
+                @Override
+                public void run() {
+                    onClick(login_confirm_rl);
+                }
+            }, 1000);
         }
     }
 
@@ -146,7 +145,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         UserHelper.saveUser(userBean);
                         UserHelper.savePassword(password);
                         UserHelper.saveIsLogin(true);
-                        IntentUtil.toMainActivity(LoginActivity.this);
+                        IntentUtil.toMainActivity2(LoginActivity.this);
+//                        IntentUtil.toMainActivity(LoginActivity.this);
                         finish();
                     }
 

@@ -197,7 +197,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                             JSONObject jsonObject = new JSONObject();
                             jsonObject.put("application_id", mAppId);
                             jsonObject.put("version_name", mVersionName);
-                            jsonObject.put("model", Build.MANUFACTURER + "-" + Build.MODEL);
+                            jsonObject.put("model", Build.MANUFACTURER + "/" + Build.MODEL);
                             jsonObject.put("api_level", Build.VERSION.SDK);
                             jsonObject.put("crash_info", sb.toString());
                             out.write(jsonObject.toString().getBytes());

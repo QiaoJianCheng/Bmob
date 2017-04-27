@@ -111,4 +111,21 @@
         <item name="android:drawablePadding">@dimen/y30</item>
     </style>
 
+    <style name="HomeTabImage">
+        <item name="android:layout_width">@dimen/x71</item>
+        <item name="android:layout_height">@dimen/x60</item>\
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginTop">@dimen/y20</item>
+    </style>
+
+    <style name="HomeTabText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textColor">@color/colorThemeGray</item>
+        <item name="android:textSize">@dimen/textSizeTiny</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_marginBottom">@dimen/y10</item>
+    </style>
+
 </resources>

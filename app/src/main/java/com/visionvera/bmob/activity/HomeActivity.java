@@ -32,7 +32,6 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void initData() {
         mHomePagerAdapter = new HomePagerAdapter(getSupportFragmentManager());
-        App.getInstance().isAppOnForeground();
     }
 
     @Override

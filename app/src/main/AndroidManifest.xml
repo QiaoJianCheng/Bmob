@@ -3,6 +3,8 @@
           package="com.visionvera.bmob">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.GET_TASKS"/>
@@ -15,6 +17,16 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.taobao.android.hotfix.IDSECRET"
+            android:value="109992-1"/>
+        <meta-data
+            android:name="com.taobao.android.hotfix.APPSECRET"
+            android:value="7394fa95fcba0792c81fcb4a16f586c2"/>
+        <meta-data
+            android:name="com.taobao.android.hotfix.RSASECRET"
+            android:value="MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQClW61ngVNmneLuQzFO4uu268EP5IrhXAFRK0OLKZUrzqtpYEzSZ+FSrZdTngdhb09k9RUq2gxAQ908tJUewGuQCiC0Jvg5DIn8eZ8OpBmRqIrchMCb1LuwNUmb4jgUfXVnYH5ZRhJeHwC/cHDZCTXUm4S5mpVILspmDhvwZ2h/5dCZahP6DDPo7vslxpXtIcbVU1QwCmTVNo1aoNatQNxSUTn+0UkWIwc2m6II47v8aRG37gnJu28ddJ6RgiWL3y2jzj0DqTTDYIrnr2mK/tajC2zZmeeK2h7v6S58DHn+8EmOTyTNAMSI72bUqOYPKKQsBz6pFNCc085IbJP66CefAgMBAAECggEAJGlGircohT0Y/jwffG5tVw8cqQI7LpqS06vCKL+UUFwm1IJXCDHFpO4Cl3AB0guvoNxyt8fh0Ljg24AsIeRfCw2f2+uE1xMSw1yIkLHDy5YgVaSJwQab+ZYSSlgK30As/QF7cO8EFmOfR4hb4P6tMs638CLA4m8jNEvBDTPIB/lX68LNEK9WCiOIaszoklkVymn5XWa7PD34aHf1U46UGItAPDajWIfzY6LNfnS4zxjLHCHUGw5i9z9rXyCbud/mhzsqNXcwqtU2t8SPPj9qelkqgpeBh7UKu/G1z2V0XT4iOx8HK2CEd0284MNvH7SgRK2DroNichcGs1OO7SqCYQKBgQD1XF5ruK0bGTZr4hAWb424f9ZLH7ouxDjVZWVT0TK0C2bXBRGIwYEznE1Tq1+MhURXO4/GohwHByzQx5Ouoa0qX/F2v8cV8kGQa9Sn7LGr7KnetXkQnkZeu1HbShArWLXQgTtq/KiYEDJeg6Nq/uV/IXwivrmkXVKhlzQJW5nmsQKBgQCshzzIACdUGz72bpn3VaucmLnDDoCO2n3N+5OlJB19kRisUg8XLj0IGf32Eh6Iajfmust/nQO5PAF5IDMQ696YFIVYkfK45wybs5ZeuTx2BWrRXFhBf/KPonrgAp294cV4zFc4Ra37nrcar5FgilU0PRZbwn5+O2X7xyj/Q9UnTwKBgFlfjAUw/90fEfO6JKIHgFf0ONqkc+0VDJ6ukHo3eYCbppor/ncSBT4HcSNJCUTmRj6AM57m7c6hjnF+QQ0bVzhYOlxG/v2/gKJapNuGHDHDwxycfbzP6lIXaXm3QKyJY7DPYhVWcxLw02gaCyyuLGpiiBUf4/86/x5dNVczRpwBAoGBAJlS7j9Hc6wZMpFKpWXbKtHWIHAqeTF7FwZxpzrBp7upsOWjX2nYW8DRaJLAc4YD734LT0IvxdlebGi6pudI1t8MjZyyx6RvIRNWPDIeKI8yLUW17XD4RhZD7TMa4BiZhibeYjzOH9pXqJ38nRPQm/v6td4CMOv52Z4x1ktUex+dAoGAZZtFWynZExjccDEgOTXcYLQ2xPjLgWSuDCZPXE43Ymg2pR5k7BPaYw5B9BzCX/6avfR5Ix+pKDFBG5FGCrGx65z2VOKIh9ssbFqYXDuh4MvNXt4hJ8XST4SOP+voRSS7pprhuJTs0keu80AWkPrJWoqI9gfr0vCOUi6BtAJX+oM="/>
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.visionvera.bmob"
@@ -72,6 +84,13 @@
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
         </activity>
         <activity android:name=".activity.CrashDetailActivity">
+        </activity>
+        <activity
+            android:name=".activity.HomeActivity2"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
+        </activity>
+        <activity android:name=".activity.ProfileActivity">
         </activity>
     </application>
 

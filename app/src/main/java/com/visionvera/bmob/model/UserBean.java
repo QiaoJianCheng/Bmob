@@ -14,6 +14,7 @@ public class UserBean extends BaseBean {
     public String signature;
     public String updatedAt;
     public String username;
+    public String nickname;
     public String sessionToken;
 
     @Override

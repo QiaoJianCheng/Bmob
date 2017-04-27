@@ -52,7 +52,7 @@ public class UserAdapter extends BaseRecyclerAdapter<UserBean> {
         @Override
         public void onBindViewHolder(int position) {
             UserBean userBean = mList.get(position);
-            item_user_name_tv.setText(userBean.username);
+            item_user_name_tv.setText(String.format("%1$s (@%2$s)", userBean.nickname, userBean.username));
             item_user_signature_tv.setText(userBean.signature);
             item_user_gender_iv.setImageResource(userBean.gender == 1 ? R.drawable.icon_20_male : R.drawable.icon_20_female);
             item_user_gender_iv.setImageTintList(ColorStateList.valueOf(ResUtil.getColor(userBean.gender == 1 ? R.color.colorMale : R.color.colorFemale)));
