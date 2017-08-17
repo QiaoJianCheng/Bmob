@@ -22,7 +22,6 @@ import com.visionvera.bmob.R;
 import com.visionvera.bmob.event.RxBus;
 import com.visionvera.bmob.event.RxEvent;
 import com.visionvera.bmob.listener.PressEffectTouchListener;
-import com.visionvera.bmob.utils.ToastUtil;
 
 import rx.Observable;
 import rx.Subscription;
@@ -127,7 +126,8 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
     @NonNull
     protected abstract View inflateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 
-    protected abstract void initData();
+    protected void initData() {
+    }
 
     protected abstract void initViews(View view, Bundle savedInstanceState);
 

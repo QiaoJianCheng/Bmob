@@ -9,6 +9,14 @@
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.GET_TASKS"/>
     <uses-permission android:name="android.permission.REORDER_TASKS"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-feature android:name="android.hardware.microphone"/>
 
     <application
         android:name=".global.App"
@@ -39,33 +47,12 @@
 
         <activity
             android:name=".activity.HomeActivity"
-            android:configChanges="orientation|keyboardHidden"
+            android:configChanges="orientation|keyboard|screenSize"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
         </activity>
         <activity
-            android:name=".activity.LoginActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
-        </activity>
-        <activity
-            android:name=".activity.RegisterActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
-        </activity>
-        <activity
-            android:name=".activity.CrashListlActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
-        </activity>
-        <activity
-            android:name=".activity.SensorActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
-        </activity>
-        <activity
-            android:name=".activity.SplashActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:theme="@style/AppFullScreenTheme"
+            android:name=".activity.user.LoginActivity"
+            android:configChanges="orientation|keyboard|screenSize"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -74,23 +61,70 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.SdcardActivity"
-            android:configChanges="orientation|keyboardHidden"
+            android:name=".activity.user.RegisterActivity"
+            android:configChanges="orientation|keyboard|screenSize"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
         </activity>
         <activity
-            android:name=".activity.ColorFilterActivity"
-            android:configChanges="orientation|keyboardHidden"
+            android:name=".activity.app.CrashListlActivity"
+            android:configChanges="orientation|keyboard|screenSize"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
         </activity>
-        <activity android:name=".activity.CrashDetailActivity">
+        <activity
+            android:name=".activity.plan.SensorActivity"
+            android:configChanges="orientation|keyboard|screenSize"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
+        </activity>
+        <activity
+            android:name=".activity.SplashActivity"
+            android:configChanges="orientation|keyboard|screenSize"
+            android:theme="@style/AppFullScreenTheme"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
+        </activity>
+        <activity
+            android:name=".activity.plan.SdcardActivity"
+            android:configChanges="orientation|keyboard|screenSize"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
+        </activity>
+        <activity
+            android:name=".activity.plan.ColorFilterActivity"
+            android:configChanges="orientation|keyboard|screenSize"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
+        </activity>
+        <activity android:name=".activity.app.CrashDetailActivity">
         </activity>
         <activity
             android:name=".activity.HomeActivity2"
-            android:configChanges="orientation|keyboardHidden"
+            android:configChanges="orientation|keyboard|screenSize"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
         </activity>
-        <activity android:name=".activity.ProfileActivity">
+        <activity
+            android:name=".activity.user.ProfileActivity"
+            android:configChanges="orientation|keyboard|screenSize"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
+        </activity>
+        <activity
+            android:name=".activity.plan.camera.CameraActivity"
+            android:configChanges="orientation|keyboard|screenSize"
+            android:theme="@style/AppFullScreenTheme"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
+        </activity>
+        <activity
+            android:name=".activity.plan.codec.CodecActivity"
+            android:configChanges="orientation|keyboard|screenSize"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
+        </activity>
+        <activity
+            android:name=".activity.user.MoodActivity"
+            android:configChanges="orientation|keyboard|screenSize"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
+        </activity>
+        <activity
+            android:name=".activity.PublishActivity"
+            android:configChanges="orientation|keyboard|screenSize"
+            android:windowSoftInputMode="adjustPan|stateVisible">
+        </activity>
+        <activity android:name=".activity.plan.KotlinActivity">
         </activity>
     </application>
 

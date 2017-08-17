@@ -20,13 +20,13 @@ import com.trello.rxlifecycle.RxLifecycle;
 import com.trello.rxlifecycle.android.ActivityEvent;
 import com.trello.rxlifecycle.android.RxLifecycleAndroid;
 import com.visionvera.bmob.R;
-import com.visionvera.bmob.activity.DragParentLayout;
 import com.visionvera.bmob.event.FinishEvent;
 import com.visionvera.bmob.event.RxBus;
 import com.visionvera.bmob.event.RxEvent;
 import com.visionvera.bmob.listener.PressEffectTouchListener;
 import com.visionvera.bmob.utils.IntentUtil;
 import com.visionvera.bmob.utils.ResUtil;
+import com.visionvera.bmob.view.DragParentLayout;
 
 import rx.Observable;
 import rx.Subscription;
@@ -120,32 +120,17 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
         }
 
         if (common_title_back_iv != null) {
-            common_title_back_iv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onBackPressed();
-                }
-            });
+            common_title_back_iv.setOnClickListener(v -> onBackPressed());
             common_title_back_iv.setOnTouchListener(new PressEffectTouchListener());
         }
         if (common_title_button_iv != null) {
             common_title_button_iv.setOnTouchListener(new PressEffectTouchListener());
         }
         if (common_failed_view != null) {
-            common_failed_view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    loadData(true);
-                }
-            });
+            common_failed_view.setOnClickListener(v -> loadData(true));
         }
         if (common_empty_view != null) {
-            common_empty_view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    loadData(true);
-                }
-            });
+            common_empty_view.setOnClickListener(v -> loadData(true));
         }
         if (common_root_view == null) {
             common_root_view = findViewById(R.id.common_root_view);
@@ -159,12 +144,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
             mDragParentLayout.addView(childView, 0);
             contentView.addView(mDragParentLayout, 0);
 
-            mDragParentLayout.setOnActivityListener(new DragParentLayout.OnActivityListener() {
-                @Override
-                public void onActivityFinish() {
-                    finish();
-                }
-            });
+            mDragParentLayout.setOnActivityListener(this::onBackPressed);
         }
     }
 
@@ -182,7 +162,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
     }
 
     public void setTitleBar(String title, View.OnClickListener onClickListener) {
-        setTitleBar(title, null, true);
+        setTitleBar(title, onClickListener, true);
     }
 
     public void setTitleBar(String title, View.OnClickListener onClickListener, boolean showBack) {

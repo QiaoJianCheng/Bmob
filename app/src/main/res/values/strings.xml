@@ -20,18 +20,20 @@
     <string name="hint_login_password">密码</string>
     <string name="button_login">登录</string>
     <string name="button_login_forget">忘记密码?</string>
+    <string name="button_login_fingerprint">指纹登录</string>
     <string name="button_login_register">新用户注册</string>
     <string name="toast_login_empty_account">用户名为空</string>
     <string name="toast_login_empty_password">密码为空</string>
     <string name="toast_login_success">登录成功</string>
 
+    <string name="tab_home_mood">Moods</string>
     <string name="tab_home_apps">应用</string>
     <string name="tab_home_users">用户</string>
     <string name="tab_home_plan">计划</string>
     <string name="button_plan_sensor">距离传感器</string>
     <string name="button_plan_sdcard">屏幕和储存</string>
 
-    <string name="text_time">时间</string>
+    <string name="text_time">计时</string>
     <string name="text_count">计数</string>
     <string name="text_start_time">00:00:00.00</string>
     <string name="text_start_count">0</string>
@@ -42,4 +44,19 @@
     <string name="text_storage">储存</string>
     <string name="button_color_filter">ColorFilter</string>
     <string name="title_color_filter">ColorFilter</string>
+    <string name="button_camera">Camera</string>
+    <string name="button_codec">MediaCodec</string>
+    <string name="title_codec">MediaCodec</string>
+    <string name="button_kotlin">Kotlin</string>
+
+
+    <string name="fingerprint_hint">Touch sensor</string>
+    <string name="fingerprint_not_recognized">Fingerprint not recognized. Try again</string>
+    <string name="fingerprint_success">Fingerprint recognized</string>
+    <string name="title_publish">发布</string>
+    <string name="hint_publish_et">此时此刻，心情如何?</string>
+    <string name="button_publish">发布</string>
+    <string name="toast_empty_mood">说点什么吧~</string>
+    <string name="text_admin">管理员</string>
+    <string name="toast_one_more_press">再按一次退出程序</string>
 </resources>

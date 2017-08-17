@@ -25,7 +25,8 @@
 # Retrofit
 -dontwarn retrofit2.**
 -keep class retrofit2.** { *; }
--keepattributes Signature-keepattributes Exceptions
+-keepattributes Signature
+-keepattributes Exceptions
 # RxJava RxAndroid
 -dontwarn sun.misc.**
 -keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
@@ -42,7 +43,7 @@
 # Gson
 -keep class com.google.gson.stream.** { *; }
 -keepattributes EnclosingMethod
--keep class org.xz_sale.entity.**{*;}
+-keep class com.visionvera.bmob.model.**{*;}
 
 # Fresco
 # Keep our interfaces so they can be used by other ProGuard rules.
@@ -69,7 +70,7 @@
 
 
 #基线包使用，生成mapping.txt
--printmapping mapping.txt
+#-printmapping mapping.txt
 #生成的mapping.txt在app/buidl/outputs/mapping/release路径下，移动到/app路径下
 
 #修复后的项目使用，保证混淆结果一致

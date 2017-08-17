@@ -21,7 +21,7 @@ public class SplashActivity extends BaseActivity {
     protected void initViews(Bundle savedInstanceState) {
         splash_image = (ImageView) findViewById(R.id.splash_image);
 
-        App.getInstance().postDelay(new Runnable() {
+        App.postDelay(new Runnable() {
             @Override
             public void run() {
                 IntentUtil.toLoginActivity(SplashActivity.this, splash_image);

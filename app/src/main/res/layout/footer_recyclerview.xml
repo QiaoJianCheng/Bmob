@@ -16,7 +16,7 @@
 
             <ProgressBar
                 android:id="@+id/footer_pb"
-                style="@style/LoadingProgressBar"
+                style="@style/LoadingProgressBarTheme"
                 android:visibility="visible"/>
 
             <TextView

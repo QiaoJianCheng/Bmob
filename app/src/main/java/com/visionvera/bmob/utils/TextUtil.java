@@ -26,6 +26,10 @@ public class TextUtil {
         return string1 != null && string2 != null && string1.equals(string2);
     }
 
+    public static boolean equalsIgnoreCase(String string1, String string2) {
+        return string1 != null && string2 != null && string1.equalsIgnoreCase(string2);
+    }
+
     /**
      * 字符串 trim 后相同，任意 null 视为不相同
      *

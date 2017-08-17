@@ -27,40 +27,63 @@
         android:layout_marginLeft="@dimen/x30"
         android:layout_toRightOf="@+id/item_user_avatar_sdv">
 
-        <TextView
-            android:id="@+id/item_user_name_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:includeFontPadding="false"
-            android:maxLines="1"
-            android:textColor="@color/colorTextDark"
-            android:textSize="@dimen/textSizeNormal"
-            tools:text="乔"/>
+        <RelativeLayout
+            android:id="@+id/item_user_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/item_user_gender_iv"
-            android:layout_width="@dimen/x46"
-            android:layout_height="@dimen/x46"
-            android:layout_marginLeft="@dimen/x10"
-            android:layout_marginTop="@dimen/y5"
-            android:layout_toRightOf="@+id/item_user_name_tv"
-            android:padding="@dimen/x5"
-            android:src="@drawable/icon_20_male"
-            android:tint="@color/colorMale"/>
+            <TextView
+                android:id="@+id/item_user_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:textColor="@color/colorTextDark"
+                android:textSize="@dimen/textSizeNormal"
+                tools:text="乔"/>
+
+            <ImageView
+                android:id="@+id/item_user_gender_iv"
+                android:layout_width="@dimen/x46"
+                android:layout_height="@dimen/x46"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginTop="@dimen/y5"
+                android:layout_toRightOf="@+id/item_user_name_tv"
+                android:padding="@dimen/x5"
+                android:src="@drawable/icon_20_male"
+                android:tint="@color/colorMale"/>
+
+            <TextView
+                android:id="@+id/item_user_level_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x10"
+                android:layout_toRightOf="@+id/item_user_gender_iv"
+                android:background="@drawable/shape_admin_bg"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:padding="@dimen/x5"
+                android:text="@string/text_admin"
+                android:textColor="@color/colorThemeRed"
+                android:textSize="@dimen/x18"/>
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/item_user_signature_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/item_user_name_tv"
+            android:layout_below="@+id/item_user_rl"
             android:layout_marginTop="@dimen/y10"
             android:ellipsize="end"
             android:includeFontPadding="false"
             android:maxLines="1"
             android:textColor="@color/colorTextLight"
-            android:textSize="@dimen/textSizeSmall"
-            tools:text="赛扽龙单反 赛扽及"/>
+            android:textSize="@dimen/textSizeSmall"/>
     </RelativeLayout>
 
     <include layout="@layout/layout_common_line_bottom"/>

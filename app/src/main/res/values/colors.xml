@@ -2,12 +2,14 @@
 <resources>
     <!--全局颜色-->
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorPressedWhite">#EFEFEF</color>
     <color name="colorBlack">#000000</color>
     <color name="colorTransparent">#00000000</color>
 
     <!--主题颜色-->
     <color name="colorThemeRed">#d96f5d</color>
     <color name="colorThemeGray">#969696</color>
+    <color name="colorPressedThemeRed">#c95f4d</color>
     <color name="colorLine">#DBDBDB</color>
     <color name="colorBackground">#F5F5F5</color>
     <color name="colorMale">#8888ff</color>
@@ -18,5 +20,13 @@
     <color name="colorTextLight">#929292</color>
 
     <!-- 带透明度： 80=alpha 0.5 , 99=alpha 0.6 , 66=alpha 0.4   -->
+    <color name="colorBlack40">#66000000</color>
 
+    <color name="colorToastWarning">#ddd96f5d</color>
+    <color name="colorToastNormal">#dd12ef41</color>
+
+
+    <color name="warning_color">#f4511e</color>
+    <color name="hint_color">#42000000</color>
+    <color name="success_color">#009688</color>
 </resources>

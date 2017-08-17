@@ -12,9 +12,6 @@ import rx.functions.Func1;
 public class ResponseFunc<T extends BaseBean> implements Func1<T, T> {
     @Override
     public T call(T resultBean) {
-        if (resultBean.code != 0) {
-            throw new ResponseException(((ErrorBean) resultBean).code, ((ErrorBean) resultBean).error);
-        }
         return resultBean;
     }
 }

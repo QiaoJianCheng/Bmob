@@ -1,6 +1,6 @@
 package com.visionvera.bmob.global;
 
-import com.visionvera.bmob.model.UserBean;
+import com.visionvera.bmob.model.UsersBean;
 import com.visionvera.bmob.utils.SharedPrefUtil;
 
 /**
@@ -82,7 +82,7 @@ public class UserHelper {
         SharedPrefUtil.putString(KEY_PASSWORD, password);
     }
 
-    public static void saveUser(UserBean userBean) {
+    public static void saveUser(UsersBean.UserBean userBean) {
         if (userBean == null) return;
         saveUserId(userBean.objectId);
         saveUserName(userBean.username);

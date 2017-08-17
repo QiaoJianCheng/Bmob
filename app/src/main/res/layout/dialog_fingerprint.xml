@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+    <RelativeLayout
+        android:layout_width="@dimen/x900"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite">
+
+        <TextView
+            android:id="@+id/common_dialog_title_tv"
+            style="@style/CommonDialogTitle"/>
+
+        <RelativeLayout
+            android:id="@+id/common_dialog_msg_rl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/common_dialog_title_tv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/x60">
+
+            <ImageView
+                android:id="@+id/common_dialog_msg_iv"
+                android:layout_width="@dimen/x100"
+                android:layout_height="@dimen/x100"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_fp_40px"/>
+
+            <TextView
+                android:id="@+id/common_dialog_msg_tv"
+                style="@style/CommonDialogMsg"
+                android:layout_width="@dimen/x500"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x40"
+                android:layout_toRightOf="@+id/common_dialog_msg_iv"
+                android:gravity="center_vertical"
+                android:padding="0dp"
+                android:text="@string/fingerprint_hint"
+                android:textSize="@dimen/textSizeSmall"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/common_dialog_btns_ll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y130"
+            android:layout_below="@+id/common_dialog_msg_rl"
+            android:background="@color/colorBackground"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/common_dialog_cancel_tv"
+                style="@style/CommonDialogButton"
+                android:text="@string/common_button_cancel"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

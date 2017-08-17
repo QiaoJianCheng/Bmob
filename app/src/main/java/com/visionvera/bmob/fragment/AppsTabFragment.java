@@ -15,12 +15,12 @@ import com.visionvera.bmob.base.BaseFragment;
 import com.visionvera.bmob.base.BaseRecyclerAdapter;
 import com.visionvera.bmob.event.ProgressEvent;
 import com.visionvera.bmob.event.RxBus;
-import com.visionvera.bmob.model.AppBean;
 import com.visionvera.bmob.model.AppsBean;
 import com.visionvera.bmob.model.BaseBean;
 import com.visionvera.bmob.net.NetworkRequest;
 import com.visionvera.bmob.net.ResponseSubscriber;
 import com.visionvera.bmob.utils.IntentUtil;
+import com.visionvera.bmob.utils.LogUtil;
 import com.visionvera.bmob.utils.ToastUtil;
 import com.visionvera.bmob.view.PtrRefreshLayout;
 
@@ -36,7 +36,7 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
 public class AppsTabFragment extends BaseFragment {
     private PtrRefreshLayout apps_ptr;
     private RecyclerView apps_rv;
-    private ArrayList<AppBean> mApps;
+    private ArrayList<AppsBean.AppBean> mApps;
     private AppAdapter mAppAdapter;
 
     @NonNull
@@ -52,7 +52,7 @@ public class AppsTabFragment extends BaseFragment {
         mAppAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                AppBean appBean = mApps.get(position);
+                AppsBean.AppBean appBean = mApps.get(position);
                 IntentUtil.toAppDetailActivity(getActivity(), appBean.application_id, appBean.app_name);
             }
         });
@@ -99,7 +99,7 @@ public class AppsTabFragment extends BaseFragment {
 
     private void networkFailure(String error) {
         apps_ptr.refreshComplete();
-        ToastUtil.networkFailure(error);
+        ToastUtil.warnToast(error);
         if (mApps.size() == 0) {
             showFailedView();
         } else {
@@ -123,7 +123,7 @@ public class AppsTabFragment extends BaseFragment {
             if (!buttonView.isClickable()) return;
             buttonView.setClickable(false);
             RxBus.getDefault().post(new ProgressEvent(position, true));
-            final AppBean bean = mApps.get(position);
+            final AppsBean.AppBean bean = mApps.get(position);
             NetworkRequest.putApp(AppsTabFragment.this, bean.objectId, isChecked, new ResponseSubscriber<BaseBean>() {
                 @Override
                 public void onSuccess(BaseBean baseBean) {
@@ -133,7 +133,7 @@ public class AppsTabFragment extends BaseFragment {
 
                 @Override
                 public void onFailure(int code, String error) {
-                    ToastUtil.networkFailure(error);
+                    ToastUtil.warnToast(error);
                     buttonView.setChecked(!isChecked);
                     buttonView.setClickable(true);
                     RxBus.getDefault().post(new ProgressEvent(position, false));
@@ -142,4 +142,9 @@ public class AppsTabFragment extends BaseFragment {
 
         }
     };
+
+    public void pullToRefresh() {
+        apps_rv.scrollToPosition(0);
+        apps_ptr.autoRefresh();
+    }
 }

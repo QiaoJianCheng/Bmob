@@ -12,7 +12,7 @@ import com.visionvera.bmob.base.BaseRecyclerAdapter;
 import com.visionvera.bmob.base.BaseViewHolder;
 import com.visionvera.bmob.event.ProgressEvent;
 import com.visionvera.bmob.event.RxEvent;
-import com.visionvera.bmob.model.AppBean;
+import com.visionvera.bmob.model.AppsBean;
 import com.visionvera.bmob.utils.LogUtil;
 
 import java.util.List;
@@ -21,8 +21,8 @@ import java.util.List;
  * Created by Qiao on 2017/3/14.
  */
 
-public class AppAdapter extends BaseRecyclerAdapter<AppBean> {
-    public AppAdapter(Context context, List<AppBean> list) {
+public class AppAdapter extends BaseRecyclerAdapter<AppsBean.AppBean> {
+    public AppAdapter(Context context, List<AppsBean.AppBean> list) {
         super(context, list);
     }
 
@@ -36,7 +36,7 @@ public class AppAdapter extends BaseRecyclerAdapter<AppBean> {
         private SwitchCompat item_app_switch;
         private View item_app_progress;
 
-        public AppHolder(View itemView) {
+        private AppHolder(View itemView) {
             super(itemView);
             item_app_name_tv = (TextView) itemView.findViewById(R.id.item_app_name_tv);
             item_app_switch = (SwitchCompat) itemView.findViewById(R.id.item_app_switch);
@@ -45,7 +45,7 @@ public class AppAdapter extends BaseRecyclerAdapter<AppBean> {
 
         @Override
         public void onBindViewHolder(final int position) {
-            AppBean bean = mList.get(position);
+            AppsBean.AppBean bean = mList.get(position);
             item_app_name_tv.setText(bean.app_name);
             item_app_switch.setChecked(bean.bang);
             item_app_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

@@ -9,62 +9,116 @@
 
     <include layout="@layout/layout_common_title"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/y150"
-        android:text="@string/text_time"
-        android:textColor="@color/colorTextLight"
-        android:textSize="@dimen/textSizeSmall"/>
-
-    <TextView
-        android:id="@+id/sensor_time_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/y20"
-        android:keepScreenOn="true"
-        android:text="@string/text_start_time"
-        android:textColor="@color/colorTextDark"
-        android:textSize="@dimen/x80"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/y200"
-        android:text="@string/text_count"
-        android:textColor="@color/colorTextLight"
-        android:textSize="@dimen/textSizeSmall"/>
-
-    <TextView
-        android:id="@+id/sensor_count_tv"
-        android:layout_width="@dimen/x300"
-        android:layout_height="@dimen/x300"
-        android:layout_marginTop="@dimen/y20"
-        android:gravity="center"
-        android:text="@string/text_start_count"
-        android:textColor="@color/colorTextDark"
-        android:textSize="@dimen/x200"/>
-
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/y200">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/sensor_stop_iv"
-            android:layout_width="@dimen/x160"
-            android:layout_height="@dimen/x160"
-            android:layout_centerInParent="true"
-            android:alpha="0"
-            android:padding="@dimen/x20"
-            android:src="@drawable/stop"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/sensor_start_iv"
-            android:layout_width="@dimen/x160"
-            android:layout_height="@dimen/x160"
-            android:layout_centerInParent="true"
-            android:padding="@dimen/x20"
-            android:src="@drawable/start"/>
-    </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y100"
+                android:text="@string/text_time"
+                android:textColor="@color/colorTextLight"
+                android:textSize="@dimen/textSizeSmall"/>
+
+            <TextView
+                android:id="@+id/sensor_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y20"
+                android:keepScreenOn="true"
+                android:text="@string/text_start_time"
+                android:textColor="@color/colorTextDark"
+                android:textSize="@dimen/x80"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y100"
+                android:text="@string/text_count"
+                android:textColor="@color/colorTextLight"
+                android:textSize="@dimen/textSizeSmall"/>
+
+            <TextView
+                android:id="@+id/sensor_count_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/text_start_count"
+                android:textColor="@color/colorTextDark"
+                android:textSize="@dimen/x200"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y100">
+
+                <ImageView
+                    android:id="@+id/sensor_stop_iv"
+                    android:layout_width="@dimen/x160"
+                    android:layout_height="@dimen/x160"
+                    android:layout_centerInParent="true"
+                    android:alpha="0"
+                    android:padding="@dimen/x20"
+                    android:src="@drawable/stop"/>
+
+                <ImageView
+                    android:id="@+id/sensor_start_iv"
+                    android:layout_width="@dimen/x160"
+                    android:layout_height="@dimen/x160"
+                    android:layout_centerInParent="true"
+                    android:padding="@dimen/x20"
+                    android:src="@drawable/start"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/sensor_sport1_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y100"
+                android:paddingLeft="@dimen/x300"
+                android:paddingTop="@dimen/y40"
+                android:text="仰卧起坐"
+                android:textColor="@color/colorTextDark"
+                android:textSize="@dimen/textSizeLarge"/>
+
+            <TextView
+                android:id="@+id/sensor_sport2_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/x300"
+                android:paddingTop="@dimen/y40"
+                android:text="俯卧撑"
+                android:textColor="@color/colorTextDark"
+                android:textSize="@dimen/textSizeLarge"/>
+
+            <TextView
+                android:id="@+id/sensor_sport3_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/x300"
+                android:paddingTop="@dimen/y40"
+                android:text="扎马步"
+                android:textColor="@color/colorTextDark"
+                android:textSize="@dimen/textSizeLarge"/>
+
+            <TextView
+                android:id="@+id/sensor_sport4_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y100"
+                android:paddingLeft="@dimen/x300"
+                android:paddingTop="@dimen/y40"
+                android:text="平板撑"
+                android:textColor="@color/colorTextDark"
+                android:textSize="@dimen/textSizeLarge"/>
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

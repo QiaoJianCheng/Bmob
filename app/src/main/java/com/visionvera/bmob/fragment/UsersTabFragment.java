@@ -12,10 +12,10 @@ import com.visionvera.bmob.R;
 import com.visionvera.bmob.adapter.UserAdapter;
 import com.visionvera.bmob.base.BaseFragment;
 import com.visionvera.bmob.base.BaseRecyclerAdapter;
-import com.visionvera.bmob.model.UserBean;
 import com.visionvera.bmob.model.UsersBean;
 import com.visionvera.bmob.net.NetworkRequest;
 import com.visionvera.bmob.net.ResponseSubscriber;
+import com.visionvera.bmob.utils.IntentUtil;
 import com.visionvera.bmob.utils.ToastUtil;
 import com.visionvera.bmob.view.PtrRefreshLayout;
 
@@ -31,7 +31,7 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
 public class UsersTabFragment extends BaseFragment {
     private PtrRefreshLayout users_ptr;
     private RecyclerView users_rv;
-    private ArrayList<UserBean> mUsers;
+    private ArrayList<UsersBean.UserBean> mUsers;
     private UserAdapter mUserAdapter;
 
     @NonNull
@@ -47,7 +47,8 @@ public class UsersTabFragment extends BaseFragment {
         mUserAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-//                IntentUtil.toRegisterActivity(getActivity());
+                UsersBean.UserBean userBean = mUsers.get(position);
+                IntentUtil.toMoodActivity(getActivity(), userBean.nickname, userBean.objectId);
             }
         });
     }
@@ -92,7 +93,7 @@ public class UsersTabFragment extends BaseFragment {
 
     private void networkFailure(String error) {
         users_ptr.refreshComplete();
-        ToastUtil.networkFailure(error);
+        ToastUtil.warnToast(error);
         if (mUsers.size() == 0) {
             showFailedView();
             mUserAdapter.footerLoadCompleted();
@@ -110,5 +111,10 @@ public class UsersTabFragment extends BaseFragment {
         } else {
             showContentView();
         }
+    }
+
+    public void pullToRefresh() {
+        users_rv.scrollToPosition(0);
+        users_ptr.autoRefresh();
     }
 }

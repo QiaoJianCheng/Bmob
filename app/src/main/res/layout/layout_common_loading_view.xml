@@ -43,7 +43,7 @@
 
     <ProgressBar
         android:id="@+id/common_loading_view"
-        style="@style/LoadingProgressBar"
+        style="@style/LoadingProgressBarTheme"
         android:layout_width="@dimen/x99"
         android:layout_height="@dimen/x99"
         android:layout_centerInParent="true"

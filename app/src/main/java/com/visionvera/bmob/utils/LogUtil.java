@@ -2,14 +2,6 @@ package com.visionvera.bmob.utils;
 
 import android.util.Log;
 
-import static com.visionvera.bmob.utils.LogUtil.Constant.A;
-import static com.visionvera.bmob.utils.LogUtil.Constant.D;
-import static com.visionvera.bmob.utils.LogUtil.Constant.E;
-import static com.visionvera.bmob.utils.LogUtil.Constant.I;
-import static com.visionvera.bmob.utils.LogUtil.Constant.TAG;
-import static com.visionvera.bmob.utils.LogUtil.Constant.V;
-import static com.visionvera.bmob.utils.LogUtil.Constant.W;
-
 /**
  * Created by Qiao on 2016/12/18.
  */

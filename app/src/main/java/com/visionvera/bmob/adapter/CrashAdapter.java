@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.visionvera.bmob.R;
 import com.visionvera.bmob.base.BaseRecyclerAdapter;
 import com.visionvera.bmob.base.BaseViewHolder;
-import com.visionvera.bmob.model.CrashBean;
+import com.visionvera.bmob.model.CrashesBean;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ import java.util.List;
  * Created by Qiao on 2017/4/12.
  */
 
-public class CrashAdapter extends BaseRecyclerAdapter<CrashBean> {
-    public CrashAdapter(Context context, List<CrashBean> list) {
+public class CrashAdapter extends BaseRecyclerAdapter<CrashesBean.CrashBean> {
+    public CrashAdapter(Context context, List<CrashesBean.CrashBean> list) {
         super(context, list);
     }
 
@@ -42,7 +42,7 @@ public class CrashAdapter extends BaseRecyclerAdapter<CrashBean> {
 
         @Override
         public void onBindViewHolder(int position) {
-            CrashBean bean = mList.get(position);
+            CrashesBean.CrashBean bean = mList.get(position);
             item_crash_model_tv.setText(bean.model);
             item_crash_api_tv.setText(bean.api_level);
             item_crash_version_tv.setText(bean.version_name);

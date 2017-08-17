@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.visionvera.bmob.base.BaseFragment;
 import com.visionvera.bmob.fragment.AppsTabFragment;
+import com.visionvera.bmob.fragment.MoodsTabFragment;
 import com.visionvera.bmob.fragment.PlanTabFragment;
 import com.visionvera.bmob.fragment.UsersTabFragment;
 
@@ -21,6 +22,7 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
     public HomePagerAdapter(FragmentManager fm) {
         super(fm);
         mTabFragments = new ArrayList<>();
+        mTabFragments.add(new MoodsTabFragment());
         mTabFragments.add(new AppsTabFragment());
         mTabFragments.add(new UsersTabFragment());
         mTabFragments.add(new PlanTabFragment());
@@ -34,5 +36,16 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return mTabFragments.size();
+    }
+
+    public void refresh(int currentItem) {
+        BaseFragment fragment = mTabFragments.get(currentItem);
+        if (fragment instanceof MoodsTabFragment) {
+            ((MoodsTabFragment) fragment).pullToRefresh();
+        } else if (fragment instanceof AppsTabFragment) {
+            ((AppsTabFragment) fragment).pullToRefresh();
+        } else if (fragment instanceof UsersTabFragment) {
+            ((UsersTabFragment) fragment).pullToRefresh();
+        }
     }
 }

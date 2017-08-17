@@ -73,12 +73,12 @@ public class ApkDownloadManager {
 
     public static void downloadApk(String versionName, String apkUrl, final DownloadListener listener) {
         if (!PermissionUtil.hasExternalStoragePermission()) {
-            ToastUtil.showToast("未授予储存权限");
+            ToastUtil.warnToast("未授予储存权限");
             return;
         }
         if (TextUtil.isEmpty(apkUrl)) return;
         if (!apkUrl.startsWith("http")) {
-            ToastUtil.showToast("下载链接错误");
+            ToastUtil.warnToast("下载链接错误");
             return;
         }
         ToastUtil.showToast("后台下载中...");
@@ -120,7 +120,7 @@ public class ApkDownloadManager {
                         final int total = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES));
                         final boolean done = progress == total;
                         if (listener != null) {
-                            App.getInstance().post(new Runnable() {
+                            App.post(new Runnable() {
                                 @Override
                                 public void run() {
                                     listener.onProgress(progress, total, done);

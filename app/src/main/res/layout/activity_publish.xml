@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/common_root_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/layout_common_title"/>
+
+    <EditText
+        android:id="@+id/publish_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/common_title_root_rl"
+        android:background="@color/colorWhite"
+        android:gravity="start"
+        android:hint="@string/hint_publish_et"
+        android:maxLength="140"
+        android:minHeight="@dimen/x400"
+        android:paddingBottom="@dimen/x50"
+        android:paddingLeft="@dimen/x30"
+        android:paddingRight="@dimen/x30"
+        android:paddingTop="@dimen/x30"
+        android:textColor="@color/colorTextDark"
+        android:textColorHint="@color/colorThemeGray"
+        android:textCursorDrawable="@drawable/shape_cursor"
+        android:textSize="@dimen/textSizeNormal"/>
+
+    <TextView
+        android:id="@+id/publish_count_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/publish_et"
+        android:layout_alignRight="@+id/publish_et"
+        android:padding="@dimen/x10"
+        android:textColor="@color/colorThemeRed"
+        android:textSize="@dimen/textSizeTiny"/>
+
+    <RelativeLayout
+        android:id="@+id/publish_rl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y110"
+        android:layout_below="@+id/publish_et"
+        android:layout_marginLeft="@dimen/x40"
+        android:layout_marginRight="@dimen/x40"
+        android:layout_marginTop="@dimen/x100"
+        android:background="@drawable/selector_common_button"
+        android:transitionName="publish">
+
+        <TextView
+            android:id="@+id/publish_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/button_publish"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/textSizeMedium"/>
+
+        <ProgressBar
+            android:id="@+id/publish_pb"
+            style="@style/LoadingProgressBarWhite"
+            android:layout_marginLeft="@dimen/x40"
+            android:layout_toRightOf="@+id/publish_tv"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+</RelativeLayout>

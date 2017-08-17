@@ -26,7 +26,8 @@
             style="@style/LoginEditText"
             android:background="@drawable/selector_login_edit_bg"
             android:hint="@string/hint_login_account"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress"
+            android:textCursorDrawable="@drawable/shape_cursor"/>
 
         <ImageView
             android:layout_width="@dimen/x51"
@@ -57,7 +58,8 @@
             android:hint="@string/hint_login_password"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
-            android:maxLength="12"/>
+            android:maxLength="12"
+            android:textCursorDrawable="@drawable/shape_cursor"/>
 
         <ImageView
             android:layout_width="@dimen/x51"
@@ -92,7 +94,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/y120"
         android:layout_marginTop="@dimen/y150"
-        android:background="@drawable/selector_common_button_bg">
+        android:background="@drawable/selector_login_button_bg">
 
         <TextView
             android:id="@+id/login_confirm_tv"
@@ -105,7 +107,7 @@
 
         <ProgressBar
             android:id="@+id/login_progress"
-            style="@style/LoadingProgressBar"
+            style="@style/LoadingProgressBarTheme"
             android:layout_marginLeft="@dimen/x30"
             android:layout_toRightOf="@+id/login_confirm_tv"
             android:visibility="gone"/>
@@ -122,6 +124,15 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/x20"
             android:text="@string/button_login_forget"
+            android:textColor="@color/selector_common_button_text"/>
+
+        <TextView
+            android:id="@+id/login_fingerprint_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:padding="@dimen/x20"
+            android:text="@string/button_login_fingerprint"
             android:textColor="@color/selector_common_button_text"/>
 
         <TextView

@@ -3,6 +3,9 @@ package com.visionvera.bmob.view;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import com.visionvera.bmob.R;
+import com.visionvera.bmob.utils.ResUtil;
+
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
 public class PtrRefreshLayout extends PtrFrameLayout {
@@ -27,8 +30,10 @@ public class PtrRefreshLayout extends PtrFrameLayout {
         setDurationToCloseHeader(500);
         setKeepHeaderWhenRefresh(true);
         setPullToRefresh(false);
-        setRatioOfHeaderHeightToRefresh(1.2f);
+        setRatioOfHeaderHeightToRefresh(110.0f / 710);
         setResistance(1.7f);
+        int x110 = (int) ResUtil.getDimen(R.dimen.x110);
+        setOffsetToKeepHeaderWhileLoading(x110);
 
         mPtrRefreshHeader = new PtrRefreshHeader(getContext());
         setHeaderView(mPtrRefreshHeader);

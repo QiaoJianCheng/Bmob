@@ -31,7 +31,7 @@
             android:layout_centerInParent="true"
             android:text="title"
             android:textColor="@color/colorWhite"
-            android:textSize="@dimen/textSizeNormal"/>
+            android:textSize="@dimen/textSizeMedium"/>
 
         <ImageView
             android:id="@+id/common_title_button_iv"

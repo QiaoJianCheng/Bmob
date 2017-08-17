@@ -38,4 +38,8 @@ public class PermissionUtil {
     public static void requestExternalStoragePermission(Activity activity, int requestCode) {
         ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, requestCode);
     }
+
+    public static void requestRecordAudioPermission(Activity activity, int requestCode) {
+        ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.RECORD_AUDIO}, requestCode);
+    }
 }

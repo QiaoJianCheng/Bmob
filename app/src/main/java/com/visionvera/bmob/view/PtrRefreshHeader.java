@@ -11,7 +11,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.visionvera.bmob.R;
+import com.visionvera.bmob.utils.FrescoUtil;
+import com.visionvera.bmob.utils.ResUtil;
 
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrUIHandler;
@@ -24,6 +27,10 @@ public class PtrRefreshHeader extends FrameLayout implements PtrUIHandler {
     private TextView mTextView;
     private ImageView mRotateView;
     private View mProgressBar;
+    private SimpleDraweeView mAdView;
+    private static final String AD_URL = "http://192.168.106.155:8080/步步高.jpg";
+//    private static final String AD_URL = "http://wx1.sinaimg.cn/large/c1a9d02cly1ff25bmgprxj20zk0hsact.jpg";
+//    private static final String AD_URL = "http://wx4.sinaimg.cn/large/c1a9d02cly1ff26r4fa6uj21hc0u0t9v.jpg";
 
     public PtrRefreshHeader(Context context) {
         super(context);
@@ -47,6 +54,8 @@ public class PtrRefreshHeader extends FrameLayout implements PtrUIHandler {
         mTextView = (TextView) header.findViewById(R.id.ptr_classic_header_text);
         mRotateView = (ImageView) header.findViewById(R.id.ptr_classic_header_rotate_view);
         mProgressBar = header.findViewById(R.id.ptr_classic_header_rotate_view_progressbar);
+        mAdView = (SimpleDraweeView) header.findViewById(R.id.ptr_classic_header_ad_sdv);
+        FrescoUtil.display(mAdView, AD_URL, (int) ResUtil.getDimen(R.dimen.x1080), (int) ResUtil.getDimen(R.dimen.x500));
     }
 
     @Override

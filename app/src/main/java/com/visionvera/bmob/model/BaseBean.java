@@ -7,8 +7,6 @@ import java.io.Serializable;
  */
 
 public class BaseBean<T extends BaseBean> implements Serializable, Comparable<T> {
-    public int code;
-    public String error;
 
     public static final String TAG = BaseBean.class.getSimpleName();
 

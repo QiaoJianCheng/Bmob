@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_press_effect"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/x30">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/item_mood_avatar_sdv"
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/x100"
+            android:layout_centerVertical="true"
+            fresco:placeholderImage="@color/colorBackground"
+            fresco:roundAsCircle="true"
+            fresco:roundingBorderColor="@color/colorLine"
+            fresco:roundingBorderWidth="1px"/>
+
+        <TextView
+            android:id="@+id/item_mood_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x30"
+            android:layout_toRightOf="@+id/item_mood_avatar_sdv"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:textColor="@color/colorTextDark"
+            android:textSize="@dimen/textSizeNormal"
+            tools:text="乔"/>
+
+        <ImageView
+            android:id="@+id/item_mood_gender_iv"
+            android:layout_width="@dimen/x46"
+            android:layout_height="@dimen/x46"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_toRightOf="@+id/item_mood_name_tv"
+            android:padding="@dimen/x5"
+            android:src="@drawable/icon_20_male"
+            android:tint="@color/colorMale"/>
+
+        <TextView
+            android:id="@+id/item_mood_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:textColor="@color/colorTextDark"
+            android:textSize="@dimen/textSizeTiny"
+            tools:text="2017-09-10 10:08"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/item_mood_content_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x160"
+        android:layout_marginRight="@dimen/x30"
+        android:ellipsize="end"
+        android:includeFontPadding="false"
+        android:maxLines="8"
+        android:textColor="@color/colorTextDark"
+        android:textSize="@dimen/textSizeSmall"/>
+
+    <com.visionvera.bmob.view.GridPhotoView
+        android:id="@+id/item_mood_grid_photo_view"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="@dimen/x60"
+        android:layout_marginTop="@dimen/x30"
+        android:visibility="gone"/>
+
+    <include layout="@layout/layout_common_line_bottom"/>
+</LinearLayout>

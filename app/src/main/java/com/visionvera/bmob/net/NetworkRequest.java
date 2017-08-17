@@ -4,10 +4,12 @@ import com.google.gson.JsonObject;
 import com.trello.rxlifecycle.LifecycleProvider;
 import com.visionvera.bmob.global.UserHelper;
 import com.visionvera.bmob.model.AppsBean;
+import com.visionvera.bmob.model.AuthorBean;
 import com.visionvera.bmob.model.BaseBean;
 import com.visionvera.bmob.model.CrashesBean;
 import com.visionvera.bmob.model.FileBean;
-import com.visionvera.bmob.model.UserBean;
+import com.visionvera.bmob.model.MoodsBean;
+import com.visionvera.bmob.model.PostBean;
 import com.visionvera.bmob.model.UsersBean;
 import com.visionvera.bmob.utils.TextUtil;
 
@@ -43,14 +45,14 @@ public class NetworkRequest {
         subscribe(lifecycleProvider, getServiceInstance().getUsers(), subscriber);
     }
 
-    public static void getLogin(LifecycleProvider lifecycleProvider, String username, String password, ResponseSubscriber<UserBean> subscriber) {
+    public static void getLogin(LifecycleProvider lifecycleProvider, String username, String password, ResponseSubscriber<UsersBean.UserBean> subscriber) {
         Map<String, Object> param = RequestParam.getBaseParam();
         param.put("username", username);
         param.put("password", password);
         subscribe(lifecycleProvider, getServiceInstance().getLogin(param), subscriber);
     }
 
-    public static void postRegister(LifecycleProvider lifecycleProvider, String username, String password, String phone, String signature, int gender, String avatar, ResponseSubscriber<UserBean> subscriber) {
+    public static void postRegister(LifecycleProvider lifecycleProvider, String username, String password, String phone, String signature, int gender, String avatar, ResponseSubscriber<UsersBean.UserBean> subscriber) {
         Map<String, Object> param = RequestParam.getBaseParam();
         param.put("username", username);
         param.put("password", password);
@@ -85,6 +87,18 @@ public class NetworkRequest {
             where = jsonObject.toString();
         }
         subscribe(lifecycleProvider, getServiceInstance().getCrashes(where), subscriber);
+    }
+
+    public static void postMood(LifecycleProvider lifecycleProvider, MoodsBean.MoodBean moodBean, ResponseSubscriber<PostBean> subscriber) {
+        subscribe(lifecycleProvider, getServiceInstance().postMood(RequestParam.beanToBody(moodBean)), subscriber);
+    }
+
+    public static void getMoods(LifecycleProvider lifecycleProvider, ResponseSubscriber<MoodsBean> subscriber) {
+        subscribe(lifecycleProvider, getServiceInstance().getMoods(), subscriber);
+    }
+
+    public static void getMoodsByUser(LifecycleProvider lifecycleProvider, String userId, ResponseSubscriber<MoodsBean> subscriber) {
+        subscribe(lifecycleProvider, getServiceInstance().getMoodsByUser(RequestParam.beanToString(new AuthorBean(new UsersBean.UserBean(userId)))), subscriber);
     }
 
 }

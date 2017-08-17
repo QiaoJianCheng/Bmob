@@ -5,4 +5,6 @@ package com.visionvera.bmob.model;
  */
 
 public class ErrorBean extends BaseBean {
+    public int code;
+    public String error;
 }

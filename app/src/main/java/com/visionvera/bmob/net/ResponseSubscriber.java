@@ -17,12 +17,11 @@ import rx.Subscriber;
 
 public abstract class ResponseSubscriber<T> extends Subscriber<T> {
     @Override
-    public void onCompleted() {
-        onComplete();
+    public final void onCompleted() {
     }
 
     @Override
-    public void onError(Throwable e) {
+    public final void onError(Throwable e) {
         if (e instanceof SocketTimeoutException) {
             onFailure(-2, ResUtil.getString(R.string.msg_network_error_time_out));
         } else if (e instanceof HttpException) {
@@ -39,11 +38,13 @@ public abstract class ResponseSubscriber<T> extends Subscriber<T> {
         } else {
             onFailure(-1, ResUtil.getString(R.string.msg_network_error_unknown) + e.getMessage());
         }
+        onComplete();
     }
 
     @Override
-    public void onNext(T t) {
+    public final void onNext(T t) {
         onSuccess(t);
+        onComplete();
     }
 
     public abstract void onSuccess(T t);

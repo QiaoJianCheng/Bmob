@@ -1,5 +1,6 @@
 package com.visionvera.bmob.listener;
 
+import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,9 +13,9 @@ import android.view.View;
 public class PressEffectTouchListener implements View.OnTouchListener {
     private Handler mHandler = new Handler();
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouch(final View v, MotionEvent event) {
-
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 v.setAlpha(0.5f);

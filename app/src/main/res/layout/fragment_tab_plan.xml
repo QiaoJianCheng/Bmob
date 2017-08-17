@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/plan_sensor_tv"
@@ -42,6 +42,42 @@
             android:background="@drawable/selector_press_effect"
             android:gravity="center"
             android:text="@string/button_color_filter"
+            android:textColor="@color/colorTextDark"
+            android:textSize="@dimen/textSizeLarge"/>
+
+        <include layout="@layout/layout_common_line"/>
+
+        <TextView
+            android:id="@+id/plan_camera_tv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y240"
+            android:background="@drawable/selector_press_effect"
+            android:gravity="center"
+            android:text="@string/button_camera"
+            android:textColor="@color/colorTextDark"
+            android:textSize="@dimen/textSizeLarge"/>
+
+        <include layout="@layout/layout_common_line"/>
+
+        <TextView
+            android:id="@+id/plan_codec_tv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y240"
+            android:background="@drawable/selector_press_effect"
+            android:gravity="center"
+            android:text="@string/button_codec"
+            android:textColor="@color/colorTextDark"
+            android:textSize="@dimen/textSizeLarge"/>
+
+        <include layout="@layout/layout_common_line"/>
+
+        <TextView
+            android:id="@+id/plan_kotlin_tv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y240"
+            android:background="@drawable/selector_press_effect"
+            android:gravity="center"
+            android:text="@string/button_kotlin"
             android:textColor="@color/colorTextDark"
             android:textSize="@dimen/textSizeLarge"/>
 

@@ -5,15 +5,19 @@ import android.content.Intent;
 import android.view.View;
 
 import com.visionvera.bmob.R;
-import com.visionvera.bmob.activity.ColorFilterActivity;
-import com.visionvera.bmob.activity.CrashDetailActivity;
-import com.visionvera.bmob.activity.CrashListlActivity;
 import com.visionvera.bmob.activity.HomeActivity;
-import com.visionvera.bmob.activity.HomeActivity2;
-import com.visionvera.bmob.activity.LoginActivity;
-import com.visionvera.bmob.activity.RegisterActivity;
-import com.visionvera.bmob.activity.SdcardActivity;
-import com.visionvera.bmob.activity.SensorActivity;
+import com.visionvera.bmob.activity.PublishActivity;
+import com.visionvera.bmob.activity.app.CrashDetailActivity;
+import com.visionvera.bmob.activity.app.CrashListlActivity;
+import com.visionvera.bmob.activity.plan.ColorFilterActivity;
+import com.visionvera.bmob.activity.plan.SdcardActivity;
+import com.visionvera.bmob.activity.plan.SensorActivity;
+import com.visionvera.bmob.activity.plan.camera.CameraActivity;
+import com.visionvera.bmob.activity.plan.codec.CodecActivity;
+import com.visionvera.bmob.activity.user.LoginActivity;
+import com.visionvera.bmob.activity.user.MoodActivity;
+import com.visionvera.bmob.activity.user.RegisterActivity;
+import com.visionvera.bmob.model.CrashesBean;
 
 /**
  * Created by Qiao on 2016/12/16.
@@ -45,16 +49,9 @@ public class IntentUtil {
         activity.overridePendingTransition(R.anim.previus_left_in, R.anim.current_right_out);
     }
 
-    public static void toMainActivity(Activity activity) {
+    public static void toHomeActivity(Activity activity) {
         if (activity == null) return;
         Intent intent = new Intent(activity, HomeActivity.class);
-        activity.startActivity(intent);
-        enterActivityAnim(activity);
-    }
-
-    public static void toMainActivity2(Activity activity) {
-        if (activity == null) return;
-        Intent intent = new Intent(activity, HomeActivity2.class);
         activity.startActivity(intent);
         enterActivityAnim(activity);
     }
@@ -99,12 +96,40 @@ public class IntentUtil {
         enterActivityAnim(activity);
     }
 
-    public static void toCrashDetailActivity(Activity activity, String title, String detail) {
+    public static void toCrashDetailActivity(Activity activity, String title, CrashesBean.CrashBean bean) {
         if (activity == null) return;
         Intent intent = new Intent(activity, CrashDetailActivity.class);
         intent.putExtra(CrashDetailActivity.INTENT_TITLE, title);
-        intent.putExtra(CrashDetailActivity.INTENT_DETAIL, detail);
+        intent.putExtra(CrashDetailActivity.INTENT_DETAIL, bean);
         activity.startActivity(intent);
         enterActivityAnim(activity);
     }
+
+    public static void toCameraActivity(Activity activity) {
+        if (activity == null) return;
+        activity.startActivity(new Intent(activity, CameraActivity.class));
+        enterActivityAnim(activity);
+    }
+
+    public static void toCodecActivity(Activity activity) {
+        if (activity == null) return;
+        activity.startActivity(new Intent(activity, CodecActivity.class));
+        enterActivityAnim(activity);
+    }
+
+    public static void toMoodActivity(Activity activity, String name, String objectId) {
+        if (activity == null) return;
+        Intent intent = new Intent(activity, MoodActivity.class);
+        intent.putExtra(MoodActivity.INTENT_NAME, name);
+        intent.putExtra(MoodActivity.INTENT_ID, objectId);
+        activity.startActivity(intent);
+        enterActivityAnim(activity);
+    }
+
+    public static void toPublishActivity(Activity activity) {
+        if (activity == null) return;
+        activity.startActivity(new Intent(activity, PublishActivity.class));
+        enterActivityAnim(activity);
+    }
+
 }
