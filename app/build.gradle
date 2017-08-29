@@ -14,6 +14,11 @@ android {
         jackOptions {
             enabled true
         }
+
+        ndk {
+            moduleName "HelloJni" // 等效 Android.mk
+            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a" // 等效 Application.mk
+        }
     }
     signingConfigs {
         myConfig {
@@ -36,16 +41,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            jni.srcDirs = [{ "src/main/jni" }] // 等效 Android.mk, 默认目录 [] 即src/main/jni
+        }
+    }
 }
+
 repositories {
-//    maven {
-//        url "http://repo.baichuan-android.taobao.com/content/groups/BaichuanRepositories"
-//    }
     flatDir {
         dirs 'libs'
     }
     mavenCentral()
 }
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //    compile(name:'crash_collection',ext:'aar')

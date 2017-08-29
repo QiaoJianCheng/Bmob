@@ -4,13 +4,10 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.visionvera.bmob.R;
 import com.visionvera.bmob.base.BaseActivity;
@@ -120,12 +117,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.login_confirm_rl:
                 String account = login_account_et.getText().toString();
                 if (TextUtil.isEmpty(account)) {
-                    ToastUtil.warnToast(getString(R.string.toast_login_empty_account));
+                    ToastUtil.showToast(getString(R.string.toast_login_empty_account));
                     return;
                 }
                 final String password = login_password_et.getText().toString();
                 if (TextUtil.isEmpty(password)) {
-                    ToastUtil.warnToast(getString(R.string.toast_login_empty_password));
+                    ToastUtil.showToast(getString(R.string.toast_login_empty_password));
                     return;
                 }
                 login_progress.setVisibility(View.VISIBLE);
@@ -145,7 +142,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
                     @Override
                     public void onFailure(int code, String error) {
-                        ToastUtil.warnToast(error);
+                        ToastUtil.showToast(error);
                         login_progress.setVisibility(View.GONE);
                         login_confirm_rl.setClickable(true);
                     }

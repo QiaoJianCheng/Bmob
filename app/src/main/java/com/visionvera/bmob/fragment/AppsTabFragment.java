@@ -20,7 +20,6 @@ import com.visionvera.bmob.model.BaseBean;
 import com.visionvera.bmob.net.NetworkRequest;
 import com.visionvera.bmob.net.ResponseSubscriber;
 import com.visionvera.bmob.utils.IntentUtil;
-import com.visionvera.bmob.utils.LogUtil;
 import com.visionvera.bmob.utils.ToastUtil;
 import com.visionvera.bmob.view.PtrRefreshLayout;
 
@@ -99,7 +98,7 @@ public class AppsTabFragment extends BaseFragment {
 
     private void networkFailure(String error) {
         apps_ptr.refreshComplete();
-        ToastUtil.warnToast(error);
+        ToastUtil.showToast(error);
         if (mApps.size() == 0) {
             showFailedView();
         } else {
@@ -133,7 +132,7 @@ public class AppsTabFragment extends BaseFragment {
 
                 @Override
                 public void onFailure(int code, String error) {
-                    ToastUtil.warnToast(error);
+                    ToastUtil.showToast(error);
                     buttonView.setChecked(!isChecked);
                     buttonView.setClickable(true);
                     RxBus.getDefault().post(new ProgressEvent(position, false));

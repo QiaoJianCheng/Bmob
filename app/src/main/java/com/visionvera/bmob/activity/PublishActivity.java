@@ -55,7 +55,7 @@ public class PublishActivity extends BaseActivity {
             public void onClick(View v) {
                 String mood = publish_et.getText().toString().trim();
                 if (TextUtil.isEmpty(mood)) {
-                    ToastUtil.warnToast(getString(R.string.toast_empty_mood));
+                    ToastUtil.showToast(getString(R.string.toast_empty_mood));
                     return;
                 }
                 publish_rl.setEnabled(false);
@@ -72,7 +72,7 @@ public class PublishActivity extends BaseActivity {
 
                             @Override
                             public void onFailure(int code, String error) {
-                                ToastUtil.warnToast(error);
+                                ToastUtil.showToast(error);
                                 publish_rl.setEnabled(true);
                                 publish_pb.setVisibility(View.INVISIBLE);
                             }

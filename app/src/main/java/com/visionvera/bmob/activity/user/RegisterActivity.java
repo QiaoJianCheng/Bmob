@@ -143,14 +143,11 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             new DrawerDialog(this)
                     .addDrawer("相机")
                     .addDrawer("相册")
-                    .setOnItemClickedListener(new DrawerDialog.OnItemClickedListener() {
-                        @Override
-                        public void onItemClick(int position) {
-                            if (position == 1) {
-                                toCamera();
-                            } else if (position == 2) {
-                                toGallery();
-                            }
+                    .setOnItemClickedListener(position -> {
+                        if (position == 1) {
+                            toCamera();
+                        } else if (position == 2) {
+                            toGallery();
                         }
                     })
                     .show();
@@ -220,7 +217,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
                     @Override
                     public void onFailure(int code, String error) {
-                        ToastUtil.warnToast(error);
+                        ToastUtil.showToast(error);
                         bitmap.recycle();
                     }
                 });
@@ -235,7 +232,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 onClick(register_avatar_sdv);
             } else {
-                ToastUtil.warnToast("permission declined");
+                ToastUtil.showToast("permission declined");
             }
         }
     }

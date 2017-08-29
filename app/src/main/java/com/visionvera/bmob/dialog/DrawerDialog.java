@@ -62,14 +62,11 @@ public class DrawerDialog {
         textView.setText(text);
         image.setVisibility(selected ? View.VISIBLE : View.INVISIBLE);
         textView.setTextColor(ResUtil.getColor(selected ? R.color.colorThemeRed : R.color.colorTextDark));
-        inflate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mOnItemClickedListener != null) {
-                    mOnItemClickedListener.onItemClick(position);
-                }
-                dismiss();
+        inflate.setOnClickListener(v -> {
+            if (mOnItemClickedListener != null) {
+                mOnItemClickedListener.onItemClick(position);
             }
+            dismiss();
         });
         return this;
     }

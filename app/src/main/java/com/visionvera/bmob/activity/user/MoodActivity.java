@@ -84,7 +84,7 @@ public class MoodActivity extends BaseActivity {
 
             @Override
             public void onFailure(int code, String error) {
-                ToastUtil.warnToast(error);
+                ToastUtil.showToast(error);
                 if (mAdapterList.size() > 0) {
                     showContentView();
                 } else {
