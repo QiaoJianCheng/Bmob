@@ -94,7 +94,7 @@ public class CrashListlActivity extends BaseActivity {
 
     private void networkFailure(String error) {
         crash_list_ptr.refreshComplete();
-        ToastUtil.warnToast(error);
+        ToastUtil.showToast(error);
         if (mAppCrashes.size() == 0) {
             showFailedView();
         } else {

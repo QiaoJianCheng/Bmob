@@ -2,16 +2,19 @@ package com.visionvera.bmob.activity.plan.camera;
 
 
 import android.content.Context;
+import android.graphics.ImageFormat;
 import android.hardware.Camera;
-import android.hardware.SensorManager;
 import android.util.AttributeSet;
-import android.view.OrientationEventListener;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.FrameLayout;
 
+import com.visionvera.bmob.activity.plan.VideoConfig;
 import com.visionvera.bmob.utils.ToastUtil;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by Qiao on 2017/3/10.
@@ -22,12 +25,9 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
     public static final int CAMERA_FACING_FRONT = Camera.CameraInfo.CAMERA_FACING_FRONT;
 
     private Camera mCamera;
-    private int mCameraID;
     private SurfaceHolder mSurfaceHolder;
-    private OrientationEventListener mOrientationEventListener;
     private CameraListener mCameraListener;
-    private int mCurrentOrientation;
-
+    private VideoConfig mVideoConfig;
 
     public CameraView(Context context) {
         this(context, null);
@@ -39,15 +39,16 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
 
     public CameraView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        setKeepScreenOn(true);
         mSurfaceHolder = getHolder();
         mSurfaceHolder.addCallback(this);
     }
 
     public Camera open() {
-        return open(CAMERA_FACING_BACK);
-    }
-
-    public Camera open(int cameraID) {
+        if (mVideoConfig == null) {
+            ToastUtil.showToast("Null VideoConfig! ");
+            return null;
+        }
         if (mCamera != null) {
             try {
                 mCamera.reconnect();
@@ -56,44 +57,75 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
             }
         }
         release();
-        mCameraID = cameraID;
-        mCamera = Camera.open(cameraID);
         try {
+            mCamera = Camera.open(mVideoConfig.source);
             mCamera.setPreviewDisplay(mSurfaceHolder);
-        } catch (IOException e) {
+            mCamera.setDisplayOrientation(mVideoConfig.orientation);
+        } catch (RuntimeException | IOException e) {
             e.printStackTrace();
+            ToastUtil.showToast("相机权限被拒绝");
         }
-        mCamera.setDisplayOrientation(90);
         try {
             Camera.Parameters parameters = mCamera.getParameters();
-            parameters.setPreviewSize(1280, 720);
+            parameters.setPreviewFormat(ImageFormat.YV12);
+            parameters.setPreviewSize(mVideoConfig.width, mVideoConfig.height);
+            List<Integer> supportedFPS = parameters.getSupportedPreviewFrameRates();
+            Collections.sort(supportedFPS);
+            parameters.setPreviewFrameRate(supportedFPS.get(supportedFPS.size() - 1));
             if (parameters.getSupportedFocusModes().contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO)) {
                 parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
             }
             mCamera.setParameters(parameters);
-            mCamera.setPreviewCallback(new Camera.PreviewCallback() {
-                @Override
-                public void onPreviewFrame(byte[] data, Camera camera) {
-                    if (mCameraListener != null) {
-                        mCameraListener.onPreviewFrame(data);
-                    }
+            final VideoConfig videoConfig = mVideoConfig;
+            Camera.Size previewSize = parameters.getPreviewSize();
+            byte[] buffer = new byte[previewSize.height * previewSize.width * 3 / 2];
+            mCamera.addCallbackBuffer(buffer);
+            mCamera.setPreviewCallbackWithBuffer((data, camera) -> {
+                if (mCameraListener != null) {
+                    mCameraListener.onYUVCallback(data, videoConfig);
                 }
+                camera.addCallbackBuffer(buffer);
             });
             mCamera.startPreview();
             if (mCameraListener != null) {
-                mCameraListener.onCameraOpen(mCameraID, mCamera);
+                mCameraListener.onCameraOpen(videoConfig);
             }
+            resizeView();
         } catch (RuntimeException e) {
             e.printStackTrace();
-            ToastUtil.warnToast("不支持的分辨率");
+            ToastUtil.showToast("相机参数错误");
         }
         return mCamera;
     }
 
-    private void release() {
-        if (mCameraListener != null) {
-            mCameraListener.onCameraRelease();
+    private void resizeView() {
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) getLayoutParams();
+        params.setMargins(0, 0, 0, 0);
+        params.width = FrameLayout.LayoutParams.MATCH_PARENT;
+        params.height = FrameLayout.LayoutParams.MATCH_PARENT;
+        setLayoutParams(params);
+        int width, height;
+        FrameLayout parent = (FrameLayout) getParent();
+        width = parent.getWidth();
+        height = parent.getHeight();
+        final VideoConfig videoConfig = mVideoConfig;
+        if (videoConfig.orientation == VideoConfig.ORIENTATION_90 || videoConfig.orientation == VideoConfig.ORIENTATION_180) {
+            if (height * 1.0f / width < videoConfig.width * 1.0f / videoConfig.height) {
+                params.leftMargin = params.rightMargin = (int) ((width - height * videoConfig.height * 1.0f / videoConfig.width) / 2);
+            } else {
+                params.topMargin = params.bottomMargin = (int) ((height - width * videoConfig.width * 1.0f / videoConfig.height) / 2);
+            }
+        } else {
+            if (height * 1.0f / width < videoConfig.height * 1.0f / videoConfig.width) {
+                params.leftMargin = params.rightMargin = (int) ((width - height * videoConfig.width * 1.0f / videoConfig.height) / 2);
+            } else {
+                params.topMargin = params.bottomMargin = (int) ((height - width * videoConfig.height * 1.0f / videoConfig.width) / 2);
+            }
         }
+        setLayoutParams(params);
+    }
+
+    public void release() {
         if (mCamera != null) {
             mCamera.setPreviewCallback(null);
             mCamera.stopPreview();
@@ -103,54 +135,45 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     @Override
-    public void surfaceCreated(SurfaceHolder holder) {
+    public final void surfaceCreated(SurfaceHolder holder) {
         open();
-        if (mOrientationEventListener == null) {
-            mOrientationEventListener = new OrientationEventListener(getContext(), SensorManager.SENSOR_DELAY_NORMAL) {
-                @Override
-                public void onOrientationChanged(int orientation) {
-                    orientation = (orientation + 45) / 90 * 90 % 360;
-                    if (mCameraListener != null && mCurrentOrientation != orientation) {
-                        mCurrentOrientation = orientation;
-                        mCameraListener.onOrientationChanged(mCurrentOrientation);
-                    }
-                }
-            };
-        }
-        if (mOrientationEventListener.canDetectOrientation()) {
-            mOrientationEventListener.enable();
-        }
     }
 
     @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+    public final void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
 
     }
 
     @Override
-    public void surfaceDestroyed(SurfaceHolder holder) {
+    public final void surfaceDestroyed(SurfaceHolder holder) {
         release();
-        if (mOrientationEventListener != null && mOrientationEventListener.canDetectOrientation()) {
-            mOrientationEventListener.disable();
-        }
     }
 
-    public void switchCamera() {
-        mCameraID = (mCameraID + 1) % 2;
-        open(mCameraID);
+    public VideoConfig getVideoConfig() {
+        return mVideoConfig;
+    }
+
+    public void setConfig(VideoConfig config) {
+        mVideoConfig = config;
+        open();
     }
 
     public interface CameraListener {
-        void onCameraOpen(int cameraId, Camera camera);
+        void onCameraOpen(VideoConfig videoConfig);
 
-        void onCameraRelease();
-
-        void onOrientationChanged(int orientation);
-
-        void onPreviewFrame(byte[] data);
+        void onYUVCallback(byte[] yuv, VideoConfig videoConfig);
     }
 
     public void setCameraListener(CameraListener cameraListener) {
         mCameraListener = cameraListener;
+    }
+
+    public void lockAutoExposure(boolean lock) {
+        if (mCamera != null) {
+            Camera.Parameters parameters = mCamera.getParameters();
+            parameters.setAutoExposureLock(lock);
+            parameters.setAutoWhiteBalanceLock(lock);
+            mCamera.setParameters(parameters);
+        }
     }
 }

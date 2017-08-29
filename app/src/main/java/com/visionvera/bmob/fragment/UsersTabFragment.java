@@ -93,7 +93,7 @@ public class UsersTabFragment extends BaseFragment {
 
     private void networkFailure(String error) {
         users_ptr.refreshComplete();
-        ToastUtil.warnToast(error);
+        ToastUtil.showToast(error);
         if (mUsers.size() == 0) {
             showFailedView();
             mUserAdapter.footerLoadCompleted();

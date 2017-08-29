@@ -3,24 +3,29 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground">
+    android:background="@color/colorBlack">
 
     <RelativeLayout
         android:id="@+id/camera_preview_rl"
-        android:layout_width="@dimen/y360"
-        android:layout_height="@dimen/y640"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentRight="true">
 
-        <com.visionvera.bmob.activity.plan.camera.CameraView
-            android:id="@+id/camera_preview"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:keepScreenOn="true"/>
+            android:layout_height="match_parent">
+
+            <com.visionvera.bmob.activity.plan.camera.CameraView
+                android:id="@+id/camera_preview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:keepScreenOn="true"/>
+        </FrameLayout>
 
         <ImageView
             android:id="@+id/shot_iv"
-            android:layout_width="@dimen/y120"
-            android:layout_height="@dimen/y120"
+            android:layout_width="@dimen/y220"
+            android:layout_height="@dimen/y220"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="24dp"
@@ -28,13 +33,13 @@
 
         <ImageView
             android:id="@+id/switch_iv"
-            android:layout_width="@dimen/y120"
-            android:layout_height="@dimen/y120"
+            android:layout_width="@dimen/y220"
+            android:layout_height="@dimen/y220"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="24dp"
-            android:layout_marginRight="0dp"
-            android:padding="@dimen/y30"
+            android:layout_marginRight="20dp"
+            android:padding="@dimen/y55"
             android:src="@drawable/icon_22_camera_switch"
             android:tint="@color/colorWhite"/>
 
@@ -46,15 +51,7 @@
             android:padding="@dimen/x20"
             android:text="00:00"
             android:textColor="@color/colorWhite"
-            android:textSize="@dimen/textSizeTiny"/>
+            android:textSize="@dimen/textSizeNormal"/>
     </RelativeLayout>
-
-    <com.visionvera.bmob.activity.plan.camera.opengl.VideoImage
-        android:id="@+id/camera_play_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/camera_preview_rl"
-        android:layout_toLeftOf="@+id/camera_preview_rl"
-        android:keepScreenOn="true"/>
 
 </RelativeLayout>

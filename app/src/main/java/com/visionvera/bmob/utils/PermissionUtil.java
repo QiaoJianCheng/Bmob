@@ -27,6 +27,10 @@ public class PermissionUtil {
                 || ActivityCompat.checkSelfPermission(App.getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
 
+    public static boolean hasRecordAudioPermission() {
+        return ActivityCompat.checkSelfPermission(App.getContext(), Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED;
+    }
+
     public static void requestLocationPermission(Activity activity, int requestCode) {
         ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, requestCode);
     }

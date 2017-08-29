@@ -1,37 +1,24 @@
 package com.visionvera.bmob.activity.plan.camera;
 
-import android.hardware.Camera;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.visionvera.bmob.R;
-import com.visionvera.bmob.activity.plan.camera.opengl.VideoDisplayFrame;
-import com.visionvera.bmob.activity.plan.camera.opengl.VideoImage;
+import com.visionvera.bmob.activity.plan.VideoConfig;
 import com.visionvera.bmob.base.BaseActivity;
 import com.visionvera.bmob.listener.PressEffectTouchListener;
-import com.visionvera.bmob.utils.DateFormatUtil;
-import com.visionvera.bmob.utils.LogUtil;
 import com.visionvera.bmob.utils.PermissionUtil;
 import com.visionvera.bmob.utils.ToastUtil;
-
-import java.util.concurrent.TimeUnit;
-
-import rx.Observable;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 
 
 public class CameraActivity extends BaseActivity implements View.OnClickListener {
     private CameraView camera_preview;
-    private VideoImage camera_play_view;
     private TextView timer_tv;
     private ImageView shot_iv;
     private ImageView switch_iv;
-    private Subscription mSubscription;
+    private CameraEncoder mCameraEncoder;
 
     @Override
     protected void setContentView() {
@@ -44,7 +31,6 @@ public class CameraActivity extends BaseActivity implements View.OnClickListener
     @Override
     protected void initViews(Bundle savedInstanceState) {
         camera_preview = (CameraView) findViewById(R.id.camera_preview);
-        camera_play_view = (VideoImage) findViewById(R.id.camera_play_view);
         timer_tv = (TextView) findViewById(R.id.timer_tv);
         shot_iv = (ImageView) findViewById(R.id.shot_iv);
         switch_iv = (ImageView) findViewById(R.id.switch_iv);
@@ -56,34 +42,22 @@ public class CameraActivity extends BaseActivity implements View.OnClickListener
         switch_iv.setOnTouchListener(new PressEffectTouchListener());
         camera_preview.setCameraListener(new CameraView.CameraListener() {
             @Override
-            public void onCameraOpen(int cameraId, Camera camera) {
+            public void onCameraOpen(VideoConfig videoConfig) {
             }
 
             @Override
-            public void onCameraRelease() {
-                timer_tv.setText("00:00");
-                if (mSubscription != null && !mSubscription.isUnsubscribed()) {
-                    mSubscription.unsubscribe();
-                    mSubscription = null;
-                }
-            }
-
-            @Override
-            public void onOrientationChanged(int orientation) {
-                LogUtil.d("orientation: " + orientation);
-            }
-
-            @Override
-            public void onPreviewFrame(byte[] data) {
-                Log.d(TAG, "onPreviewFrame:" + data.length);
-//                byte[] tmp = data.clone();
-//                rotateYUV240SP(tmp, data, 1280, 720);
-                if (mIsRecording) {
-                    VideoDisplayFrame vdFrame = new VideoDisplayFrame(data, 0, data.length, 1280, 720, System.currentTimeMillis());
-                    camera_play_view.Play(vdFrame);
+            public void onYUVCallback(byte[] yuv, VideoConfig videoConfig) {
+                if (mCameraEncoder != null && mCameraEncoder.isRecording()) {
+                    mCameraEncoder.encode(yuv);
                 }
             }
         });
+    }
+
+    @Override
+    protected void loadData(boolean showLoading) {
+        super.loadData(showLoading);
+        camera_preview.setConfig(VideoConfig.getCameraConfigSD());
     }
 
     @Override
@@ -91,42 +65,30 @@ public class CameraActivity extends BaseActivity implements View.OnClickListener
         super.onDestroy();
     }
 
-    private boolean mIsRecording;
-
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.shot_iv) {
-            if (mIsRecording) {
-                ToastUtil.showToast("结束录制");
-                timer_tv.setText("00:00");
-                if (mSubscription != null && !mSubscription.isUnsubscribed()) {
-                    mSubscription.unsubscribe();
-                    mSubscription = null;
-                }
-            } else {
-                ToastUtil.showToast("开始录制");
-                final long start = System.currentTimeMillis();
-                if (mSubscription == null) {
-                    mSubscription = Observable.interval(0, 10, TimeUnit.MILLISECONDS)
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(new Action1<Long>() {
-                                @Override
-                                public void call(Long aLong) {
-                                    long current = System.currentTimeMillis();
-                                    timer_tv.setText(DateFormatUtil.getFormattedDuration(current - start));
-                                }
-                            });
-                }
-                startPlay();
-            }
-            mIsRecording = !mIsRecording;
+            startPlay();
         } else if (v.getId() == R.id.switch_iv) {
-            camera_preview.switchCamera();
+            VideoConfig videoConfig = camera_preview.getVideoConfig();
+            videoConfig.source = videoConfig.source == VideoConfig.SOURCE_CAMERA_BACK ? VideoConfig.SOURCE_CAMERA_FRONT : VideoConfig.SOURCE_CAMERA_BACK;
+            camera_preview.setConfig(videoConfig);
         }
     }
 
     private void startPlay() {
-//        camera_play_view.setVideoPath(mVideoRecorder.getFile());
+        if (mCameraEncoder != null && mCameraEncoder.isRecording()) {
+            ToastUtil.showToast("结束录制");
+            mCameraEncoder.release();
+            mCameraEncoder = null;
+            camera_preview.lockAutoExposure(false);
+        } else {
+            ToastUtil.showToast("开始录制");
+            if (mCameraEncoder != null) mCameraEncoder.release();
+            mCameraEncoder = new CameraEncoder(camera_preview.getVideoConfig());
+            mCameraEncoder.start();
+            camera_preview.lockAutoExposure(true);
+        }
     }
 
     // 顺时针旋转90度：一般后置摄像头使用

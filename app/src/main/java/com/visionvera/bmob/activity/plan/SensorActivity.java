@@ -59,7 +59,7 @@ public class SensorActivity extends BaseActivity {
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
         if (mSensor == null) {
-            ToastUtil.warnToast("sensor TYPE_PROXIMITY not found");
+            ToastUtil.showToast("sensor TYPE_PROXIMITY not found");
         }
     }
 
