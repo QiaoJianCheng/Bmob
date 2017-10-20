@@ -57,7 +57,7 @@ public class CameraActivity extends BaseActivity implements View.OnClickListener
     @Override
     protected void loadData(boolean showLoading) {
         super.loadData(showLoading);
-        camera_preview.setConfig(VideoConfig.getCameraConfigHD());
+        camera_preview.setConfig(VideoConfig.getCameraConfigSD());
     }
 
     @Override

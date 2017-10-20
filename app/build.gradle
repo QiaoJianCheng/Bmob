@@ -55,10 +55,6 @@ repositories {
     mavenCentral()
 }
 
-
-
-
-
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //    compile(name:'crash_collection',ext:'aar')
