@@ -3,6 +3,9 @@ package com.visionvera.bmob.listener;
 import android.text.Editable;
 import android.text.TextWatcher;
 
+import com.visionvera.bmob.model.MoodsBean;
+import com.visionvera.bmob.model.UsersBean;
+
 /**
  * Created by Qiao on 2017/3/15.
  */

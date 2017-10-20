@@ -38,8 +38,9 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
     private Handler mHandler = new Handler();
     private static CrashHandler mInstance;
-    public static String CRASH_FILE_PATH;
-    private boolean mUseCrashHandler;
+    private static String CRASH_FILE_PATH;
+    private boolean mBang;
+    private boolean mDebugLog;
     private String mAppId;
     private String mAppName;
     private int mVersionCode;
@@ -79,7 +80,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
-        if (!mUseCrashHandler && (mDebug || ex == null)) {
+        if (mDebug && !mDebugLog) {
             if (mDefaultHandler != null) {
                 Thread.setDefaultUncaughtExceptionHandler(mDefaultHandler);
                 mDefaultHandler.uncaughtException(thread, ex);
@@ -87,7 +88,6 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         } else {
             handleException(ex);
         }
-
     }
 
     private void handleException(final Throwable ex) {
@@ -255,8 +255,9 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                                 postNewApp();
                             } else {
                                 JSONObject app = results.getJSONObject(0);
+                                mDebugLog = app.getBoolean("debugLog");
                                 if (app.getBoolean("bang")) {
-                                    mUseCrashHandler = true;
+                                    mBang = true;
                                     mHandler.postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
@@ -294,6 +295,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                     jsonObject.put("application_id", mAppId);
                     jsonObject.put("app_name", mAppName);
                     jsonObject.put("bang", false);
+                    jsonObject.put("debugLog", false);
                     out.write(jsonObject.toString().getBytes());
                     connection.getResponseCode();
                 } catch (IOException | JSONException var8) {

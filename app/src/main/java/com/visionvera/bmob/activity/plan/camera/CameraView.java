@@ -173,6 +173,13 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
             Camera.Parameters parameters = mCamera.getParameters();
             parameters.setAutoExposureLock(lock);
             parameters.setAutoWhiteBalanceLock(lock);
+            if (lock) {
+                if (parameters.getSupportedFocusModes().contains(Camera.Parameters.FOCUS_MODE_AUTO))
+                    parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+            } else {
+                if (parameters.getSupportedFocusModes().contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO))
+                    parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
+            }
             mCamera.setParameters(parameters);
         }
     }

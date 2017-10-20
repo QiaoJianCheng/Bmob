@@ -70,7 +70,7 @@ public class VideoConfig {
         VideoConfig videoConfig = new VideoConfig();
         videoConfig.width = Integer.valueOf(split[0]);
         videoConfig.height = Integer.valueOf(split[1]);
-        videoConfig.bitrate = Integer.valueOf(split[2]) * 1000;
+        videoConfig.bitrate = Integer.valueOf(split[2]) * 1000 * 4;
         videoConfig.fps = Integer.valueOf(split[3]);
         videoConfig.definition = DEFINITION_SM;
         videoConfig.orientation = ORIENTATION_90;
@@ -83,7 +83,7 @@ public class VideoConfig {
         VideoConfig videoConfig = new VideoConfig();
         videoConfig.width = Integer.valueOf(split[0]);
         videoConfig.height = Integer.valueOf(split[1]);
-        videoConfig.bitrate = Integer.valueOf(split[2]) * 1000;
+        videoConfig.bitrate = Integer.valueOf(split[2]) * 1000 * 4;
         videoConfig.fps = Integer.valueOf(split[3]);
         videoConfig.definition = DEFINITION_SD;
         videoConfig.orientation = ORIENTATION_90;
@@ -96,7 +96,7 @@ public class VideoConfig {
         VideoConfig videoConfig = new VideoConfig();
         videoConfig.width = Integer.valueOf(split[0]);
         videoConfig.height = Integer.valueOf(split[1]);
-        videoConfig.bitrate = Integer.valueOf(split[2]) * 1000;
+        videoConfig.bitrate = Integer.valueOf(split[2]) * 1000 * 4;
         videoConfig.fps = Integer.valueOf(split[3]);
         videoConfig.definition = DEFINITION_HD;
         videoConfig.orientation = ORIENTATION_90;

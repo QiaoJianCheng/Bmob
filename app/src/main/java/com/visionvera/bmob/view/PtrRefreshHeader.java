@@ -28,8 +28,7 @@ public class PtrRefreshHeader extends FrameLayout implements PtrUIHandler {
     private ImageView mRotateView;
     private View mProgressBar;
     private SimpleDraweeView mAdView;
-    private static final String AD_URL = "http://192.168.106.155:8080/步步高.jpg";
-//    private static final String AD_URL = "http://wx1.sinaimg.cn/large/c1a9d02cly1ff25bmgprxj20zk0hsact.jpg";
+    private static final String AD_URL = "http://wx1.sinaimg.cn/large/c1a9d02cly1ff25bmgprxj20zk0hsact.jpg";
 //    private static final String AD_URL = "http://wx4.sinaimg.cn/large/c1a9d02cly1ff26r4fa6uj21hc0u0t9v.jpg";
 
     public PtrRefreshHeader(Context context) {

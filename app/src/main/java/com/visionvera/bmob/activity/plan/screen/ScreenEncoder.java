@@ -45,6 +45,7 @@ public class ScreenEncoder {
     private MediaProjection mMediaProjection;
     private boolean mIsRecording;
     private MediaMuxer mMediaMuxer;
+    private long mLastTime;
 
     public ScreenEncoder(MediaProjection mediaProjection, VideoConfig videoConfig) {
         mMediaProjection = mediaProjection;
@@ -61,7 +62,7 @@ public class ScreenEncoder {
         format.setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatSurface);
         format.setInteger(MediaFormat.KEY_BIT_RATE, mVideoConfig.bitrate);
         format.setInteger(MediaFormat.KEY_FRAME_RATE, mVideoConfig.fps);
-        format.setInteger(MediaFormat.KEY_I_FRAME_INTERVAL, 10);
+        format.setInteger(MediaFormat.KEY_I_FRAME_INTERVAL, 1);
         try {
             mEncoder = MediaCodec.createEncoderByType(MIME_TYPE);
             mEncoder.configure(format, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE);
@@ -75,9 +76,14 @@ public class ScreenEncoder {
                 public void onOutputBufferAvailable(@NonNull MediaCodec codec, int index, @NonNull MediaCodec.BufferInfo info) {
                     if (mIsRecording && mMediaMuxer != null) {
                         if (index >= 0 && info.flags != MediaCodec.BUFFER_FLAG_CODEC_CONFIG) {
+                            long current = System.nanoTime() / 1000;
                             ByteBuffer encodedData = codec.getOutputBuffer(index);
                             if (encodedData != null && info.size > 0) {
+                                boolean isKeyframe = (encodedData.get(4) & 0x0F) == 5;
+//                                if (isKeyframe /*|| current - mLastTime > 1000000 / mVideoConfig.fps*/) {
                                 mMediaMuxer.writeSampleData(mTrackIndex, encodedData, info);
+                                mLastTime = current;
+//                                }
                             }
                             codec.releaseOutputBuffer(index, false);
                         }
@@ -97,7 +103,7 @@ public class ScreenEncoder {
                     }
                 }
             });
-            mVirtualDisplay = mMediaProjection.createVirtualDisplay("screen_record", mVideoConfig.width, mVideoConfig.height, DensityUtil.getDensity(), DisplayManager.VIRTUAL_DISPLAY_FLAG_PUBLIC, mEncoder.createInputSurface(), null, null);
+            mVirtualDisplay = mMediaProjection.createVirtualDisplay("screen_encoder", mVideoConfig.width, mVideoConfig.height, DensityUtil.getDensity(), DisplayManager.VIRTUAL_DISPLAY_FLAG_PUBLIC, mEncoder.createInputSurface(), null, null);
             mMediaMuxer = new MediaMuxer(new File(Environment.getExternalStorageDirectory(), "screen_encoder.mp4").getAbsolutePath(), MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
         } catch (Exception e) {
             e.printStackTrace();

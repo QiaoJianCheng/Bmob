@@ -32,7 +32,7 @@ public class ScreenRecorder {
         mMediaRecorder = new MediaRecorder();
         mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.SURFACE);
         mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-        mMediaRecorder.setOutputFile(new File(Environment.getExternalStorageDirectory(), "screen.mp4").getAbsolutePath());
+        mMediaRecorder.setOutputFile(new File(Environment.getExternalStorageDirectory(), "screen_recorder.mp4").getAbsolutePath());
         mMediaRecorder.setVideoSize(mVideoConfig.width, mVideoConfig.height);
         mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
         mMediaRecorder.setVideoEncodingBitRate(mVideoConfig.bitrate); // 可选，默认200Kbps

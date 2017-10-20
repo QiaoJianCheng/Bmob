@@ -19,6 +19,7 @@ import com.visionvera.bmob.utils.ResUtil;
 import com.visionvera.bmob.view.GridPhotoView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by Qiao on 2017/5/12.
@@ -53,8 +54,8 @@ public class MoodAdapter extends BaseRecyclerAdapter<MoodsBean.MoodBean> {
         }
 
         @Override
-        public void onBindViewHolder(int position) {
-            MoodsBean.MoodBean moodBean = mList.get(position);
+        public void onBindViewHolder(final int position) {
+            final MoodsBean.MoodBean moodBean = mList.get(position);
             UsersBean.UserBean userBean = moodBean.author;
             item_mood_name_tv.setText(String.format("%1$s (@%2$s)", userBean.nickname, userBean.username));
             item_mood_gender_iv.setImageResource(userBean.gender == 1 ? R.drawable.icon_20_male : R.drawable.icon_20_female);
@@ -63,7 +64,11 @@ public class MoodAdapter extends BaseRecyclerAdapter<MoodsBean.MoodBean> {
             FrescoUtil.display(item_mood_avatar_sdv, userBean.avatar, size, size, R.drawable.sign_head);
             item_mood_content_tv.setText(moodBean.content);
             item_mood_time_tv.setText(DateFormatUtil.formatLocalDate(moodBean.updatedAt));
-//            item_mood_grid_photo_view.setUrls(moodBean.photos);
+            Random random = new Random();
+            int in = random.nextInt(9);
+            for (int i = 0; i < in; i++) {
+                item_mood_grid_photo_view.addUrl("http://wx1.sinaimg.cn/large/c1a9d02cly1ff25bmgprxj20zk0hsact.jpg");
+            }
         }
     }
 }

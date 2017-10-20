@@ -83,25 +83,27 @@ public class GridPhotoView extends FrameLayout {
         if (mUrls.size() > 0) {
             for (int i = 0; i < mUrls.size(); i++) {
                 String url = mUrls.get(i);
-                SquareImageView squareImageView = new SquareImageView(getContext(), mItemSize);
-                addView(squareImageView);
-                GenericDraweeHierarchyBuilder builder = new GenericDraweeHierarchyBuilder(getResources())
-                        .setPressedStateOverlay(ResUtil.getDrawable(R.color.colorBlack40))
-                        .setPlaceholderImage(R.color.colorLine);
-                squareImageView.setHierarchy(builder.build());
-                FrescoUtil.display(squareImageView, url, mItemSize, mItemSize);
-                final int finalI = i;
-                squareImageView.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (mOnItemClickListener != null) {
-                            mOnItemClickListener.onClick(finalI, mUrls);
-                        }
-                    }
-                });
+                addUrl(url);
             }
             invalidate();
         }
+    }
+
+    public void addUrl(String url) {
+        mUrls.add(url);
+        SquareImageView squareImageView = new SquareImageView(getContext(), mItemSize);
+        int position = getChildCount();
+        addView(squareImageView);
+        GenericDraweeHierarchyBuilder builder = new GenericDraweeHierarchyBuilder(getResources())
+                .setPressedStateOverlay(ResUtil.getDrawable(R.color.colorBlack40))
+                .setPlaceholderImage(R.color.colorLine);
+        squareImageView.setHierarchy(builder.build());
+        FrescoUtil.display(squareImageView, url, mItemSize, mItemSize);
+        squareImageView.setOnClickListener(v -> {
+            if (mOnItemClickListener != null) {
+                mOnItemClickListener.onClick(position, mUrls);
+            }
+        });
     }
 
     public interface OnItemClickListener {

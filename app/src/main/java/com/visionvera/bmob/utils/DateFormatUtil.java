@@ -13,7 +13,7 @@ import java.util.TimeZone;
 
 public class DateFormatUtil {
     private static final TimeZone UTC = TimeZone.getTimeZone("UTC");
-    private static SimpleDateFormat mDurationFormat = new SimpleDateFormat("HH:mm:ss.SS", Locale.CHINA);
+    private static SimpleDateFormat mDurationFormat = new SimpleDateFormat("HH:mm:ss", Locale.CHINA);
     private static SimpleDateFormat mLocalDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
     private static TimeZone GMT8 = TimeZone.getTimeZone("GMT+08:00");
 

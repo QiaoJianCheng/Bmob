@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/common_root_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:keepScreenOn="true"
+    android:orientation="horizontal">
+
+    <RadioGroup
+        android:id="@+id/time_rg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/time1_rb"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/time2_rb"
+            android:layout_width="50dp"
+            android:layout_height="150dp"/>
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <SeekBar
+            android:id="@+id/seek_bar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:max="7"/>
+
+        <TimePicker
+            android:id="@+id/time_picker"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:timePickerMode="spinner"
+            tools:targetApi="lollipop"/>
+
+        <TextView
+            android:id="@+id/time_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/colorThemeRed"
+            android:textSize="30dp"/>
+
+        <Button
+            android:id="@+id/time_ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="OK"/>
+
+    </LinearLayout>
+</LinearLayout>

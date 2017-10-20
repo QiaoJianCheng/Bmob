@@ -13,7 +13,7 @@ import com.visionvera.bmob.activity.plan.ColorFilterActivity;
 import com.visionvera.bmob.activity.plan.SdcardActivity;
 import com.visionvera.bmob.activity.plan.SensorActivity;
 import com.visionvera.bmob.activity.plan.camera.CameraActivity;
-import com.visionvera.bmob.activity.plan.codec.CodecActivity;
+import com.visionvera.bmob.activity.plan.screen.CodecActivity;
 import com.visionvera.bmob.activity.user.LoginActivity;
 import com.visionvera.bmob.activity.user.MoodActivity;
 import com.visionvera.bmob.activity.user.RegisterActivity;
