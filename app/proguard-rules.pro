@@ -43,7 +43,7 @@
 # Gson
 -keep class com.google.gson.stream.** { *; }
 -keepattributes EnclosingMethod
--keep class com.visionvera.bmob.model.**{*;}
+-keep class com.qiao.bmob.model.**{*;}
 
 # Fresco
 # Keep our interfaces so they can be used by other ProGuard rules.

@@ -48,7 +48,7 @@
             android:padding="5dp"/>
     </ScrollView>
 
-    <com.visionvera.bmob.activity.plan.extractor.YUVView
+    <com.qiao.bmob.activity.plan.extractor.YUVView
         android:id="@+id/yuv_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

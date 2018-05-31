@@ -77,7 +77,7 @@
             android:textColor="@color/colorTextDark"
             android:textSize="@dimen/textSizeSmall"/>
 
-        <com.visionvera.bmob.view.GridPhotoView
+        <com.qiao.bmob.view.GridPhotoView
             android:id="@+id/item_mood_grid_photo_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

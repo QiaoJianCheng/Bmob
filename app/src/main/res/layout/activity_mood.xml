@@ -7,7 +7,7 @@
 
     <include layout="@layout/layout_common_title"/>
 
-    <com.visionvera.bmob.view.PtrRefreshLayout
+    <com.qiao.bmob.view.PtrRefreshLayout
         android:id="@+id/common_content_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,7 +17,7 @@
             android:id="@+id/mood_rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-    </com.visionvera.bmob.view.PtrRefreshLayout>
+    </com.qiao.bmob.view.PtrRefreshLayout>
 
     <include layout="@layout/layout_common_loading_view"/>
 </RelativeLayout>
